@@ -52,6 +52,7 @@ header {
 .logo img {
     width: 200px;
     height: auto;
+    transition: 0.3s;
 }
 
 .nav-bar ul {
@@ -126,7 +127,7 @@ a.book-appointment:hover {
 
 /*This will give a slide down effect to our Nav Bar */
 .nav-bar.active {
-    height: 350px;
+    height: 300px;
 }
 
 /*  Let's add some media queries to make our Site responsive */
@@ -137,7 +138,11 @@ a.book-appointment:hover {
     }
 }
 
-@media screen and (max-width: 1065px) {    
+@media screen and (max-width: 1065px) { 
+    .logo img {
+        width: 170px;
+    }
+    
     /*  Hide the Bottom Bar, as it's not needed at this point*/
     .bottom-bar {
         display: none;
@@ -165,7 +170,6 @@ a.book-appointment:hover {
     .nav-bar ul {
         flex-direction: column;
         text-align: center;
-        font-size: 1.2em;
     }
 
     /*  Since the Bottom Bar won't show in mobile or smaller screen devices, 
@@ -205,5 +209,13 @@ a.book-appointment:hover {
         display: block;
         margin-bottom: 10px;
         width: fit-content;
+    }
+
+    .logo img {
+        width: 150px;
+    }
+
+    .hamburger-menu span {
+        height: 2px;
     }
 }
