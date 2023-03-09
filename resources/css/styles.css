@@ -1,0 +1,209 @@
+html {
+    font-size: 100%;
+}
+
+body {
+    font-size: 1em;
+    font-family: montserrat;
+    background-color: var(--light-grey);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+}
+
+/*  Let's define some color variables. 
+    We will make use of these color variables to help us maintain consistency
+*/
+:root {
+    /*Colors*/
+    --dark-brown: #59372d;
+    --brown: #ab918a;
+    --green: #008000;
+    --light-green: #b5de9b;
+    --orange-brown: #E3B67B;
+    --whitish-brown: #fffbf4;
+    --light-grey: #f5f5f5;
+    --light-brown: #f3eadf;
+
+    /*Size of elements in pixels*/
+    --header-size: 100px
+}
+
+/*  Let's style our header*/
+header {
+    width: 100%;
+    min-height: var(--header-size);
+    background-color: var(--whitish-brown);
+    box-shadow: 0px 2px 14px 0px #00000026;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 100px 0 100px;
+    position: fixed;
+    transition: 0.3s;
+}
+
+.logo img {
+    width: 200px;
+    height: auto;
+}
+
+.nav-bar ul {
+    display: flex;
+}
+
+.nav-bar ul li a, .book-appointment {
+    display: block;
+    color: var(--dark-brown);
+    padding: 10px 15px;
+    font-weight: 500;
+    transition: 0.3s;
+    position: relative;
+}
+
+/*  Let's make our Nav Bar's position to be relative so we can position the Bottom Bar*/
+.nav-bar {
+    position: relative;
+}
+
+/*  Let's style our Bottom Bar*/
+.bottom-bar {
+    position: absolute;
+    bottom: 0;
+    width: 0;
+    height: 5px;
+    background-color: var(--light-green);
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    transition: 0.3s;
+}
+
+/*  Let's style our Book Appointment button */
+a.book-appointment {
+    background-color: var(--dark-brown);
+    color: var(--whitish-brown) !important;
+    border-radius: 20px;
+    margin-left: 10px;
+}
+
+a.book-appointment:hover {
+    background-color: var(--green);
+}
+
+/*  This is to make our Appointment and Hamburger
+    Menu buttons to sit on the same line with a middle alignment
+*/
+.hamburger-and-button {
+    display: none;
+    align-items: center;
+}
+
+/*  Let's add a right margin to the Book Appointment
+    Button that's close to our Hamburger Menu
+*/
+.hamburger-and-button .book-appointment {
+    margin-right: 15px;
+}
+
+/*  Let's style our Hamburger Menu */
+.hamburger-menu span {
+    display: block;
+    margin: 6px 0;
+    width: 30px;
+    height: 3px;
+    background-color: var(--dark-brown);
+}
+
+.hamburger-menu {
+    cursor: pointer;
+}
+
+/*This will give a slide down effect to our Nav Bar */
+.nav-bar.active {
+    height: 350px;
+}
+
+/*  Let's add some media queries to make our Site responsive */
+@media screen and (max-width: 1206px) {
+    header {
+        padding: 0 20px 0 20px;
+
+    }
+}
+
+@media screen and (max-width: 1065px) {    
+    /*  Hide the Bottom Bar, as it's not needed at this point*/
+    .bottom-bar {
+        display: none;
+    }
+
+    /*  On mobile and smaller screen devices, the Nav Items
+        should show below our Logo
+    */
+    .nav-bar {
+        position: absolute;
+        background-color: var(--light-brown);        
+        box-shadow: 0px 6px 6px 0px #00000024;
+        top: calc(var(--header-size));
+        left: 0;
+        width: 100vw;
+        overflow: hidden;
+        height: 0;
+        transition: height 0.3s cubic-bezier(0.23, 0.44, 0.45, 0.79);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /*  Make the Nav Items sit line by line with each other */
+    .nav-bar ul {
+        flex-direction: column;
+        text-align: center;
+        font-size: 1.2em;
+    }
+
+    /*  Since the Bottom Bar won't show in mobile or smaller screen devices, 
+        let's make each Nav Item bolder when hovered
+    */
+    .nav-bar ul li a:not(.book-appointment):hover, .nav-bar ul li a:not(.book-appointment).active  {
+        font-weight: 800;
+    }
+
+    .nav-bar ul li a:not(.book-appointment) {
+        width: 100%;
+    }
+    
+    /*  Hide the Book Appointment Button inside the Nav Bar since the Book Appointment Button that is with the Hamburger Menu is showing */
+    .nav-bar ul li .book-appointment {
+        display: none;
+    }
+
+    /*  Show the Appointment and Hamburger Menu Buttons and 
+        make them sit next to each other, using display flex
+    */
+    .hamburger-and-button {
+        display: flex;
+    }
+}
+
+@media screen and (max-width: 520px) {
+    /*  Hide the Book Appointment Button that's close to the Hamburger Menu
+        when the device width is exactly or smaller than 500px 
+    */
+    .hamburger-and-button .book-appointment {
+        display: none;
+    }
+
+    /*  Then show the Book Appointment Button that's inside the Nav Bar */
+    .nav-bar ul li .book-appointment {
+        display: block;
+        margin-bottom: 10px;
+        width: fit-content;
+    }
+}
