@@ -46,7 +46,8 @@ window.onload = function () {
 
     var hamburgerMenu = document.querySelector(".hamburger-menu");
     var navBar = document.querySelector(".nav-bar");
-
+    var header = document.querySelector("header");
+    
     hamburgerMenu.addEventListener("click", ()=> {
         navBar.classList.toggle("active");
         hamburgerMenu.classList.toggle("active");
@@ -58,16 +59,28 @@ window.onload = function () {
             navBar.classList.remove("active");
             hamburgerMenu.classList.remove("active");
         } 
-    });
-    
-    //  When User clicks on the page, and not the header, the Nav Bar slides back up
-    document.onclick = function(target) {
-        var header = document.querySelector("header");
+    });   
+
+    //  When User clicks on the page, and not the header element, the Nav Bar slides back up
+    document.onclick = function(target) {        
         var isClickInsideHeader = header.contains(event.target);
         if (isClickInsideHeader !== true){
             navBar.classList.remove("active");
             hamburgerMenu.classList.remove("active");
-        }
-    
+        }    
     }
+
+    //  Let's add a shrink effect that will be applied to our header when the page is scrolled
+    window.onscroll = function() {
+        shrinkHeader();
+    }
+
+    function shrinkHeader() { 
+        if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+            header.classList.add("shrinked");
+        } else {
+            header.classList.remove("shrinked");
+        }
+    }
+
 }
