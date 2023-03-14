@@ -47,11 +47,28 @@ window.onload = function () {
     var hamburgerMenu = document.querySelector(".hamburger-menu");
     var navBar = document.querySelector(".nav-bar");
     var header = document.querySelector("header");
+    var navListItems = document.querySelectorAll(".nav-bar ul li");
     
     hamburgerMenu.addEventListener("click", ()=> {
         navBar.classList.toggle("active");
         hamburgerMenu.classList.toggle("active");
+        
+        showNavListItems();
     });
+
+    function showNavListItems() {
+        var remItems = navListItems.length;
+        var currItem = 0;
+        var interval = setInterval(()=> {
+            if (currItem < remItems) {
+                navListItems[currItem].classList.toggle("show");                
+                currItem += 1;
+            } 
+            else {
+                clearInterval(interval);
+            }
+        }, 100);
+    }
 
     //  When the device width is greater than 1065px, perform these actions
     window.addEventListener("resize", ()=> {
@@ -67,6 +84,7 @@ window.onload = function () {
         if (isClickInsideHeader !== true){
             navBar.classList.remove("active");
             hamburgerMenu.classList.remove("active");
+            showNavListItems();
         }    
     }
 
