@@ -52,18 +52,25 @@ window.onload = function () {
     hamburgerMenu.addEventListener("click", ()=> {
         navBar.classList.toggle("active");
         hamburgerMenu.classList.toggle("active");
-        
-        showNavListItems();
+
+        if (navListItems[0].classList.contains("show")) {            
+            navListItems.forEach(item => {
+                item.classList.remove("show");
+            });
+        } else {
+           showNavListItems();
+        }
     });
 
     function showNavListItems() {
         var remItems = navListItems.length;
-        var currItem = 0;
+        var currItemNo = 0;
+        
         var interval = setInterval(()=> {
-            if (currItem < remItems) {
-                navListItems[currItem].classList.toggle("show");                
-                currItem += 1;
-            } 
+            if (currItemNo < remItems) {
+                navListItems[currItemNo].classList.toggle("show");                
+                currItemNo += 1;
+            }
             else {
                 clearInterval(interval);
             }
@@ -84,7 +91,10 @@ window.onload = function () {
         if (isClickInsideHeader !== true){
             navBar.classList.remove("active");
             hamburgerMenu.classList.remove("active");
-            showNavListItems();
+            
+            navListItems.forEach(item => {
+                item.classList.remove("show");
+            });
         }    
     }
 

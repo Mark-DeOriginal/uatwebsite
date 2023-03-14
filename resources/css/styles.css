@@ -283,7 +283,7 @@ header.shrinked .logo img {
         width: 100vw;
         overflow: hidden;
         height: 0;
-        transition: height 0.3s cubic-bezier(0.23, 0.44, 0.45, 0.79) 0.1s;
+        transition: height 0.3s cubic-bezier(0.3, 0.68, 0.72, 0.79) 0.1s;
         display: flex;
         align-items: center;
         justify-content: center;
