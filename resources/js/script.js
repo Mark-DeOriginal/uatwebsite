@@ -66,6 +66,7 @@ window.onload = function () {
         var remItems = navListItems.length;
         var currItemNo = 0;
         
+        //  This setInterval function helps us show the list items one after the other
         var interval = setInterval(()=> {
             if (currItemNo < remItems) {
                 navListItems[currItemNo].classList.toggle("show");                
