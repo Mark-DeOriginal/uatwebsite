@@ -69,7 +69,7 @@ window.onload = function () {
         //  This setInterval function helps us show the list items one after the other
         var interval = setInterval(()=> {
             if (currItemNo < remItems) {
-                navListItems[currItemNo].classList.toggle("show");                
+                navListItems[currItemNo].classList.add("show");                
                 currItemNo += 1;
             }
             else {
@@ -93,9 +93,11 @@ window.onload = function () {
             navBar.classList.remove("active");
             hamburgerMenu.classList.remove("active");
             
-            navListItems.forEach(item => {
-                item.classList.remove("show");
-            });
+            if (navListItems[0].classList.contains("show")) {            
+                navListItems.forEach(item => {
+                    item.classList.remove("show");
+                });
+            }
         }    
     }
 
