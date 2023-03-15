@@ -230,13 +230,18 @@ header.shrinked .logo img {
     border-radius: 25px;
     width: fit-content;
     font-size: 1.2em;
-    transition: 0.5s;
+    transition: 0.3s;
 }
 
 .hero-button:hover {
     background-color: #412821a9;
     border: 2px solid var(--light-green);
     color: var(--light-green);
+    transform: scale(1.07);
+}
+
+.hero-button:active {
+    transform: scale(1);
 }
 
 /*  Let's add some media queries to make our Site responsive */
