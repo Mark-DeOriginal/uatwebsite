@@ -107,7 +107,7 @@ window.onload = function () {
     }
 
     function shrinkHeader() { 
-        if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+        if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
             header.classList.add("shrinked");
         } else {
             header.classList.remove("shrinked");
