@@ -49,20 +49,28 @@ window.onload = function () {
     var header = document.querySelector("header");
     var navListItems = document.querySelectorAll(".nav-bar ul li");
     
+    //  When the hamburger menu is clicked,
     hamburgerMenu.addEventListener("click", ()=> {
+        //  Toggle the Nav Bar active class to slide it down or up
         navBar.classList.toggle("active");
+        //  Change the hamburger menu icon to an X or back to how it was
         hamburgerMenu.classList.toggle("active");
 
-        if (navListItems[0].classList.contains("show")) {            
+        //  Check if our Nav Bar items are showing. If yes,
+        if (navListItems[0].classList.contains("show")) {
+            
+            //  Remove the class 'show' from each of the items to hide them
             navListItems.forEach(item => {
                 item.classList.remove("show");
             });
         } else {
-           showNavListItems();
+            //  Otherwise, run this function to show the Nav Bar items
+            showNavListItems();
         }
     });
 
     function showNavListItems() {
+        //  Initialize some variables
         var remItems = navListItems.length;
         var currItemNo = 0;
         
