@@ -123,10 +123,12 @@ window.onload = function () {
 
 
     //  This holds the updated translateX of the testimonial cards
-    var newTranslateX = 0;
+    var cardsTranslateX = 0;
     var repositionX = 0;
     //  This holds the number of cards remaining
     var remCards = testimonialCards.length;
+
+    var cardsOriginalTranslateX;
 
     //  When the Browser is resized, perform these actions
     window.addEventListener("resize", ()=> {
@@ -149,7 +151,7 @@ window.onload = function () {
         //  After that, let's update this variable and
         //  make it same with the variable, repositionX, so we
         //  will not have a problem when the forward or backward button is pressed
-        newTranslateX = repositionX;
+        cardsTranslateX = repositionX;
         //  Let's also reset this variable to its original value
         remCards = testimonialCards.length;
 
@@ -218,16 +220,18 @@ window.onload = function () {
         //  Slide the testimonial cards using total obtained from this formula:
         //  Sliding distance = ((cardsOffsetWidth * cardsPerSlide) + ((cardsMargin * 2) * cardsPerSlide)) * direction
         //  Or we can also slide the cards using the testimonial container offsetWidth and multiply it by the direction variable value, which is either -1 or 1, to make it slide left or right
-        newTranslateX += ((cardsOffsetWidth * cardsPerSlide) + ((Number(cardsMargin.split(/[a-zA-Z]+/)[0]) * 2) * cardsPerSlide)) * direction;
-        
+        cardsTranslateX += ((cardsOffsetWidth * cardsPerSlide) + ((Number(cardsMargin.split(/[a-zA-Z]+/)[0]) * 2) * cardsPerSlide)) * direction;
+        cardsOriginalTranslateX = cardsTranslateX;
+
         //  Testing some variable values using the console
         console.log(('20.3px').split(/[a-zA-Z]+/)[0]);
-        console.log(newTranslateX);
+        console.log(cardsTranslateX);
         console.log(remCards);
         
         cards.forEach(card => {
             //  Slide the testimonial cards
-            card.style.transform = `translateX(${newTranslateX}px)`;
+            card.style.transition = "0.8s";
+            card.style.transform = `translateX(${cardsTranslateX}px)`;
         });
 
         if (slidingDirection == "right") {
@@ -273,21 +277,25 @@ window.onload = function () {
     var isDragInsideTestimonialContainer;
 
     var testimonialCardsPrevPosX;
+
+    var canDrag = false;
+    var wasDragged = false;
     
     //  Let's capture Mouse events for PCs
     testimonialContainer.addEventListener("mousedown", registerDragStartPosX);
     testimonialContainer.addEventListener("mousemove", dragTestimonialCards);
     testimonialContainer.addEventListener("mouseup", registerDragEndPosX);
+    testimonialContainer.addEventListener("mouseleave", handleDragLeave);
 
     //  Touch events for mobile devices
     testimonialContainer.addEventListener("touchstart", registerDragStartPosX);
     testimonialContainer.addEventListener("touchmove", dragTestimonialCards);
     testimonialContainer.addEventListener("touchend", registerDragEndPosX);
-
-    var distanceDisplayer = document.querySelector("div.distance-moved");
+    testimonialContainer.addEventListener("touchcancel", handleDragLeave);
 
     function registerDragStartPosX(event) {
-        
+        event.preventDefault();
+
         if (event.type === "mousedown") {
             isMouseDown = true;
             dragStartPosX = event.clientX;
@@ -301,7 +309,8 @@ window.onload = function () {
         }
 
         isDragInsideTestimonialContainer = testimonialContainer.contains(event.target); // Will return true or false
-        distanceDisplayer.style.display = "block";
+
+        console.log("Hey dear!");
     }
 
     function calculateDragDistance(event) {
@@ -317,48 +326,144 @@ window.onload = function () {
     }
 
     function dragTestimonialCards(event) {
+        event.preventDefault();
         
         if (isMouseDown == true || isTouchStart == true) {
             if (isDragInsideTestimonialContainer == true) {
                 calculateDragDistance(event);
-    
-                if (dragStartPosX > currentDragPosX) { // This means the user is sliding left
-    
-                } else { // Else, then the user is sliding right
-    
+
+                if (currentDragPosX > dragStartPosX) { // This means user is dragging right
+                    if (sliderBackwardsBtn.classList.contains("btn-disabled") == false) {
+                        dragCards("no-resistance");
+                        canDrag = true;
+                    } else {                        
+                        canDrag = false;
+                        dragCards("10-percent-resistance"); // We will snap back to undo this drag, since the user isn't supposed to drag at this point
+                    }
                 }
-    
-                testimonialCardsPrevPosX = newTranslateX;
-    
-                testimonialCards.forEach(card => {
-                    //  Slide the testimonial cards
-                    card.style.transform = `translateX(${testimonialCardsPrevPosX + dragDistance}px)`;
-                });
-    
-                distanceDisplayer.innerHTML = "<p>Distance X: " + dragDistance + "</p>";
+                else if (dragStartPosX > currentDragPosX) { // User is sliding left
+                    dragCards("no-resistance");
+                    canDrag = true;
+                    if (sliderForwardBtn.classList.contains("btn-disabled") == false) {
+                        dragCards("no-resistance");
+                        canDrag = true;
+                    } else {                        
+                        canDrag = false;
+                        dragCards("10-percent-resistance"); // We will snap back to undo this drag, since the user isn't supposed to drag at this point
+                    }
+                }
+
             }
-        }        
+        }       
+
+    }
+
+    function dragCards(resistance) {
+        var dragResistance = resistance == "no-resistance" ? "1" : resistance == "10-percent-resistance" ? "10" : "1";
+        var translateDuration = dragResistance == "1" ? "0.8s" : "0.3s";
+        
+        testimonialCardsPrevPosX = cardsTranslateX;
+
+        testimonialCards.forEach(card => {
+            //  Slide the testimonial cards
+            card.style.transition = translateDuration;
+            card.style.transform = `translateX(${testimonialCardsPrevPosX + (dragDistance / parseInt(dragResistance))}px)`;
+        });
+
+        wasDragged = true;
 
     }
 
     function registerDragEndPosX(event) {
+        event.preventDefault();
 
-        if (event.type === "mouseup") {
-            isMouseDown = false;
-            dragEndPosX = event.clientX;
-            console.log("Drag end is " + dragEndPosX + "px from the left of the screen");
-        }
+        if (isMouseDown == true || isTouchStart == true) {
+            if (canDrag == true) {
 
-        if (event.type === "touchend") {
-            isTouchStart = false;
-            dragEndPosX = event.changedTouches[0].clientX;
-            console.log("Touch end is " + dragEndPosX + "px from the left of the screen");
+                if (event.type === "mouseup") {
+                    isMouseDown = false;
+                    console.log("Drag end is " + dragEndPosX + "px from the left of the screen");
+                }
+    
+                if (event.type === "touchend") {
+                    isTouchStart = false;
+                    console.log("Touch end is " + dragEndPosX + "px from the left of the screen");
+                }
+                
+                dragDistance = currentDragPosX - dragStartPosX;
+                console.log("The drag distance is " + dragDistance + "px");
+                
+                if (wasDragged == true) {
+                    if (currentDragPosX > dragStartPosX) { // This means user is dragging right
+                        slideTestimonialCards (testimonialCards, "right");
+                    }
+                    else if (dragStartPosX > currentDragPosX) { // User is sliding left
+                        slideTestimonialCards (testimonialCards, "left");
+                    }
+                }                
+                
+                wasDragged = false;
+                console.log(cardsTranslateX);
+    
+    
+            } else {
+                
+                if (sliderBackwardsBtn.classList.contains("btn-disabled") == true) {
+                    undoCardsDrag("left-end");
+                    isMouseDown = false;
+                    isTouchStart = false;
+                } else if (sliderForwardBtn.classList.contains("btn-disabled") ==  true) {
+                    undoCardsDrag("right-end");
+                    isMouseDown = false;
+                    isTouchStart = false;
+                }
+            }
+
+
         }
         
-        dragDistance = dragEndPosX - dragStartPosX;
-        console.log("The drag distance is " + dragDistance + "px");
+    }
 
-        newTranslateX += dragDistance;
-        testimonialCardsPrevPosX = newTranslateX;
+    function handleDragLeave(event) {
+        event.preventDefault();
+
+        if (isMouseDown == true || isTouchStart == true) {
+            if (canDrag == true) {
+
+                isMouseDown = false;
+                isTouchStart = false;
+    
+                dragDistance = currentDragPosX - dragStartPosX;
+                console.log("The drag distance is " + dragDistance + "px");
+
+                if (currentDragPosX > dragStartPosX) { // This means user is dragging right
+                    slideTestimonialCards (testimonialCards, "right");
+                }
+                else if (dragStartPosX > currentDragPosX) { // User is sliding left
+                    slideTestimonialCards (testimonialCards, "left");
+                }
+    
+            } else {
+                if (sliderBackwardsBtn.classList.contains("btn-disabled") == true) {
+                    undoCardsDrag("left-end");
+                } else if (sliderForwardBtn.classList.contains("btn-disabled") ==  true) {
+                    undoCardsDrag("right-end");                
+                }
+    
+                isMouseDown = false;
+                isTouchStart = false;
+            }
+        }
+        
+        
+    }
+
+    function undoCardsDrag(toRightEndOrLeftEnd) {
+        // cardsTranslateX = window.getComputedStyle(testimonialCards[0]).getPropertyValue('transform').split(',')[4];
+        var snapBack = toRightEndOrLeftEnd == "left-end" ? 0 : toRightEndOrLeftEnd == "right-end" ? cardsTranslateX : 0;
+        testimonialCards.forEach(card => {
+            //  Slide the testimonial cards
+            card.style.transform = `translateX(${snapBack}px)`;
+        });
     }
 }
