@@ -120,19 +120,60 @@ window.onload = function () {
     var sliderForwardBtn = document.querySelector(".arrow-right");
     var sliderBackwardsBtn = document.querySelector(".arrow-left");
     var testimonialCards = document.querySelectorAll(".testimonial-container .card");
+    var testimonialPaginationContainer = document.querySelector(".testimonial-pagination");
 
+    //  Get the width of the Browser Window        
+    var browserWidth = window.innerWidth;
+    //  Based on the Browser's Window width, return the number of testimonial 
+    //  cards that should be shown at once
+    var noOfCardsOnFirstSlide = browserWidth <= 750 ? 1     // If device-width is <= 750px, return 1
+                              : browserWidth <= 1080 ? 2  // else if it's <= 1080px, return 2
+                              : 3;                       // else, return 3
+    
+    //  This holds how many cards we wish to slide by
+    var defaultCardToSlide = 1;
+    var cardsToSlide = defaultCardToSlide;
+    
+    const totalNoOfSlides = testimonialCards.length;
+    var slidesRemaining = totalNoOfSlides - noOfCardsOnFirstSlide;
 
+    var paginationButtons;
+    var noOfPaginationBtnsToCreate;
+    var activePaginationBtnID = 0;
+    var previousSlideID = 0;
+    var currentSlideID;
+    
     //  This holds the updated translateX of the testimonial cards
     var cardsTranslateX = 0;
     var repositionX = 0;
-    //  This holds the number of cards remaining
-    var remCards = testimonialCards.length;
 
-    var cardsOriginalTranslateX;
+    //  Define some useful variables
+    var dragStartPosX,
+        dragEndPosX,
+        dragDistance;
+    var currentDragPosX;
+
+    //  We will use these to check if the mousedown 
+    //  or touchstart event is firing. 
+    var isMouseDown = false;
+    var isTouchStart = false;
+
+    //  This will help us make sure the 
+    //  drag is happening inside the testimonial container
+    var isDragInsideTestimonialContainer;
+
+    var isDraggingFromImage;
+
+    var testimonialCardsPrevPosX;
+
+    var canDrag = false;
+    var wasDragged = false;
 
     //  When the Browser is resized, perform these actions
     window.addEventListener("resize", ()=> {
-        if (window.innerWidth > 1065) {
+        browserWidth = window.innerWidth;
+
+        if (browserWidth > 1065) {
             navBar.classList.remove("active");
             hamburgerMenu.classList.remove("active");
 
@@ -141,6 +182,12 @@ window.onload = function () {
                 item.classList.remove("show");
             });
         }
+
+
+        noOfPaginationBtnsToCreate = browserWidth <= 750 ? totalNoOfSlides : browserWidth <= 1080 ? totalNoOfSlides -1 : browserWidth > 1080 ? totalNoOfSlides - 2 : totalNoOfSlides;
+        activePaginationBtnID = 0;
+        testimonialPaginationContainer.innerHTML = "";
+        createPaginationBtns(); 
         
         //  Any time user resizes the browser, go back to the 
         //  first slide
@@ -153,7 +200,13 @@ window.onload = function () {
         //  will not have a problem when the forward or backward button is pressed
         cardsTranslateX = repositionX;
         //  Let's also reset this variable to its original value
-        remCards = testimonialCards.length;
+        slidesRemaining = totalNoOfSlides;
+
+        browserWidth = window.innerWidth;
+        noOfCardsOnFirstSlide = browserWidth <= 750 ? 1     // If device-width is <= 750px, return 1
+                              : browserWidth <= 1080 ? 2  // else if it's <= 1080px, return 2
+                              : 3;
+        slidesRemaining = totalNoOfSlides - noOfCardsOnFirstSlide;
 
         //  Since we are now in the first slide,
         if (sliderBackwardsBtn.classList.contains("btn-disabled") == false) {
@@ -172,7 +225,8 @@ window.onload = function () {
         if (sliderForwardBtn.classList.contains("btn-disabled") == false) {
             //  Run this function and pass preferred sliding direction as its argument
             //  to slide the testimonial cards
-            slideTestimonialCards (testimonialCards, "left");
+            wasDragged = true;
+            slideTestimonialCards (testimonialCards, "left", "auto");
         }        
           
     });
@@ -183,24 +237,17 @@ window.onload = function () {
         if (sliderBackwardsBtn.classList.contains("btn-disabled") == false) {
             //  Run this function and pass preferred sliding direction as its argument
             //  to slide the testimonial cards
-            slideTestimonialCards (testimonialCards, "right");
+            wasDragged = true;
+            slideTestimonialCards (testimonialCards, "right", "auto");
         }        
         
     });
 
     //  We will call this function to slide the testimonial cards
-    function slideTestimonialCards (cards, slidingDirection) {       
+    function slideTestimonialCards (cards, slidingDirection, slideTo) {       
 
         //  Get the offsetWidth of the testimonial cards
         var cardsOffsetWidth = cards[0].offsetWidth;
-
-        //  Get the width of the Browser Window        
-        var browserWidth = window.innerWidth;
-        //  Based on the Browser's Window width, return the number of testimonial 
-        //  cards that should be shown at once
-        var cardsPerSlide = browserWidth <= 750 ? 1     // If device-width is <= 750px, return 1
-                        : browserWidth <= 1080 ? 2  // else if it's <= 1080px, return 2
-                        : 3;                       // else, return 3
 
         //  Get one of the testimonial cards, and an array of its css styles
         var card = window.getComputedStyle(cards[0]);
@@ -215,18 +262,21 @@ window.onload = function () {
         //  while a negative one will make it slide left.
         var direction = slidingDirection == "left" ? -1  
                         : slidingDirection == "right" ? 1 
-                        : 0;
+                        : 1;
 
-        //  Slide the testimonial cards using total obtained from this formula:
-        //  Sliding distance = ((cardsOffsetWidth * cardsPerSlide) + ((cardsMargin * 2) * cardsPerSlide)) * direction
-        //  Or we can also slide the cards using the testimonial container offsetWidth and multiply it by the direction variable value, which is either -1 or 1, to make it slide left or right
-        cardsTranslateX += ((cardsOffsetWidth * cardsPerSlide) + ((Number(cardsMargin.split(/[a-zA-Z]+/)[0]) * 2) * cardsPerSlide)) * direction;
+        if (slideTo == "auto") {
+            //  Slide the testimonial cards using total obtained from this formula:
+            //  Sliding distance = ((cardsOffsetWidth * noOfCardsOnFirstSlide) + ((cardsMargin * 2) * noOfCardsOnFirstSlide)) * direction
+            //  Or we can also slide the cards using the testimonial container offsetWidth and multiply it by the direction variable value, which is either -1 or 1, to make it slide left or right
+            cardsTranslateX += ((cardsOffsetWidth * cardsToSlide) + ((Number(cardsMargin.split(/[a-zA-Z]+/)[0]) * 2) * cardsToSlide)) * direction;
+        } else {
+            cardsTranslateX = ((cardsOffsetWidth * slideTo) + ((Number(cardsMargin.split(/[a-zA-Z]+/)[0]) * 2) * slideTo)) * -1;
+        }
+        
         cardsOriginalTranslateX = cardsTranslateX;
 
-        //  Testing some variable values using the console
-        console.log(('20.3px').split(/[a-zA-Z]+/)[0]);
-        console.log(cardsTranslateX);
-        console.log(remCards);
+        // Testing some values using the console
+        // console.log(('20.3px').split(/[a-zA-Z]+/)[0]);
         
         cards.forEach(card => {
             //  Slide the testimonial cards
@@ -235,51 +285,67 @@ window.onload = function () {
         });
 
         if (slidingDirection == "right") {
-            remCards += cardsPerSlide;
+            
+
+            
+            if (wasDragged == true) {
+                activePaginationBtnID -= 1;
+                slidesRemaining += 1;
+            } else {
+                if (activePaginationBtnID == 0) {
+                    slidesRemaining =  totalNoOfSlides - noOfCardsOnFirstSlide;
+                } else {
+                    slidesRemaining = (totalNoOfSlides - noOfCardsOnFirstSlide) - activePaginationBtnID;
+                }
+                
+            }
+
+            paginationButtons.forEach(all => {
+                all.classList.remove("active");
+            });
+            paginationButtons[activePaginationBtnID].classList.add("active");
 
             if (sliderForwardBtn.classList.contains("btn-disabled") == true) {
                 sliderForwardBtn.classList.remove("btn-disabled");
                 
             }
-            if (remCards >= testimonialCards.length && sliderBackwardsBtn.classList.contains("btn-disabled") == false) {
+            if (slidesRemaining == totalNoOfSlides - noOfCardsOnFirstSlide && sliderBackwardsBtn.classList.contains("btn-disabled") == false) {
                 sliderBackwardsBtn.classList.add("btn-disabled");
             }
         }
         if (slidingDirection == "left") {
-            remCards -= cardsPerSlide;
+            
+
+            if (wasDragged == true) {
+                activePaginationBtnID += 1;
+                slidesRemaining -= 1;
+            } else { 
+                
+                slidesRemaining = (totalNoOfSlides - noOfCardsOnFirstSlide) - activePaginationBtnID;
+                
+                
+            }
+            
+            paginationButtons.forEach(all => {
+                all.classList.remove("active");
+            });
+            paginationButtons[activePaginationBtnID].classList.add("active");
 
             if (sliderBackwardsBtn.classList.contains("btn-disabled") == true) {
                 sliderBackwardsBtn.classList.remove("btn-disabled");
                 
             }
-            if (remCards < 3 && sliderForwardBtn.classList.contains("btn-disabled") == false) {  
+            if (slidesRemaining == 0 && sliderForwardBtn.classList.contains("btn-disabled") == false) {  
                 sliderForwardBtn.classList.add("btn-disabled");           
             }
         }
+
+        canDrag =  true;
+        wasDragged =  false;
     }
 
     //  Let's add a feature to help users slide the
     //  testimonial cards by sliding left or right on the testimonial cards
-    
-    //  Define some useful variables
-    var dragStartPosX,
-        dragEndPosX,
-        dragDistance;
-    var currentDragPosX;
-
-    //  We will use these to check if the mousedown 
-    //  or touchstart event is firing. 
-    var isMouseDown = false;
-    var isTouchStart = false;
-
-    //  This will help us make sure the 
-    //  drag is happening inside the testimonial container
-    var isDragInsideTestimonialContainer;
-
-    var testimonialCardsPrevPosX;
-
-    var canDrag = false;
-    var wasDragged = false;
     
     //  Let's capture Mouse events for PCs
     testimonialContainer.addEventListener("mousedown", registerDragStartPosX);
@@ -287,14 +353,13 @@ window.onload = function () {
     testimonialContainer.addEventListener("mouseup", registerDragEndPosX);
     testimonialContainer.addEventListener("mouseleave", handleDragLeave);
 
-    //  Touch events for mobile devices
+    //  Touch events for touch enabled devices
     testimonialContainer.addEventListener("touchstart", registerDragStartPosX);
     testimonialContainer.addEventListener("touchmove", dragTestimonialCards);
     testimonialContainer.addEventListener("touchend", registerDragEndPosX);
     testimonialContainer.addEventListener("touchcancel", handleDragLeave);
 
     function registerDragStartPosX(event) {
-        event.preventDefault();
 
         if (event.type === "mousedown") {
             isMouseDown = true;
@@ -308,9 +373,10 @@ window.onload = function () {
             console.log("Touch start is " + dragStartPosX + "px from the left of the screen");
         }
 
+        //  Didn't like the outcome, so let me comment it out
+        //  isDraggingFromImage = event.target.tagName.toLowerCase() === 'img' || event.target.nodeName.toLowerCase() === 'img';
+        
         isDragInsideTestimonialContainer = testimonialContainer.contains(event.target); // Will return true or false
-
-        console.log("Hey dear!");
     }
 
     function calculateDragDistance(event) {
@@ -326,8 +392,15 @@ window.onload = function () {
     }
 
     function dragTestimonialCards(event) {
-        event.preventDefault();
-        
+
+        //  Since touch screen devices depend on  
+        //  sliding the screen to scroll, let's not 
+        //  use preventDefault() on touch screen devices
+        var isTouchScreen = event.type === "touchmove";
+        if (isTouchScreen == false) {
+            event.preventDefault();
+        }
+
         if (isMouseDown == true || isTouchStart == true) {
             if (isDragInsideTestimonialContainer == true) {
                 calculateDragDistance(event);
@@ -375,8 +448,10 @@ window.onload = function () {
     }
 
     function registerDragEndPosX(event) {
-        event.preventDefault();
-
+        if (event.type !== "touchend") {
+            event.preventDefault();
+        }
+        
         if (isMouseDown == true || isTouchStart == true) {
             if (canDrag == true) {
 
@@ -394,15 +469,23 @@ window.onload = function () {
                 console.log("The drag distance is " + dragDistance + "px");
                 
                 if (wasDragged == true) {
-                    if (currentDragPosX > dragStartPosX) { // This means user is dragging right
-                        slideTestimonialCards (testimonialCards, "right");
+                    if (Math.abs(dragDistance) > 70) {
+
+                        if (currentDragPosX > dragStartPosX) { // This means user is dragging right
+                            slideTestimonialCards (testimonialCards, "right", "auto");
+                        }
+                        else if (dragStartPosX > currentDragPosX) { // User is sliding left
+                            slideTestimonialCards (testimonialCards, "left", "auto");
+                        }
+                        
+                    } else {
+                        undoCardsDrag("auto");
                     }
-                    else if (dragStartPosX > currentDragPosX) { // User is sliding left
-                        slideTestimonialCards (testimonialCards, "left");
-                    }
+
+                    
                 }                
                 
-                wasDragged = false;
+                
                 console.log(cardsTranslateX);
     
     
@@ -424,11 +507,10 @@ window.onload = function () {
         
     }
 
-    function handleDragLeave(event) {
-        event.preventDefault();
+    function handleDragLeave() {
 
         if (isMouseDown == true || isTouchStart == true) {
-            if (canDrag == true) {
+            if (canDrag == true && isDraggingFromImage == false) {
 
                 isMouseDown = false;
                 isTouchStart = false;
@@ -436,12 +518,20 @@ window.onload = function () {
                 dragDistance = currentDragPosX - dragStartPosX;
                 console.log("The drag distance is " + dragDistance + "px");
 
-                if (currentDragPosX > dragStartPosX) { // This means user is dragging right
-                    slideTestimonialCards (testimonialCards, "right");
+                if (Math.abs(dragDistance) > 70) {
+
+                    if (currentDragPosX > dragStartPosX) { // This means user is dragging right
+                        slideTestimonialCards (testimonialCards, "right", "auto");
+                    }
+                        else if (dragStartPosX > currentDragPosX) { // User is sliding left
+                        slideTestimonialCards (testimonialCards, "left", "auto");
+                    }
+                    
+                } else {
+                    undoCardsDrag("auto");
                 }
-                else if (dragStartPosX > currentDragPosX) { // User is sliding left
-                    slideTestimonialCards (testimonialCards, "left");
-                }
+
+                
     
             } else {
                 if (sliderBackwardsBtn.classList.contains("btn-disabled") == true) {
@@ -460,10 +550,64 @@ window.onload = function () {
 
     function undoCardsDrag(toRightEndOrLeftEnd) {
         // cardsTranslateX = window.getComputedStyle(testimonialCards[0]).getPropertyValue('transform').split(',')[4];
-        var snapBack = toRightEndOrLeftEnd == "left-end" ? 0 : toRightEndOrLeftEnd == "right-end" ? cardsTranslateX : 0;
+        var snapBack = toRightEndOrLeftEnd == "left-end" ? 0 : toRightEndOrLeftEnd == "right-end" || "auto" ? cardsTranslateX : 0;
         testimonialCards.forEach(card => {
             //  Slide the testimonial cards
             card.style.transform = `translateX(${snapBack}px)`;
         });
+        wasDragged = false;
     }
+
+
+    function createPaginationBtns() {
+        for (i = 0; i < noOfPaginationBtnsToCreate; i++) {
+            testimonialPaginationContainer.innerHTML += `
+            <div class="pagination-btn" data-slide-id="${i}"></div>
+            `;
+        }
+        
+        paginationButtons = document.querySelectorAll(".testimonial-pagination .pagination-btn");
+        paginationButtons[0].classList.add("active");
+        
+        paginationButtons.forEach(paginationButton => {
+            paginationButton.addEventListener('click', ()=> {
+                if (paginationButton.classList.contains("active") == false) {
+                    
+                    currentSlideID = Number(paginationButton.dataset.slideId);
+                    
+                    var direction = currentSlideID > previousSlideID ? "left" : "right"; 
+
+                    previousSlideID = currentSlideID;
+
+                    
+                    paginationButtons[activePaginationBtnID].classList.remove("active");
+                
+                    activePaginationBtnID = Number(paginationButton.dataset.slideId);
+                
+                    paginationButtons[activePaginationBtnID].classList.add("active");
+                
+
+                    if (sliderForwardBtn.classList.contains("btn-disabled") == true) {
+                        sliderForwardBtn.classList.remove("btn-disabled");
+                        
+                    }
+                    
+                    if (sliderBackwardsBtn.classList.contains("btn-disabled") == true) {
+                        sliderBackwardsBtn.classList.remove("btn-disabled");
+                        
+                    }
+
+                    slideTestimonialCards(testimonialCards, direction, currentSlideID);
+                }
+            });
+        });
+    }
+    
+
+    noOfPaginationBtnsToCreate = browserWidth <= 750 ? totalNoOfSlides : browserWidth <= 1080 ? totalNoOfSlides -1 : browserWidth > 1080 ? totalNoOfSlides - 2 : totalNoOfSlides;
+    testimonialPaginationContainer.innerHTML = "";
+    createPaginationBtns(); 
+
+    
+
 }
