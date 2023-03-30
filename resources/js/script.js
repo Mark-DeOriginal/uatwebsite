@@ -469,7 +469,7 @@ window.onload = function () {
                 console.log("The drag distance is " + dragDistance + "px");
                 
                 if (wasDragged == true) {
-                    if (Math.abs(dragDistance) > 70) {
+                    if (Math.abs(dragDistance) > 15) {
 
                         if (currentDragPosX > dragStartPosX) { // This means user is dragging right
                             slideTestimonialCards (testimonialCards, "right", "auto");
@@ -518,7 +518,7 @@ window.onload = function () {
                 dragDistance = currentDragPosX - dragStartPosX;
                 console.log("The drag distance is " + dragDistance + "px");
 
-                if (Math.abs(dragDistance) > 70) {
+                if (Math.abs(dragDistance) > 15) {
 
                     if (currentDragPosX > dragStartPosX) { // This means user is dragging right
                         slideTestimonialCards (testimonialCards, "right", "auto");
@@ -591,7 +591,7 @@ window.onload = function () {
                         sliderForwardBtn.classList.remove("btn-disabled");
                         
                     }
-                    
+
                     if (sliderBackwardsBtn.classList.contains("btn-disabled") == true) {
                         sliderBackwardsBtn.classList.remove("btn-disabled");
                         

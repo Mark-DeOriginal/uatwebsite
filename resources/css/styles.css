@@ -602,6 +602,10 @@ i.fa-arrow-right::after {
         min-height: 300px;
     }
 
+    .testimonial-container .card:last-child {
+        min-width: calc(100% - 30px);
+    }
+
     .testimonial-wrapper {
         padding: 0 0 0 10px;
     }
