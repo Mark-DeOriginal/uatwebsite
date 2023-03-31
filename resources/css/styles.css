@@ -512,6 +512,7 @@ i.fa-arrow-right::after {
   
 .testimonial-container {
     margin-top: 20px;
+    text-align: start;
 }
 
 .testimonial-container.slider {    
