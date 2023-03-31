@@ -512,7 +512,9 @@ i.fa-arrow-right::after {
   
 .testimonial-container {
     margin-top: 20px;
-    text-align: start;
+}
+
+.testimonial-container.slider {    
     display: flex;
     position: relative;
     overflow-x: hidden;
@@ -520,6 +522,23 @@ i.fa-arrow-right::after {
     cursor: move;
     user-select: none;
     -webkit-user-select: none;
+}
+
+/*  This p element will be added with javascript when there is no card in display */
+p.no-testimonials-text {
+    text-align: center;
+    color: #b7b1b1;
+}
+
+/*  Whenever the class 'no-testimonials' is added to the testimonial
+    wrapper, hide the arrow buttons
+*/
+.testimonial-wrapper.no-testimonials .arrow-btn {
+    display: none;
+}
+/*  And change the display of the testimonial wrapper to block */
+.testimonial-wrapper.no-testimonials {
+    display: block;
 }
 
 .testimonial-container .card {
@@ -530,7 +549,7 @@ i.fa-arrow-right::after {
     min-width: calc(33.3% - 20px);
     margin: 10px;
     min-height: 370px;
-    transition: 0.8s cubic-bezier(0.29, 0.73, 0.32, 0.96);
+    transition: 0.6s ease;
     display: flex;
 }
 
