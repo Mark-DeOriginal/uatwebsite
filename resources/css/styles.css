@@ -435,8 +435,9 @@ header.shrinked .logo img {
     margin-bottom: 10px;
 }
 
-.testimonials p {
+.testimonials .heading-wrapper p {
     align-self: center; 
+    font-weight: 600;
 }
 
 .testimonials p:not(:nth-of-type(1)) {
