@@ -515,6 +515,10 @@ i.fa-arrow-right::after {
     text-align: start;
 }
 
+/*  We can remove the slider class to strip the testimonial container
+    of these styles using javascript when we notice there are no testimonials 
+    in the testimonial container 
+*/
 .testimonial-container.slider {    
     display: flex;
     position: relative;
@@ -542,6 +546,7 @@ p.no-testimonials-text {
     display: block;
 }
 
+/*  Let's style the cards in the testimonial container */  
 .testimonial-container .card {
     padding: 15px 20px;
     box-shadow: 0px 2px 11px 1px #0000001f;
@@ -554,6 +559,8 @@ p.no-testimonials-text {
     display: flex;
 }
 
+/*  Let's ensure responsiveness for the testimonial cards 
+    and other elements, using media queries */
 @media screen and (max-width: 1080px) {
     .testimonial-container .card {
         min-width: calc(50% - 20px);
