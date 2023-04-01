@@ -165,7 +165,6 @@ window.onload = function () {
     
         //  Let's define some more useful variables
         var dragStartPosX,
-            dragEndPosX,
             dragDistance;
         var currentDragPosX;
     
@@ -193,7 +192,7 @@ window.onload = function () {
         window.addEventListener("resize", ()=> {
             
             //  If the bottom bar is not in the correct position, or does
-            //  not have same width as the active Nav item, then will adjust it
+            //  not have same width as the active Nav item, then adjust it
             if (bottomBar.style.width !== activeNavItem.style.offsetWidth) {
                 adjustBottomBar(activeNavItem);
             }
@@ -207,7 +206,7 @@ window.onload = function () {
                 //  So, remove the active class from the Nav Bar to turn it
                 //  from mobile styled Nav to desktop style
                 navBar.classList.remove("active");
-                //  Do same to the Hamburger Menu to turn it to a,
+                //  Do same to the Hamburger Menu to turn it to a
                 //  three stacked horizontal line instead of an X 
                 hamburgerMenu.classList.remove("active");
     
@@ -216,51 +215,62 @@ window.onload = function () {
                     item.classList.remove("show");
                 });
             }
-    
-            //  This will be updated with the correct number 
-            //  of buttons to be created whenever the browser is resized
-            noOfPaginationBtnsToCreate = browserWidth <= 750 ? totalNoOfSlides : browserWidth <= 1080 ? totalNoOfSlides -1 : browserWidth > 1080 ? totalNoOfSlides - 2 : totalNoOfSlides;
-            
-            //  When the browser is resized,
-            //  check if the pagination buttons are complete in number
-            if (paginationButtons.length !== noOfPaginationBtnsToCreate) {
+
+            if (browserWidth > 500) {
+                //  Any time user resizes the browser,  
+                //  go back to the first slide
+                testimonialCards.forEach(card => {
+                    card.style.transform = `translateX(${repositionX}px)`;
+                });
+
+                //  This will be updated with the correct number 
+                //  of buttons to be created whenever the browser is resized
+                noOfPaginationBtnsToCreate = browserWidth <= 750 ? totalNoOfSlides : browserWidth <= 1080 ? totalNoOfSlides -1 : browserWidth > 1080 ? totalNoOfSlides - 2 : totalNoOfSlides;
+                
+                //  When the browser is resized,
+                //  check if the pagination buttons are complete in number
+                if (paginationButtons.length !== noOfPaginationBtnsToCreate) {
+                    //  Clear the content of the pagination container of any object in it
+                    testimonialPaginationContainer.innerHTML = "";
+                    //  Call this function to create the pagination buttons
+                    createPaginationBtns();
+                }
                 //  This is zero by default, to help us 
                 //  select the first pagination button
                 activePaginationBtnID = 0;
-                //  Clear the content of the pagination container of any object in it
-                testimonialPaginationContainer.innerHTML = "";
-                //  Call this function to create the pagination buttons
-                createPaginationBtns();
-            } 
+                //  Remove the active class from any pagination 
+                //  buttons that have it
+                paginationButtons.forEach(all => {
+                    all.classList.remove("active");
+                });
+                //  Then add it to the pagination button the User clicked 
+                paginationButtons[activePaginationBtnID].classList.add("active"); 
+        
+                //  After that, let's update this variable to that of 
+                //  repositionX, which is zero (0), since we're now 
+                //  in the beginning of the slides
+                cardsTranslateX = repositionX;
+                //  Let's also reset this variable to its original value
+                slidesRemaining = totalNoOfSlides;
+        
+                noOfCardsOnFirstSlide = browserWidth <= 750 ? 1     // If device-width is <= 750px, return 1
+                                    : browserWidth <= 1080 ? 2  // else if it's <= 1080px, return 2
+                                    : 3;
+                slidesRemaining = totalNoOfSlides - noOfCardsOnFirstSlide;
+        
+                //  Since we are now in the first slide, disable the 
+                //  backwards button if it's not already disabled
+                if (sliderBackwardsBtn.classList.contains("btn-disabled") == false) {
+                    sliderBackwardsBtn.classList.add("btn-disabled");            
+                }
+                //  Enable the forward button if its disabled
+                if (sliderForwardBtn.classList.contains("btn-disabled") == true) {
+                    sliderForwardBtn.classList.remove("btn-disabled");
+                    
+                }    
+            }
+    
             
-            //  Any time user resizes the browser,  
-            //  go back to the first slide
-            testimonialCards.forEach(card => {
-                card.style.transform = `translateX(${repositionX}px)`;
-            });
-    
-            //  After that, let's update this variable to that of 
-            //  repositionX, which is zero (0), since we're now 
-            //  in the beginning of the slides
-            cardsTranslateX = repositionX;
-            //  Let's also reset this variable to its original value
-            slidesRemaining = totalNoOfSlides;
-    
-            noOfCardsOnFirstSlide = browserWidth <= 750 ? 1     // If device-width is <= 750px, return 1
-                                  : browserWidth <= 1080 ? 2  // else if it's <= 1080px, return 2
-                                  : 3;
-            slidesRemaining = totalNoOfSlides - noOfCardsOnFirstSlide;
-    
-            //  Since we are now in the first slide, disable the 
-            //  backwards button if it's not already disabled
-            if (sliderBackwardsBtn.classList.contains("btn-disabled") == false) {
-                sliderBackwardsBtn.classList.add("btn-disabled");            
-            }
-            //  Enable the forward button if its disabled
-            if (sliderForwardBtn.classList.contains("btn-disabled") == true) {
-                sliderForwardBtn.classList.remove("btn-disabled");
-                
-            }
         });
     
     
