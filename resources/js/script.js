@@ -548,7 +548,7 @@ window.onload = function () {
             //  This returns the drag resistance, which we get by dividing by the drag distance to reduce the drag effort
             var dragResistance = resistance == "no-resistance" ? "1" : resistance == "10-percent-resistance" ? "10" : "1";
             //  This will return a value based on value returned by the dragDistance variable
-            var translateDuration = dragResistance == "1" ? "0.8s" : "0.3s";
+            var translateDuration = dragResistance == "1" ? "0.1s" : "0.2s";
             
             //  Update this variable
             testimonialCardsPrevPosX = cardsTranslateX;
@@ -565,7 +565,7 @@ window.onload = function () {
         }
     
         //  When the User stops dragging and releases the mouse or lifts hand
-        //  off the screen call this function to perform drag end operations
+        //  off the screen, call this function to perform drag end operations
         function registerDragEndPosX(event) {
             //  Let's be sure it's not a touch enabled device, before
             //  proceeding with preventDefault()
@@ -593,9 +593,9 @@ window.onload = function () {
                     //  before proceeding
                     if (wasDragged == true) {
                         //  Return an absolute (positive) value of the drag distance
-                        //  and check if it's greater than 15. This will help us 
+                        //  and check if it's greater than 30. This will help us 
                         //  know that the User really intended dragging the cards
-                        if (Math.abs(dragDistance) > 15) {
+                        if (Math.abs(dragDistance) > 30) {
                             //  If yes check the sliding direction using 
                             //  this method and then slide the cards accordingly
                             if (currentDragPosX > dragStartPosX) {
@@ -675,6 +675,7 @@ window.onload = function () {
             var snapBack = toRightEndOrLeftEnd == "left-end" ? 0 : toRightEndOrLeftEnd == "right-end" || "auto" ? cardsTranslateX : 0;
             testimonialCards.forEach(card => {
                 //  Slide the testimonial cards
+                card.style.transition = "0.5s";
                 card.style.transform = `translateX(${snapBack}px)`;
             });
             wasDragged = false;
