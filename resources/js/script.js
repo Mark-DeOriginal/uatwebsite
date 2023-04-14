@@ -650,7 +650,7 @@ window.onload = function () {
                         if (currentDragPosX > dragStartPosX) { // This means user is dragging right
                             slideTestimonialCards (testimonialCards, "right", "auto");
                         }
-                            else if (dragStartPosX > currentDragPosX) { // User is sliding left
+                        else if (dragStartPosX > currentDragPosX) { // User is sliding left
                             slideTestimonialCards (testimonialCards, "left", "auto");
                         }
                     } else {
@@ -675,7 +675,7 @@ window.onload = function () {
             var snapBack = toRightEndOrLeftEnd == "left-end" ? 0 : toRightEndOrLeftEnd == "right-end" || "auto" ? cardsTranslateX : 0;
             testimonialCards.forEach(card => {
                 //  Slide the testimonial cards
-                card.style.transition = "0.5s";
+                card.style.transition = "0.2s";
                 card.style.transform = `translateX(${snapBack}px)`;
             });
             wasDragged = false;
