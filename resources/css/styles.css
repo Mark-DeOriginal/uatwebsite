@@ -1,5 +1,6 @@
 html {
     font-size: 100%;
+    scroll-behavior: smooth;
 }
 
 body {
@@ -207,14 +208,14 @@ header.shrinked .logo img {
 
 .hero-img {
     width: 100%;
-    height: 420px;    
+    height: 430px;    
     border-radius: var(--border-radius);
     object-fit: cover;
     transition: 0.3s;
 }
 
 .hero-caption {
-    margin-top: 40px;
+    margin-top: 30px;
     transition: 0.3s;
 }
 
@@ -237,18 +238,17 @@ header.shrinked .logo img {
     border-radius: 25px;
     width: fit-content;
     font-size: 1.2em;
-    transition: transform 0.3s;
+    transition: 0.3s;
 }
 
 .hero-button:hover {
     background-color: #412821a9;
     border: 2px solid var(--light-green);
     color: var(--light-green);
-    transform: scale(1.05);
 }
 
 .hero-button:active {
-    transform: scale(1);
+    transform: scale(0.95);
 }
 
 @media screen and (min-width: 1300px) {
@@ -410,6 +410,7 @@ header.shrinked .logo img {
        
 }
 
+
 .testimonials .container {
     height: fit-content;
     background-color: var(--whitish-brown);
@@ -436,8 +437,7 @@ header.shrinked .logo img {
 }
 
 .testimonials .heading-wrapper p {
-    align-self: center; 
-    font-weight: 600;
+    align-self: center;
 }
 
 .testimonials p:not(:nth-of-type(1)) {
@@ -459,238 +459,4 @@ header.shrinked .logo img {
     }
 }
 
-/*  Let me comment this out. It looks better centered
-@media screen and (max-width: 540px){
-    .testimonials .container {
-        text-align: left;
-        align-items: left;
-    }
 
-    .testimonials p {
-        align-self: flex-start;
-    }
-}*/
-
-.testimonial-wrapper {
-    display: flex;
-    align-items: center;
-    transition: 0.3s;
-}
-
-.arrow-left, .arrow-right {
-    display: flex;
-    min-width: 40px;
-    height: 40px;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.arrow-btn.btn-disabled {
-    color: var(--grey-color);
-    cursor: default;
-}
-
-.arrow-btn:not(.btn-disabled):hover {
-    transform: scale(1.3);
-}
-
-i.fa-arrow-left::before, i.fa-arrow-right::before {
-    content: none;
-}
-  
-i.fa-arrow-left::after {
-    content: "\f053";
-    font-size: 25px;
-}
-
-i.fa-arrow-right::after {
-    content: "\f054";
-    font-size: 25px;
-}
-
-  
-.testimonial-container {
-    margin-top: 20px;
-    text-align: start;
-}
-
-/*  We can remove the slider class to strip the testimonial container
-    of these styles using javascript when we notice there are no testimonials 
-    in the testimonial container 
-*/
-.testimonial-container.slider {    
-    display: flex;
-    position: relative;
-    overflow-x: hidden;
-    -webkit-overflow-scrolling: touch;
-    cursor: move;
-    user-select: none;
-    -webkit-user-select: none;
-}
-
-/*  This p element will be added with javascript when there is no card in display */
-p.no-testimonials-text {
-    text-align: center;
-    color: #b7b1b1;
-}
-
-/*  Whenever the class 'no-testimonials' is added to the testimonial
-    wrapper, hide the arrow buttons
-*/
-.testimonial-wrapper.no-testimonials .arrow-btn {
-    display: none;
-}
-/*  And change the display of the testimonial wrapper to block */
-.testimonial-wrapper.no-testimonials {
-    display: block;
-}
-
-/*  Let's style the cards in the testimonial container */  
-.testimonial-container .card {
-    padding: 15px 20px;
-    box-shadow: 0px 2px 11px 1px #0000001f;
-    background-color: var(--white);
-    border-radius: 10px;
-    min-width: calc(33.3% - 20px);
-    margin: 10px;
-    min-height: 370px;
-    transition: 0.6s ease;
-    display: flex;
-}
-
-/*  Let's ensure responsiveness for the testimonial cards 
-    and other elements, using media queries */
-@media screen and (max-width: 1080px) {
-    .testimonial-container .card {
-        min-width: calc(50% - 20px);
-    }
-}
-
-.testimonial-container .card .column {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-.testimonial-container .card .card-header {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 20px;
-}
-
-.testimonial-container .card-header h3 {
-    font-size: 1em;
-}
-
-.testimonial-container .card-header p {
-    font-size: 1em;
-}
-
-.testimonial-container .card-header i {
-    font-size: 1.2em;
-    margin-right: 5px;
-}
-
-.testimonial-container .card img {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    object-fit: cover;
-    object-position: center;
-}
-
-.testimonial-container .card .card-body p {
-    font-size: 1em;
-}
-
-.testimonial-container .card .card-footer {
-    margin-top: 20px;
-}
-
-.testimonial-container .card .card-footer .tag {
-    background-color: var(--light-brown);
-    border-radius: 5px;
-    padding: 4px;
-    margin-block-end: 2px;
-    margin-bottom: 2px;
-    font-size: 0.9em;
-    display: inline-block;
-}
-
-@media screen and (max-width: 750px) {
-    .arrow-left, .arrow-right {
-        display: none;
-    }
-
-    .testimonial-container .card {
-        min-width: calc(100% - 80px);
-        min-height: 300px;
-    }
-
-    .testimonial-container .card:last-child {
-        min-width: calc(100% - 30px);
-    }
-
-    .testimonial-wrapper {
-        padding: 0 0 0 10px;
-    }
-}
-
-@media screen and (max-width: 500px) {
-    .testimonial-container .card img {
-        width: 50px;
-        height: 50px;
-    }
-    .testimonial-container .card .caption h3 {
-        font-size: 0.9em;
-    }
-
-    .testimonial-container .card-header p {
-        font-size: 0.8em;
-    }
-    
-    .testimonial-container .card-header i {
-        font-size: 1em;
-        margin-right: 5px;
-    }
-
-    .testimonial-container .card .card-body p {
-        font-size: 0.9em;
-    }
-
-    .testimonial-container .card .card-footer .tag {
-        font-size: 0.8em;
-    }
-}
-
-.testimonial-pagination  {
-    margin-top: 20px;
-    display: flex;
-    gap: 5px;
-    justify-content: center;
-    align-items: center;
-    min-height: 15px;
-    min-width: 100px;    
-}
-
-.testimonial-pagination .pagination-btn {
-    width: 10px;
-    height: 10px;
-    background-color: var(--grey-color);
-    border-radius: 3px;
-    transition: 0.3s ease-in-out;
-    cursor: pointer;
-}
-
-.pagination-btn.active {
-    background-color: var(--black-color);
-    width: 15px;
-    height: 12px;
-}
-
-.pagination-btn:not(.active):hover {
-    background-color: #a5a3a3;
-}
