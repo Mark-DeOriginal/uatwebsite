@@ -1,17 +1,7 @@
-/*
-    Chimaobi Testimonial Slider
-    Copyright © 2023 - Chimaobi Friday
-    Email: davidmarkfriday16@gmail.com
-    WhatsApp: +2348072157818
-*/
-
 window.addEventListener("load", function() {
-    //  Let's handle some issues that may occur when the 
-    //  page scrolls, while sliding the testimonial cards
+
     window.addEventListener("scroll", function() {
-        // This is especially useful for touch devices
-        // so that the testimonial cards wont slide if
-        // user holds down on it and scrolls the page
+        //  This will help us undo any drag on our cards while the page is scrolling  
         function handleDragWhilePageScrolls() {
             if (isTouchStart == true) {
                 undoCardsDrag("auto");
@@ -20,15 +10,13 @@ window.addEventListener("load", function() {
         }
 
         handleDragWhilePageScrolls();
-    });
+    })
 
     //  These will hold true or false, depending on
     //  whether the user is pressing down on the screen
     var isMouseDown = false;
     var isTouchStart = false;
 
-    //  This will indicate whether there is a 
-    //  testimonial available or not
     var isTestimonialAvailable;
 
     //  Get necessary elements from the testimonial container
@@ -50,7 +38,8 @@ window.addEventListener("load", function() {
     const totalNoOfSlides = testimonialCards.length;
 
     window.addEventListener("resize", function() {
-
+        //  Update the browserWidth variable with the browser's current width
+        browserWidth = window.innerWidth;
         noOfCardsOnFirstSlide = browserWidth <= 750 || testimonialCards.length == 1 ? 1
                             : browserWidth <= 1080 && testimonialCards.length > 1 ? 2 
                             : browserWidth > 1080 && testimonialCards.length == 2 ? 2 
@@ -124,8 +113,8 @@ window.addEventListener("load", function() {
                     
                 }    
             }
-        }
-
+        }   
+        
     });
 
     //  Before we continue, let's make sure the testimonial container
@@ -137,7 +126,7 @@ window.addEventListener("load", function() {
         var sliderForwardBtn = document.querySelector(".arrow-right");
         var sliderBackwardsBtn = document.querySelector(".arrow-left");
         var testimonialPaginationContainer = document.querySelector(".testimonial-pagination");
-
+    
         
         //  This holds how many cards we wish to slide by
         var defaultCardToSlide = 1;
@@ -146,7 +135,7 @@ window.addEventListener("load", function() {
         
         //  This returns the number of slides remaining
         var slidesRemaining = totalNoOfSlides - noOfCardsOnFirstSlide;
-
+    
         //  Let's define some useful variables for the pagination
         var paginationButtons;
         var noOfPaginationBtnsToCreate;
@@ -159,21 +148,21 @@ window.addEventListener("load", function() {
         //  The value of this variable will help take us
         //  back to the beginning of our slide 
         var repositionX = 0;
-
+    
         //  Let's define some more useful variables
         var dragStartPosX,
             dragDistance;
         var currentDragPosX;
-
+    
         //  We will insert a value here to help us confirm if the 
         //  drag is happening inside the testimonial container
         var isDragInsideTestimonialContainer;
-
+    
         //  We will keep the testimonial cards position here.
         //  It will be added with the drag distance to take the testimonial
         //  cards to the current drag position
         var testimonialCardsPrevPosX;
-
+    
         //  Just as their names imply, we will use them to check if
         //  we can drag the cards to the current drag position, and to update
         //  the slides remaining
@@ -189,9 +178,9 @@ window.addEventListener("load", function() {
                 wasDragged = true;
                 slideTestimonialCards (testimonialCards, "left", "auto");
             }        
-                
+              
         });
-
+    
         //  Do same when the testimonial slider backwards button is clicked
         sliderBackwardsBtn.addEventListener("click", ()=> {
             if (sliderBackwardsBtn.classList.contains("btn-disabled") == false) {
@@ -199,22 +188,22 @@ window.addEventListener("load", function() {
                 slideTestimonialCards (testimonialCards, "right", "auto");
             }
         });
-
+    
         //  We will call this function to slide the testimonial cards
         //  Where the parameter: 
         //  Cards = an array of the testimonial cards
         //  slidingDirection = the direction we want to slide to
         //  slideTo = the slide we want to slide to
         function slideTestimonialCards (cards, slidingDirection, slideTo) {       
-
+    
             //  Get the offsetWidth of the testimonial cards
             var cardsOffsetWidth = cards[0].offsetWidth;
-
+    
             //  Get one of the testimonial cards, and an array of its css styles
             var card = window.getComputedStyle(cards[0]);
             //  Get the left margin of the card
             var cardsMargin = card.marginLeft;
-
+    
             //  Check the preferred sliding direction. Return '-1' if the
             //  direction is left and '1' if it's right
             //  We will multiply this by the total distance the testimonial cards
@@ -224,7 +213,7 @@ window.addEventListener("load", function() {
             var direction = slidingDirection == "left" ? -1  
                             : slidingDirection == "right" ? 1 
                             : 1;
-
+    
             //  If the parameter, slideTo returns "auto",
             if (slideTo == "auto") {
                 //  Slide the testimonial cards using total obtained from this formula:
@@ -236,22 +225,21 @@ window.addEventListener("load", function() {
             } else {
                 cardsTranslateX = ((cardsOffsetWidth * slideTo) + ((Number(cardsMargin.split(/[a-zA-Z]+/)[0]) * 2) * slideTo)) * -1;
             }
-
+    
             // Testing some values using the console
             // console.log(('20.3px').split(/[a-zA-Z]+/)[0]);
-
+    
             //  Update the browserWidth variable
             browserWidth = window.innerWidth;
-
+    
             //  Return a duration for our transition based on the browserWidth
             var animationTransition = browserWidth < 1080 ? "0.5s ease" : "0.6s ease";
             
             //  Slide the testimonial cards
             cards.forEach(card => {
-                card.style.transition = animationTransition;
                 card.style.transform = `translateX(${cardsTranslateX}px)`;
             });
-
+    
             //  If the User slides right
             if (slidingDirection == "right") {
                 //  If the sliding was done through dragging the testimonial
@@ -260,7 +248,7 @@ window.addEventListener("load", function() {
                     //  Decrement these variables by 1
                     activePaginationBtnID -= 1;
                     slidesRemaining += 1;
-
+    
                 //  Otherwise, then it was done using the pagination buttons
                 } else {
                     //  If the ID of the pagination button pressed is 0 
@@ -276,16 +264,16 @@ window.addEventListener("load", function() {
                     }
                     
                 }
-
+    
                 //  Remove the active class from any pagination 
                 //  buttons that have it
                 paginationButtons.forEach(all => {
                     all.classList.remove("active");
                 });
-
+    
                 //  Then add it to the pagination button the User clicked 
                 paginationButtons[activePaginationBtnID].classList.add("active");
-
+    
                 if (paginationButtons[0].classList.contains("active") == true) {
                     if (sliderBackwardsBtn.classList.contains("btn-disabled") == false) {
                         sliderBackwardsBtn.classList.add("btn-disabled");
@@ -338,7 +326,7 @@ window.addEventListener("load", function() {
                 });
                 //  Then add it to the currently active pagination button
                 paginationButtons[activePaginationBtnID].classList.add("active");
-
+    
                 
 
                 if (paginationButtons[0].classList.contains("active") == true) {
@@ -370,12 +358,12 @@ window.addEventListener("load", function() {
                     }
                 }
             }
-
+    
             //  Set these variables appropriately
             canDrag =  true;
             wasDragged =  false;
         }
-
+    
         //  Let's add a feature to help users slide the
         //  testimonial cards by sliding left or right on the testimonial cards
         
@@ -384,31 +372,31 @@ window.addEventListener("load", function() {
         testimonialContainer.addEventListener("mousemove", dragTestimonialCards);
         testimonialContainer.addEventListener("mouseup", registerDragEndPosX);
         testimonialContainer.addEventListener("mouseleave", handleDragLeave);
-
+    
         //  Touch events for touch enabled devices
         testimonialContainer.addEventListener("touchstart", registerDragStartPosX);
         testimonialContainer.addEventListener("touchmove", dragTestimonialCards);
         testimonialContainer.addEventListener("touchend", registerDragEndPosX);
-
+    
 
         //  Call this function when the user presses or  
         //  touches the testimonial cards
         function registerDragStartPosX(event) {
-
+    
             //  If it's a mousedown event, then it was done using a PC
             if (event.type === "mousedown") {
                 isMouseDown = true;
                 //  Set the drag start position
                 dragStartPosX = event.clientX;
             }
-
+    
             //  If it's a touchstart event, it was done with a touch enabled device
             if (event.type === "touchstart") {
                 isTouchStart = true;
                 dragStartPosX = event.touches[0].clientX;
                 console.log("Touch start is " + dragStartPosX + "px from the left of the screen");
             }
-
+    
             //  Didn't like the outcome, so let me comment it out
             //  = event.target.tagName.toLowerCase() === 'img' || event.target.nodeName.toLowerCase() === 'img';
             
@@ -416,7 +404,7 @@ window.addEventListener("load", function() {
             //  inside the testimonial container
             isDragInsideTestimonialContainer = testimonialContainer.contains(event.target); // Will return true or false
         }
-
+    
         //  We will call this to calculate the drag distance
         function calculateDragDistance(event) {
             if (isMouseDown == true) {
@@ -424,17 +412,17 @@ window.addEventListener("load", function() {
                 //  The drag distance is given by: currentDragPosX - dragStartPosX
                 dragDistance = currentDragPosX - dragStartPosX;
             }
-
+    
             if (isTouchStart == true) {
                 currentDragPosX = event.touches[0].clientX;
                 dragDistance = currentDragPosX - dragStartPosX;
             }
         }
-
+    
         //  We will call this function on mouse move or touch move
         //  to enable us drag the cards accordingly 
         function dragTestimonialCards(event) {
-
+    
             //  Since touch screen devices depend on  
             //  sliding the screen to scroll, let's not 
             //  use preventDefault() on touch screen devices
@@ -442,7 +430,7 @@ window.addEventListener("load", function() {
             if (isTouchScreen == false) {
                 event.preventDefault();
             }
-
+    
             //  Verify that the user is actually pressing or touching the screen
             if (isMouseDown == true || isTouchStart == true) {
                 //  Before we perform the drag operation, let's be sure the 
@@ -450,7 +438,7 @@ window.addEventListener("load", function() {
                 if (isDragInsideTestimonialContainer == true) {
                     //  Call this function to calculate the drag distance
                     calculateDragDistance(event);
-
+    
                     //  If the current drag position is greater than the 
                     //  drag start position, then User is sliding right
                     if (currentDragPosX > dragStartPosX) {
@@ -485,28 +473,28 @@ window.addEventListener("load", function() {
                     }
                 }
             }       
-
+    
         }
-
+    
         //  Call this function to drag the cards
         function dragCards(resistance) {
             //  This returns the drag resistance, which we get by dividing by the drag distance to reduce the drag effort
-            var dragResistance = resistance == "no-resistance" ? "1" : resistance == "10-percent-resistance" ? "10" : "1";
+            var dragResistance = resistance == "no-resistance" ? "1" : resistance == "10-percent-resistance" ? "20" : "1";
             
             //  Update this variable
             testimonialCardsPrevPosX = cardsTranslateX;
-
+    
             //  Slide the cards using our defined formula
             testimonialCards.forEach(card => {
+                card.style.transition = "0.1s";
                 card.style.transform = `translateX(${testimonialCardsPrevPosX + (dragDistance / parseInt(dragResistance))}px)`;
-                
             });
-
+    
             //  Set this variable to true, to indicate that we've dragged the cards
             wasDragged = true;
-
+    
         }
-
+    
         //  When the User stops dragging and releases the mouse or lifts hand
         //  off the screen, call this function to perform drag end operations
         function registerDragEndPosX(event) {
@@ -553,21 +541,26 @@ window.addEventListener("load", function() {
                         } else {
                             undoCardsDrag("auto");
                         }
+
+                        testimonialCards.forEach(card => {
+                            card.style.transition = "0.5s ease";
+                        });
                     }
         
                 //  If the conditions to drag the cards were not met
                 } else {
-                        
+                      
                     undoCardsDrag("auto");                  
 
                     //  Then reset these variables
                     isMouseDown = false;
                     isTouchStart = false;
                 }
+                
             }
             
         }
-
+    
         //  Call this function whenever the User leaves the 
         //  testimonial container while dragging
         function handleDragLeave() {
@@ -579,7 +572,7 @@ window.addEventListener("load", function() {
         
                     dragDistance = currentDragPosX - dragStartPosX;
                     console.log("The drag distance is " + dragDistance + "px");
-
+    
                     if (Math.abs(dragDistance) > 15) {    
                         if (currentDragPosX > dragStartPosX) { // This means user is dragging right
                             slideTestimonialCards (testimonialCards, "right", "auto");
@@ -591,8 +584,12 @@ window.addEventListener("load", function() {
                         undoCardsDrag("auto");
                     }
 
+                    testimonialCards.forEach(card => {
+                        card.style.transition = "0.5s ease";
+                    });
+
                 } else {
-                        
+                      
                     undoCardsDrag("auto");
         
                     isMouseDown = false;
@@ -600,7 +597,7 @@ window.addEventListener("load", function() {
                 }
             }
         }
-
+    
         //  We will call this function to undo cards drag
         function undoCardsDrag(toRightEndOrLeftEnd) {
             var snapBack = toRightEndOrLeftEnd == "left-end" ? 0 : toRightEndOrLeftEnd == "right-end" || "auto" ? cardsTranslateX : 0;
@@ -616,7 +613,7 @@ window.addEventListener("load", function() {
             });
             wasDragged = false;
         }
-
+    
         //  Call this function to create our testimonial pagination buttons
         function createPaginationBtns() {
             
@@ -647,10 +644,10 @@ window.addEventListener("load", function() {
                         //  button clicked is greater or less than that of 
                         //  the previously active button
                         var direction = currentSlideID > previousSlideID ? "left" : "right"; 
-
+    
                         //  Update the value of this variable 
                         previousSlideID = currentSlideID;
-
+    
                         //  Remove the active class of the previously 
                         //  active pagination button
                         paginationButtons[activePaginationBtnID].classList.remove("active");
@@ -666,13 +663,13 @@ window.addEventListener("load", function() {
                             sliderForwardBtn.classList.remove("btn-disabled");
                             
                         }
-
+    
                         //  Enable the backwards button if it's disabled
                         if (sliderBackwardsBtn.classList.contains("btn-disabled") == true) {
                             sliderBackwardsBtn.classList.remove("btn-disabled");
                             
                         }
-
+    
                         //  Then slide the testimonial cards
                         slideTestimonialCards(testimonialCards, direction, currentSlideID);
                         
@@ -686,7 +683,7 @@ window.addEventListener("load", function() {
         
         
         
-
+    
         //  This will be updated with the correct number 
         //  of buttons to be created whenever the browser is resized
         noOfPaginationBtnsToCreate = testimonialCards.length - noOfCardsOnFirstSlide == 0 ? 0 : 1 + (testimonialCards.length - noOfCardsOnFirstSlide);
@@ -719,6 +716,7 @@ window.addEventListener("load", function() {
             document.querySelector(".testimonial-pagination").style.display = "none";
         }
     }
+    
 
     //  If there are no testimonial cards in the testimonial container,
     if (testimonialCards.length == 0) {        
@@ -735,4 +733,5 @@ window.addEventListener("load", function() {
         //  to remove the styles that are no longer necessary
         testimonialContainer.classList.remove("slider");
     }
+
 });
