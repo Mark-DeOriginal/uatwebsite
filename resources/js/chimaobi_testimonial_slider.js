@@ -20,10 +20,12 @@ window.addEventListener("load", function() {
     })
 
     //  These will hold true or false, depending on
-    //  whether the user is pressing down on the screen
+    //  whether the User is pressing down on the screen
     var isMouseDown = false;
     var isTouchStart = false;
 
+    //  This will hold true or false, depending on whether 
+    //  a testimonial card is available
     var isTestimonialAvailable;
 
     //  Get necessary elements from the testimonial container
@@ -44,82 +46,97 @@ window.addEventListener("load", function() {
     //  This holds the total number of slides in the testimonial slider
     const totalNoOfSlides = testimonialCards.length;
 
+    //  When the browser is resized,
     window.addEventListener("resize", function() {
         //  Update the browserWidth variable with the browser's current width
         browserWidth = window.innerWidth;
+        //  Update this variable too
         noOfCardsOnFirstSlide = browserWidth <= 750 || testimonialCards.length == 1 ? 1
                             : browserWidth <= 1080 && testimonialCards.length > 1 ? 2 
                             : browserWidth > 1080 && testimonialCards.length == 2 ? 2 
                             : 3; 
 
+        //  Proceed only when a testimonial card is available
         if (isTestimonialAvailable == true) {            
-                                
+            //  If all the cards are in view,
             if (testimonialCards.length == noOfCardsOnFirstSlide) {
+                //  Hide the arrows and pagination buttons, 
+                //  since there's no need for them                
                 arrowBtns.forEach(arrowBtn => {
                     arrowBtn.style.display = "none";
                 });
-
-                document.querySelector(".testimonial-pagination").style.display = "none";
+                document.querySelector(".testimonial-pagination").style.display = "none";            
+            
             } else {
+                //  But if some cards are hidden and the browser width
+                //  is greater than 750px, then show the arrow buttons
                 if (browserWidth > 750) {
                     arrowBtns.forEach(arrowBtn => {
                         arrowBtn.style.display = "flex";
                     });
+
+                //  If the browser width is less than 750px, then it's
+                //  mobile view, so hide the arrow buttons
                 } else {
                     arrowBtns.forEach(arrowBtn => {
                         arrowBtn.style.display = "none";
                     });
                 }                
 
+                //  The pagination buttons should always show as long as
+                //  some cards are hidden, to enable us view them
                 document.querySelector(".testimonial-pagination").style.display = "flex";
-            }
-
-
-            if (browserWidth > 500) {
-                //  Any time user resizes the browser,  
-                //  go back to the first slide
+            }            
+            
+            //  Any time User resizes the browser,  
+            //  go back to the first slide. 
+            //  But be sure the screen width is upto 450px
+            if (browserWidth > 450) {                
                 testimonialCards.forEach(card => {
                     card.style.transform = `translateX(${repositionX}px)`;
                 });
 
+                //  And reset this variable
                 cardsTranslateX = 0;
-
-                //  This will be updated with the correct number 
-                //  of buttons to be created whenever the browser is resized
-                noOfPaginationBtnsToCreate = testimonialCards.length - noOfCardsOnFirstSlide == 0 ? 0 : 1 + (testimonialCards.length - noOfCardsOnFirstSlide);
-                
-                //  When the browser is resized,
-                //  check if the pagination buttons are complete in number
-                if (testimonialCards.length > noOfCardsOnFirstSlide && noOfPaginationBtnsToCreate !== 0) {
-                    //  Clear the content of the pagination container of any object in it
-                    testimonialPaginationContainer.innerHTML = "";
-                    //  Call this function to create the pagination buttons
-                    createPaginationBtns();
-
-                    //  This is zero by default, to help us 
-                    //  select the first pagination button
-                    activePaginationBtnID = 0;
-                    //  Remove the active class from any pagination 
-                    //  buttons that have it
-                    paginationButtons.forEach(all => {
-                        all.classList.remove("active");
-                    });
-                    //  Then add it to the pagination button the User clicked 
-                    paginationButtons[activePaginationBtnID].classList.add("active"); 
-                }
-                
-
-                //  If we are in the first slide, disable the 
-                //  backwards button if it's not already disabled
-                if (sliderBackwardsBtn.classList.contains("btn-disabled") == false) {
-                    sliderBackwardsBtn.classList.add("btn-disabled");            
-                }
-                //  Enable the forward button if its disabled
-                if (sliderForwardBtn.classList.contains("btn-disabled") == true) {
-                    sliderForwardBtn.classList.remove("btn-disabled");
-                    
-                }    
             }
+
+            //  This will be updated with the correct number 
+            //  of buttons to be created whenever the browser is resized
+            noOfPaginationBtnsToCreate = testimonialCards.length - noOfCardsOnFirstSlide == 0 ? 0 
+                                        // The formula to create the correct number of pagination buttons, is
+                                        // 1 + (noOfCards - noOfCardsInView)
+                                        : 1 + (testimonialCards.length - noOfCardsOnFirstSlide);
+            
+            //  When the browser is resized,
+            //  proceed with this block if this condition is true
+            if (testimonialCards.length > noOfCardsOnFirstSlide && noOfPaginationBtnsToCreate !== 0) {
+                //  Clear the content of the pagination container of any object in it
+                testimonialPaginationContainer.innerHTML = "";
+                //  Call this function to create the pagination buttons
+                createPaginationBtns();
+
+                //  This is zero by default, to help us 
+                //  select the first pagination button
+                activePaginationBtnID = 0;
+                //  Remove the active class from any pagination 
+                //  buttons that have it
+                paginationButtons.forEach(all => {
+                    all.classList.remove("active");
+                });
+                //  Then add it to the pagination button the User clicked 
+                paginationButtons[activePaginationBtnID].classList.add("active"); 
+            }           
+
+            //  If we are in the first slide, disable the 
+            //  backwards button if it's not already disabled
+            if (sliderBackwardsBtn.classList.contains("btn-disabled") == false) {
+                sliderBackwardsBtn.classList.add("btn-disabled");            
+            }
+            //  Enable the forward button if its disabled
+            if (sliderForwardBtn.classList.contains("btn-disabled") == true) {
+                sliderForwardBtn.classList.remove("btn-disabled");                
+            }    
+            
         }   
         
     });
@@ -127,9 +144,10 @@ window.addEventListener("load", function() {
     //  Before we continue, let's make sure the testimonial container
     //  has at least one testimonial card in it
     if (testimonialCards.length > 0) {        
-        
+        //  If it does, set this variable to true
         isTestimonialAvailable = true;
 
+        //  Get some necessary testimonial slider elements
         var sliderForwardBtn = document.querySelector(".arrow-right");
         var sliderBackwardsBtn = document.querySelector(".arrow-left");
         var testimonialPaginationContainer = document.querySelector(".testimonial-pagination");
@@ -212,7 +230,7 @@ window.addEventListener("load", function() {
             var cardsMargin = card.marginLeft;
     
             //  Check the preferred sliding direction. Return '-1' if the
-            //  direction is left and '1' if it's right
+            //  direction is left and '1' if it's right.
             //  We will multiply this by the total distance the testimonial cards
             //  will be sliding, to return either a negative or positive value.
             //  A positive value will make the testimonial cards slide right,
@@ -223,37 +241,32 @@ window.addEventListener("load", function() {
     
             //  If the parameter, slideTo returns "auto",
             if (slideTo == "auto") {
+
                 //  Slide the testimonial cards using total obtained from this formula:
                 //  Sliding distance = ((cardsOffsetWidth * noOfCardsOnFirstSlide) + ((cardsMargin * 2) * noOfCardsOnFirstSlide)) * direction
                 //  Or we can also slide the cards using the testimonial container offsetWidth and multiply it by the direction variable value, which is either -1 or 1, to make it slide left or right
                 cardsTranslateX += ((cardsOffsetWidth * cardsToSlide) + ((Number(cardsMargin.split(/[a-zA-Z]+/)[0]) * 2) * cardsToSlide)) * direction;
+            
             //  Else, slide the cards by the slideTo value, which is the 
             //  number of the card to slide to
             } else {
-                cardsTranslateX = ((cardsOffsetWidth * slideTo) + ((Number(cardsMargin.split(/[a-zA-Z]+/)[0]) * 2) * slideTo)) * -1;
+                cardsTranslateX = ((cardsOffsetWidth * slideTo) + ((Number(cardsMargin.split(/[a-zA-Z]+/)[0]) * 2) * slideTo)) * -1;            
             }
     
-            // Testing some values using the console
-            // console.log(('20.3px').split(/[a-zA-Z]+/)[0]);
-    
-            //  Update the browserWidth variable
-            browserWidth = window.innerWidth;
-    
-            //  Return a duration for our transition based on the browserWidth
-            var animationTransition = browserWidth < 1080 ? "0.5s ease" : "0.6s ease";
-            
             //  Slide the testimonial cards
             cards.forEach(card => {
                 card.style.transform = `translateX(${cardsTranslateX}px)`;
             });
     
-            //  If the User slides right
+            //  Proceed with these if User slides right
             if (slidingDirection == "right") {
                 //  If the sliding was done through dragging the testimonial
                 //  cards or pressing the forward or backwards button            
                 if (wasDragged == true) {
-                    //  Decrement these variables by 1
+                    //  Decrement this variable by 1
                     activePaginationBtnID -= 1;
+                    //  We increment this since sliding the cards to the 
+                    //  right means we're going back to the beginning of the slide
                     slidesRemaining += 1;
     
                 //  Otherwise, then it was done using the pagination buttons
@@ -268,8 +281,7 @@ window.addEventListener("load", function() {
                         //  Then minus the pagination button ID from the slides 
                         //  remaining, to help us know how many slides are remaining
                         slidesRemaining = (totalNoOfSlides - noOfCardsOnFirstSlide) - activePaginationBtnID;
-                    }
-                    
+                    }                    
                 }
     
                 //  Remove the active class from any pagination 
@@ -311,8 +323,9 @@ window.addEventListener("load", function() {
                 }
             }
 
-            //  If the user slides left
+            //  If the User slides left
             if (slidingDirection == "left") {
+
                 //  Verify that the dragging was done through dragging on the cards
                 //  or pressing the forward/backwards button
                 if (wasDragged == true) {
@@ -322,8 +335,8 @@ window.addEventListener("load", function() {
 
                 //  Else, then it was done using the pagination button
                 } else { 
-                    //  So minus the pagination button ID, which holds the current 
-                    // slide number from the remaining slides
+                    //  So minus the pagination button ID, which holds  
+                    //  the current slide number from the remaining slides
                     slidesRemaining = (totalNoOfSlides - noOfCardsOnFirstSlide) - activePaginationBtnID;   
                 }
                 
@@ -332,46 +345,52 @@ window.addEventListener("load", function() {
                     all.classList.remove("active");
                 });
                 //  Then add it to the currently active pagination button
-                paginationButtons[activePaginationBtnID].classList.add("active");
-    
-                
+                paginationButtons[activePaginationBtnID].classList.add("active");  
 
+                //  If the first pagination button is active, then
+                //  we're obviously at the beginning of the slide
                 if (paginationButtons[0].classList.contains("active") == true) {
+                    //  So disable the backwards button, since it's 
+                    //  not needed at this point
                     if (sliderBackwardsBtn.classList.contains("btn-disabled") == false) {
-                        sliderBackwardsBtn.classList.add("btn-disabled");
-                        
+                        sliderBackwardsBtn.classList.add("btn-disabled");                        
                     }
+                    //  And enable the forward button if it's disabled
                     if (sliderForwardBtn.classList.contains("btn-disabled") == true) {
-                        sliderForwardBtn.classList.remove("btn-disabled");
-                        
+                        sliderForwardBtn.classList.remove("btn-disabled");                        
                     }
+
+                //  If the last pagination button is active, it 
+                //  means we're at the end of the slide
                 } else if (paginationButtons[paginationButtons.length - 1].classList.contains("active") == true) {
+                    //  So enable the backwards button if its disabled
                     if (sliderBackwardsBtn.classList.contains("btn-disabled") == true) {
-                        sliderBackwardsBtn.classList.remove("btn-disabled");
-                        
+                        sliderBackwardsBtn.classList.remove("btn-disabled");                        
                     }
+                    //  And disable the forward button if its enabled
                     if (sliderForwardBtn.classList.contains("btn-disabled") == false) {
-                        sliderForwardBtn.classList.add("btn-disabled");
-                        
+                        sliderForwardBtn.classList.add("btn-disabled");                        
                     }
+
+                //  If none of the above are true, it means we're not 
+                //  in the beginning or end of the slides
                 } else {
+                    //  So enable forward and backwards buttons if they're disabled
                     if (sliderBackwardsBtn.classList.contains("btn-disabled") == true) {
-                        sliderBackwardsBtn.classList.remove("btn-disabled");
-                        
+                        sliderBackwardsBtn.classList.remove("btn-disabled");                        
                     }
                     if (sliderForwardBtn.classList.contains("btn-disabled") == true) {
-                        sliderForwardBtn.classList.remove("btn-disabled");
-                        
+                        sliderForwardBtn.classList.remove("btn-disabled");                        
                     }
                 }
             }
     
-            //  Set these variables appropriately
+            //  Set these variables to their appropriate values
             canDrag =  true;
             wasDragged =  false;
         }
     
-        //  Let's add a feature to help users slide the
+        //  Let's add a feature to help Users slide the
         //  testimonial cards by sliding left or right on the testimonial cards
         
         //  Let's capture Mouse events for PCs
@@ -386,7 +405,7 @@ window.addEventListener("load", function() {
         testimonialContainer.addEventListener("touchend", registerDragEndPosX);
     
 
-        //  Call this function when the user presses or  
+        //  Call this function when the User presses or  
         //  touches the testimonial cards
         function registerDragStartPosX(event) {
     
@@ -403,13 +422,10 @@ window.addEventListener("load", function() {
                 dragStartPosX = event.touches[0].clientX;
                 console.log("Touch start is " + dragStartPosX + "px from the left of the screen");
             }
-    
-            //  Didn't like the outcome, so let me comment it out
-            //  = event.target.tagName.toLowerCase() === 'img' || event.target.nodeName.toLowerCase() === 'img';
             
             //  Let's return true if the drag was done 
             //  inside the testimonial container
-            isDragInsideTestimonialContainer = testimonialContainer.contains(event.target); // Will return true or false
+            isDragInsideTestimonialContainer = testimonialContainer.contains(event.target);
         }
     
         //  We will call this to calculate the drag distance
@@ -438,7 +454,7 @@ window.addEventListener("load", function() {
                 event.preventDefault();
             }
     
-            //  Verify that the user is actually pressing or touching the screen
+            //  Verify that the User is actually pressing or touching the screen
             if (isMouseDown == true || isTouchStart == true) {
                 //  Before we perform the drag operation, let's be sure the 
                 //  drag is happening within the testimonial container
@@ -447,35 +463,40 @@ window.addEventListener("load", function() {
                     calculateDragDistance(event);
     
                     //  If the current drag position is greater than the 
-                    //  drag start position, then User is sliding right
+                    //  drag start position, then User is dragging right
                     if (currentDragPosX > dragStartPosX) {
-                        //  Drag the cards if the backwards button is not disabled
+                        //  Drag the cards only if 
+                        //  1) the backwards button is not disabled,
+                        //  2) there are hidden testimonial cards,
+                        //  3) and the first pagination button is not active
                         if (sliderBackwardsBtn.classList.contains("btn-disabled") == false && testimonialCards.length >  noOfCardsOnFirstSlide && paginationButtons[0].classList.contains("active") == false) {
                             dragCards("no-resistance");
                             canDrag = true;
                         
                         //  But if the backwards button is disabled, it means we are already
-                        //  in the beginning, so User doesn't have to slide that way
+                        //  in the beginning, so User doesn't have to drag that way
                         } else {                        
                             canDrag = false;
                             //  Drag the cards, but with resistance, 
-                            //  and then snap then back to their original position
+                            //  We will snap the cards back to their 
+                            //  original position once the User ends the drag process
                             dragCards("10-percent-resistance");
                         }
                     
                     //  But if the drag start position is greater than the 
-                    //  current drag position, the User is sliding left
+                    //  current drag position, the User is dragging left
                     } else if (dragStartPosX > currentDragPosX) {
-                        //  If the forward button is not disabled, drag the cards
+                        //  If these conditions are true, drag the cards
                         if (sliderForwardBtn.classList.contains("btn-disabled") == false && testimonialCards.length >  noOfCardsOnFirstSlide && paginationButtons[paginationButtons.length -1].classList.contains("active") == false) {
                             dragCards("no-resistance");
                             canDrag = true;
                         
-                        //  If it's disabled, snap the cards back to 
-                        //  their original position
+                        //  If any of the condition is false, drag with resistance
                         } else {                        
                             canDrag = false;
-                            dragCards("10-percent-resistance"); // We will snap back to undo this drag, since the user isn't supposed to drag at this point
+                            dragCards("10-percent-resistance");
+                            //  We will snap back to undo this drag, since 
+                            //  the User isn't supposed to drag at this point
                         }
                     }
                 }
@@ -549,23 +570,20 @@ window.addEventListener("load", function() {
                             undoCardsDrag("auto");
                         }
 
+                        //  Reset the cards transition duration to its original value
                         testimonialCards.forEach(card => {
                             card.style.transition = "0.5s ease";
                         });
                     }
         
                 //  If the conditions to drag the cards were not met
-                } else {
-                      
-                    undoCardsDrag("auto");                  
-
+                } else {                      
+                    undoCardsDrag("auto");
                     //  Then reset these variables
                     isMouseDown = false;
                     isTouchStart = false;
-                }
-                
-            }
-            
+                }                
+            }            
         }
     
         //  Call this function whenever the User leaves the 
@@ -581,7 +599,7 @@ window.addEventListener("load", function() {
                     console.log("The drag distance is " + dragDistance + "px");
     
                     if (Math.abs(dragDistance) > 15) {    
-                        if (currentDragPosX > dragStartPosX) { // This means user is dragging right
+                        if (currentDragPosX > dragStartPosX) { // This means User is dragging right
                             slideTestimonialCards (testimonialCards, "right", "auto");
                         }
                         else if (dragStartPosX > currentDragPosX) { // User is sliding left
@@ -595,10 +613,8 @@ window.addEventListener("load", function() {
                         card.style.transition = "0.5s ease";
                     });
 
-                } else {
-                      
-                    undoCardsDrag("auto");
-        
+                } else {                      
+                    undoCardsDrag("auto");        
                     isMouseDown = false;
                     isTouchStart = false;
                 }
@@ -622,9 +638,8 @@ window.addEventListener("load", function() {
         }
     
         //  Call this function to create our testimonial pagination buttons
-        function createPaginationBtns() {
-            
-            //  Using this for() loop, create the correct number of cards
+        function createPaginationBtns() {            
+            //  Using this for() loop, create the correct number of buttons
             //  in proportion with the number of slides available
             for (i = 0; i < noOfPaginationBtnsToCreate; i++) {
                 testimonialPaginationContainer.innerHTML += `
@@ -640,7 +655,7 @@ window.addEventListener("load", function() {
             //  Add an event listener to all the buttons using .forEach() method
             paginationButtons.forEach(paginationButton => {
                 paginationButton.addEventListener('click', ()=> {
-                    //  We won't proceed if the button clicked is already active
+                    //  Let's proceed if the pagination button clicked, is not active
                     if (paginationButton.classList.contains("active") == false) {
                         
                         //  Set this variable to the value of the data-set
@@ -667,14 +682,12 @@ window.addEventListener("load", function() {
                     
                         //  If the forward button is disabled, enable it
                         if (sliderForwardBtn.classList.contains("btn-disabled") == true) {
-                            sliderForwardBtn.classList.remove("btn-disabled");
-                            
+                            sliderForwardBtn.classList.remove("btn-disabled");                            
                         }
     
                         //  Enable the backwards button if it's disabled
                         if (sliderBackwardsBtn.classList.contains("btn-disabled") == true) {
-                            sliderBackwardsBtn.classList.remove("btn-disabled");
-                            
+                            sliderBackwardsBtn.classList.remove("btn-disabled");                            
                         }
     
                         //  Then slide the testimonial cards
@@ -687,53 +700,53 @@ window.addEventListener("load", function() {
             });            
             
         }
-        
-        
-        
     
-        //  This will be updated with the correct number 
-        //  of buttons to be created whenever the browser is resized
+        //  All these are run once the page loads
+
+        //  Set the number of pagination buttons to create based on these conditions
         noOfPaginationBtnsToCreate = testimonialCards.length - noOfCardsOnFirstSlide == 0 ? 0 : 1 + (testimonialCards.length - noOfCardsOnFirstSlide);
         
-        //  When the browser is resized,
-        //  check if the pagination buttons are complete in number
+        //  Proceed if these conditions are true
         if (testimonialCards.length > noOfCardsOnFirstSlide && noOfPaginationBtnsToCreate !== 0) {
             //  Clear the content of the pagination container of any object in it
             testimonialPaginationContainer.innerHTML = "";
             //  Call this function to create the pagination buttons
             createPaginationBtns();
 
-            //  This is zero by default, to help us 
-            //  select the first pagination button
-            activePaginationBtnID = 0;
             //  Remove the active class from any pagination 
             //  buttons that have it
             paginationButtons.forEach(all => {
                 all.classList.remove("active");
             });
-            //  Then add it to the pagination button the User clicked 
-            paginationButtons[activePaginationBtnID].classList.add("active"); 
+
+            //  Then add it to the first pagination button, whose index is 0 
+            paginationButtons[0].classList.add("active"); 
         }
 
+        //  Once the page loads and we discover that the cards are all in view 
+        //  and that no card is hidden, then the arrow buttons should be hidden
         if (testimonialCards.length == noOfCardsOnFirstSlide) {
             arrowBtns.forEach(arrowBtn => {
                 arrowBtn.style.display = "none";
             });
 
+            //  The pagination buttons should be hidden too
             document.querySelector(".testimonial-pagination").style.display = "none";
         }
     }
     
 
     //  If there are no testimonial cards in the testimonial container,
-    if (testimonialCards.length == 0) {        
+    if (testimonialCards.length == 0) { 
+        //  Set this variable to false       
         isTestimonialAvailable = false;
 
         //  Then show this in the testimonial container
         testimonialContainer.innerHTML = `
             <p class='no-testimonials-text'>There are no testimonials to view</p>
         `;
-        //  And hide the forward and backwards button
+
+        //  Hide the forward and backwards button
         //  by adding this class to the testimonial wrapper
         testimonialWrapper.classList.add("no-testimonials");
         //  Remove the slider class from the testimonial container 

@@ -21,33 +21,39 @@
             $password = "";
             $dbname = "uat_database";
 
+            //  Connect to the database with our connection details
             $conn = mysqli_connect($host, $username, $password, $dbname);
 
+            //  Let's select all the rows in the uat_testimonials table
             $sql = "SELECT * FROM uat_testimonials";
-            $result = mysqli_query($conn, $sql);
+            $testimonials = mysqli_query($conn, $sql);
 
-            while ($row = mysqli_fetch_assoc($result)) { ?>
+            //  Using this while loop, display all the testimonials from each row, respectively
+            while ($testimonial = mysqli_fetch_assoc($testimonials)) { ?>
                 
                 <div class="card">
                     <div class="column">
                         <div class="row">
                             <div class="card-header">
                                 <div class="image">
-                                    <img src="<?php echo $row['avatar'] ?>" alt="Testifier">
+                                    <img src="<?php echo $testimonial['avatar'] ?>" alt="Testifier">
                                 </div>
                                 <div class="caption">
-                                    <h3><?php echo $row['name'] ?></h3>
-                                    <p><i class="fa fa-map-marker" aria-hidden="true"></i><?php echo $row['location'] ?></p>
+                                    <h3><?php echo $testimonial['name'] ?></h3>
+                                    <p><i class="fa fa-map-marker" aria-hidden="true"></i><?php echo $testimonial['location'] ?></p>
                                 </div>
                             </div>                                    
                             <div class="card-body">
-                                <p><?php echo $row['testimony_summary'] ?></p>
+                                <p><?php echo $testimonial['testimony_summary'] ?></p>
                             </div>
                         </div>
                         <div class="row card-footer">
-                            <?php                            
-                                $illness_tags = explode(",", $row['illness_tags']);
+                            <?php
+                                //  To place the testimonial tags in separate <span> elements, 
+                                //  we have to split them from the coma delimiter and store them in an array                            
+                                $illness_tags = explode(",", $testimonial['illness_tags']);
 
+                                //  After that, we use this foreach loop to display each of the tags in the array
                                 foreach ($illness_tags as $tag) {
                                     echo '<span class="tag">' . trim($tag) . '</span>';
                                 }

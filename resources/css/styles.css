@@ -50,20 +50,19 @@ p {
     --header-size: 100px;
     --wide-screen-padding: 100px;
     --small-screen-padding: 20px;
-    --border-radius: 20px;
+    --hero-img-border-radius: 15px;
 }
 
 /*  Let's style our header*/
 header {
     width: 100%;
-    background-color: var(--whitish-brown);
+    background-color: var(--light-brown);
     box-shadow: 0px 2px 15px 1px #0000001f;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
-    position: fixed;
-    top: 0;
+    position: absolute;
     transition-duration: 0.3s;
     z-index: 1;
 }
@@ -81,7 +80,7 @@ header {
 }
 
 .logo img {
-    width: 200px;
+    width: 180px;
     height: auto;
     transition: 0.3s;
 }
@@ -93,10 +92,11 @@ header {
 .nav-bar ul li a, header .book-appointment {
     display: block;
     color: var(--dark-brown);
-    padding: 10px 15px;
+    padding: 10px 12px;
     font-weight: 500;
     transition: 0.3s;
     position: relative;
+    font-size: 0.97em;
 }
 
 /*  Let's make our Nav Bar's position to be relative so we can position the Bottom Bar*/
@@ -113,14 +113,14 @@ header {
     background-color: var(--light-green);
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
-    transition: 0.3s;
+    transition: 0.3s cubic-bezier(0.32, 0.54, 0, 0.68);
 }
 
 /*  Let's style our Book Appointment button */
 header a.book-appointment {
     background-color: var(--dark-brown);
     color: var(--whitish-brown) !important;
-    border-radius: 20px;
+    border-radius: 10px;
     margin-left: 10px;
 }
 
@@ -182,6 +182,26 @@ header.shrinked .logo img {
     width: 170px;
 }
 
+header.scroll-slide {
+    animation: scroll-slide 0.5s ease;
+}
+
+@keyframes scroll-slide {
+    0% {
+        top: -100px;
+        left: 0;
+    } 100% {
+        top: 0;
+        left: 0;
+    }
+}
+
+header.background-effect {
+    background-color: #fff5e6e0;
+    backdrop-filter: blur(4px);
+    transition: background-color 0.2s ease 0.5s, backdrop-filter 0.2s ease 0.5s;
+}
+
 /*Let's style the rest of our Landing Page*/
 .hero-section {   
     background-size: cover;
@@ -209,7 +229,7 @@ header.shrinked .logo img {
 .hero-img {
     width: 100%;
     height: 430px;    
-    border-radius: var(--border-radius);
+    border-radius: var(--hero-img-border-radius);
     object-fit: cover;
     transition: 0.3s;
 }
@@ -235,7 +255,7 @@ header.shrinked .logo img {
     background-color: #41282179;
     cursor: pointer;
     border: 2px solid var(--orange-brown);
-    border-radius: 25px;
+    border-radius: 15px;
     width: fit-content;
     font-size: 1.2em;
     transition: 0.3s;
@@ -354,7 +374,7 @@ header.shrinked .logo img {
     .nav-bar ul li {
         opacity: 0;
         transform: translateY(-15px);
-        transition: 0.5s;
+        transition: 0.3s;
     }
     
     .nav-bar ul li.show {
@@ -384,6 +404,10 @@ header.shrinked .logo img {
 }
 
 @media screen and (max-width: 760px) {
+    .hero-container {
+        padding-bottom: 15px;
+    }
+
     .hero-container .row {
         justify-content: center;
     }
@@ -405,7 +429,11 @@ header.shrinked .logo img {
     }
     
     .hero-img {
-        height: 300px;
+        height: 250px;
+    }
+
+    .logo img, header.shrinked .logo img {
+        width: 150px;
     }
        
 }

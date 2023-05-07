@@ -18,7 +18,7 @@
     --cards-shadow-x-offset: 0px;
     --cards-shadow-y-offset: 2px;
 
-    --cards-tags-bg-color: rgba(245, 219, 171, 0.459);
+    --cards-tags-bg-color: #f1e6d3;
     --cards-tags-text-color: #626262;
 
     --arrow-btns-color: #626262;
@@ -124,6 +124,7 @@ p.no-testimonials-text {
     transition: 0.6s ease;
     display: flex;
     color: var(--cards-text-color);
+    font-size: 0.9em;
 }
 
 /*  Let's ensure responsiveness for the testimonial cards 
@@ -148,7 +149,7 @@ p.no-testimonials-text {
 }
 
 .testimonial-container .card-header h3 {
-    font-size: 1em;
+    font-size: 1.1em;
 }
 
 .testimonial-container .card-header p {
@@ -193,7 +194,7 @@ p.no-testimonials-text {
     }
 
     .testimonial-container .card {
-        min-width: calc(100% - 80px);
+        min-width: calc(100% - 50px);
         min-height: 300px;
     }
 
@@ -212,11 +213,11 @@ p.no-testimonials-text {
         height: 50px;
     }
     .testimonial-container .card .caption h3 {
-        font-size: 0.9em;
+        font-size: 1.1em;
     }
 
     .testimonial-container .card-header p {
-        font-size: 0.8em;
+        font-size: 1em;
     }
     
     .testimonial-container .card-header i {
@@ -225,11 +226,11 @@ p.no-testimonials-text {
     }
 
     .testimonial-container .card .card-body p {
-        font-size: 0.9em;
+        font-size: 1.05em;
     }
 
     .testimonial-container .card .card-footer .tag {
-        font-size: 0.8em;
+        font-size: 0.9em;
     }
 }
 

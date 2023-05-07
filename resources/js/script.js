@@ -59,6 +59,12 @@ window.onload = ()=> {
             //  Otherwise, call this function to show the Nav Bar items
             showNavListItems();
         }
+        
+        //  Once the hamburger menu button is clicked,
+        //  change the header position to fixed          
+        header.style.position = "fixed";
+        //  And set this variable to true   
+        isHeaderInFixedPos = true;     
     });
 
     function showNavListItems() {
@@ -76,14 +82,13 @@ window.onload = ()=> {
                 //  Increment this variable afterwards to help us
                 //  show the other Nav items
                 currItemNo += 1;
-
             }
             else {
                 //  When we're done showing all the nav items, 
                 //  clear the interval
                 clearInterval(interval);
             }
-        }, 100);
+        }, 50);
     }
 
     //  When User clicks on the page and not the header element, 
@@ -105,15 +110,42 @@ window.onload = ()=> {
     window.onscroll = function() {
         //  Call this function to add a shrink or expand effect to our
         //  header, when the page is scrolled
-        shrinkHeader();
+        headerScrollEffect();
     }
 
+    //  This will help us know if the Nav Bar is in fixed position
+    var isHeaderInFixedPos = false;
 
-    function shrinkHeader() { 
-        if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
-            header.classList.add("shrinked");
-        } else {
+    //  We'll call this function each time the page is scrolled
+    function headerScrollEffect() {
+    
+        if (isHeaderInFixedPos == false) {
+            if (window.scrollY > 130) {
+                header.style.position = "fixed";
+                header.classList.add("shrinked");
+                header.classList.add("scroll-slide");
+            }
+        }
+
+        if (window.scrollY < 130) {
             header.classList.remove("shrinked");
+            header.classList.remove("background-effect");
+        } else if (hamburgerMenu.classList.contains("active") == false && isHeaderInFixedPos == false) {
+            header.classList.add("shrinked");
+            header.classList.add("scroll-slide");
+        } 
+        
+        if (window.scrollY > 130) {
+            header.classList.add("background-effect");
+            header.classList.add("shrinked");
+        }
+        
+        if (window.scrollY == 0 && hamburgerMenu.classList.contains("active") == false) {
+            header.classList.remove("scroll-slide");
+            header.classList.remove("background-effect");
+
+            header.style.position = "absolute";
+            isHeaderInFixedPos = false;
         }
     }
 
@@ -147,4 +179,14 @@ window.onload = ()=> {
         }
         
     });
+    
+    //  Once the page loads, apply these to the header element
+    if (window.scrollY < 120) {
+        header.style.position = "absolute";
+    } else {
+        header.style.position = "fixed";
+        header.classList.add("shrinked");
+        header.classList.add("scroll-slide");
+        header.classList.add("background-effect");
+    }
 }                  
