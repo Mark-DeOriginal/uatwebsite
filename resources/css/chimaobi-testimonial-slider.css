@@ -1,0 +1,288 @@
+/*  Chimaobi Testimonial Slider
+    Copyright © 2023 - Chimaobi Friday
+    Email: davidmarkfriday16@gmail.com
+    WhatsApp: +2348072157818 */
+
+/*  STYLE SETTINGS 
+    Feel free to adjust these settings as needed */
+:root {
+    --cards-bg-color: #f7f4f0;
+    --cards-text-color: #626262;
+
+    --cards-shadow-color: #0000001f;
+    --cards-shadow-blur: 5px;
+    --cards-shadow-spread: 2px;
+    --cards-shadow-x-offset: 0px;
+    --cards-shadow-y-offset: 2px;
+
+    --cards-tags-bg-color: #f3eae8;
+    --cards-tags-text-color: var(--cards-text-color);
+
+    --arrow-btns-color: #9b786d;
+    --arrow-btns-hover-color: #9b786d;
+    --arrow-btns-disabled-color: #d7c5c0;
+    --arrow-btns-hover-scale: 1.3;
+
+    --pagination-btns-color: #d7c5c0;
+    --pagination-btns-active-color: #9b786d;
+    --pagination-btns-hover-color: #bba7a7;
+    --pagination-margin-bottom: 0px;
+
+    --testimonials-container-bg-color: #f7f0f0;
+    --no-testimonial-text-color: #b7b1b1;
+}   /* End of Style Settings */
+
+
+/*  To prevent unexpected results, please 
+    avoid editing these CSS rules */
+
+.testimonials .container {
+    height: fit-content;
+    background-color: var(--testimonials-container-bg-color);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    transition: 0.3s;
+}
+
+.testimonial-wrapper {
+    display: flex;
+    transition: 0.3s;
+    align-items: center;
+}
+
+.arrow-left, .arrow-right {
+    display: flex;
+    min-width: 40px;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.3s;
+    color: var(--arrow-btns-color);
+}
+
+.arrow-btn.btn-disabled {
+    color: var(--arrow-btns-disabled-color);
+    cursor: default;
+}
+
+.arrow-btn:not(.btn-disabled):hover {
+    transform: scale(var(--arrow-btns-hover-scale));
+    color: var(--arrow-btns-hover-color);
+}
+
+i.fa-arrow-left::before, i.fa-arrow-right::before {
+    content: none;
+}
+  
+i.fa-arrow-left::after {
+    content: "\f053";
+    font-size: 25px;
+}
+
+i.fa-arrow-right::after {
+    content: "\f054";
+    font-size: 25px;
+}
+  
+.testimonial-container {
+    margin-top: 20px;
+    text-align: start;
+}
+
+/*  We can remove the slider class to strip the testimonial container
+    of these styles using javascript when we notice there are no testimonials 
+    in the testimonial container */
+.testimonial-container.slider {    
+    display: flex;
+    position: relative;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    cursor: move;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+/*  This p element will be added with javascript when there is no card in display */
+p.no-testimonials-text {
+    text-align: center;
+    color: var(--no-testimonial-text-color);
+}
+
+/*  Whenever the class 'no-testimonials' is added to the testimonial
+    wrapper, hide the arrow buttons */
+.testimonial-wrapper.no-testimonials .arrow-btn {
+    display: none;
+}
+/*  And change the display of the testimonial wrapper to block */
+.testimonial-wrapper.no-testimonials {
+    display: block;
+}
+
+/*  Let's style the cards in the testimonial container */  
+.testimonial-container .card {
+    padding: 15px 20px;
+    box-shadow: var(--cards-shadow-x-offset) var(--cards-shadow-y-offset) var(--cards-shadow-blur) var(--cards-shadow-spread) var(--cards-shadow-color);
+    background-color: var(--cards-bg-color);
+    border-radius: 10px;
+    min-width: calc(33.3% - 20px);
+    margin: 10px;
+    min-height: 370px;
+    transition: 0.6s ease;
+    display: flex;
+    color: var(--cards-text-color);
+    font-size: 0.9em;
+}
+
+/*  Let's ensure responsiveness for the testimonial cards 
+    and other elements, using media queries */
+@media screen and (max-width: 1080px) {
+    .testimonial-container .card {
+        min-width: calc(50% - 20px);
+    }
+}
+
+.testimonial-container .card .column {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.testimonial-container .card .card-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.testimonial-container .card-header h3 {
+    font-size: 1.2em;
+    margin-bottom: 0;
+    color: #9b786d;
+}
+
+.testimonial-container .card-header p {
+    font-size: 1em;
+}
+
+.testimonial-container .card-header i {
+    font-size: 1em;
+    margin-right: 5px;
+}
+
+.testimonial-container .card img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.testimonial-container .card .card-body p {
+    font-size: 1em;
+}
+
+.testimonial-container .card .card-footer {
+    margin-top: 20px;
+}
+
+.testimonial-container .card .card-footer .tag {
+    background-color: var(--cards-tags-bg-color);    
+    color: var(--cards-tags-text-color);
+    border-radius: 5px;
+    padding: 4px;
+    margin-inline-end: 3px;
+    margin-block-end: 3px;
+    font-size: 0.9em;
+    display: inline-block;
+}
+
+@media screen and (max-width: 770px) {
+
+    .testimonials .container {
+        padding-right: 0;
+        padding-left: 0;
+    }
+
+    .testimonials .container .heading-wrapper {
+        padding-right: 50px;
+        padding-left: 50px;
+    }
+
+    .testimonial-wrapper {
+        padding-right: 0;
+        padding-left: 10px;
+    }
+
+    .arrow-btn {
+        display: none;
+    }
+
+    .testimonial-container .card {
+        min-width: calc(100% - 50px);
+        min-height: 300px;
+    }
+
+    .testimonial-container .card:last-child {
+        min-width: calc(100% - 30px);
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .testimonial-container .card img {
+        width: 50px;
+        height: 50px;
+    }
+    .testimonial-container .card .caption h3 {
+        font-size: 1.1em;
+    }
+
+    .testimonial-container .card-header p {
+        font-size: 0.9em;
+    }
+    
+    .testimonial-container .card-header i {
+        font-size: 1em;
+        margin-right: 5px;
+    }
+
+    .testimonial-container .card .card-body p {
+        font-size: 0.9em;
+    }
+
+    .testimonial-container .card .card-footer .tag {
+        font-size: 0.9em;
+    }
+}
+
+.testimonial-pagination  {
+    margin-top: 20px;
+    margin-bottom: var(--pagination-margin-bottom);
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+    align-items: center;
+    min-height: 15px;
+    min-width: 100px;    
+}
+
+.testimonial-pagination .pagination-btn {
+    width: 10px;
+    height: 10px;
+    background-color: var(--pagination-btns-color);
+    border-radius: 3px;
+    transition: 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+.pagination-btn.active {
+    background-color: var(--pagination-btns-active-color);
+    width: 15px;
+    height: 12px;
+}
+
+.pagination-btn:not(.active):hover {
+    background-color: var(--pagination-btns-hover-color);
+}
+

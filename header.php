@@ -32,7 +32,7 @@
                 <li>
                     <a href="#">About</a>
                 </li><li>
-                    <a href="#" class="<?php if (basename($_SERVER['PHP_SELF']) == 'services.php') echo 'active'?>">Services</a>
+                    <a href="#services" class="<?php if (basename($_SERVER['PHP_SELF']) == 'briefs.php') echo 'active'?>">Briefs</a>
                 </li>
                 <li>
                     <a href="#" class="<?php if (basename($_SERVER['PHP_SELF']) == 'testimonials.php') echo 'active'?>">Testimonials</a>

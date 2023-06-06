@@ -1,7 +1,7 @@
-<!--This is the content of our testimonial section-->
+<!--This is the content of our Testimonial Section-->
 <div class="container">
     <div class="heading-wrapper">
-        <h2>Testimonials</h2>
+        <h2 class="heading">Testimonials</h2>
         <!--
         <p>Our Health Therapist/Healing Coach is a knowledgeable and experienced professional with a deep understanding of how the human body works, and how to help the body heal from different diseases.</p> -->
         <p>Here are testimonies from some of our Patients.</p>
@@ -15,14 +15,8 @@
         <div class="testimonial-container slider">
 
             <?php
-            // Let's provide our connection details
-            $host = "localhost";
-            $username = "root";
-            $password = "";
-            $dbname = "uat_database";
-
-            //  Connect to the database with our connection details
-            $conn = mysqli_connect($host, $username, $password, $dbname);
+            //  Connect to the database
+            include "database-connect.php";
 
             //  Let's select all the rows in the uat_testimonials table
             $sql = "SELECT * FROM uat_testimonials";
@@ -40,7 +34,7 @@
                                 </div>
                                 <div class="caption">
                                     <h3><?php echo $testimonial['name'] ?></h3>
-                                    <p><i class="fa fa-map-marker" aria-hidden="true"></i><?php echo $testimonial['location'] ?></p>
+                                    <p><i class="fa fa-location-dot" aria-hidden="true"></i><?php echo $testimonial['location'] ?></p>
                                 </div>
                             </div>                                    
                             <div class="card-body">

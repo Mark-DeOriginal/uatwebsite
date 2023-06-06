@@ -1,83 +1,251 @@
+:root {
+    
+    --default-transition: 0.3s;
+    --default-font-family: 'Poppins', sans-serif;
+    --default-text-color: #626262;
+    --button-border-radius: 15px;
+    --button-padding: 10px 20px;
+
+    --site-logo-width: 180px;
+
+    --base-color: #59372d;
+
+    --header-bg-color: #f0e8dd;
+    --header-slide-down-bg-color: #f1e8dde8;
+    --header-slide-down-blur: 2px;
+    --header-padding: 0 100px 0 100px;
+    --header-box-shadow: 0px 2px 6px 2px #9b786d29;
+    
+    --header-nav-item-color: var(--base-color);
+    --header-nav-item-padding: 10px 12px;
+    --heading-nav-item-font-family: 'Montserrat', sans-serif;
+    --header-nav-item-font-weight: 500;
+    --header-nav-item-font-size: 0.97em;
+    --header-nav-divider-color: #59372d24;
+
+    --header-special-nav-item-color: var(--header-bg-color);
+    --header-special-nav-item-bg-color: var(--base-color);
+    --header-special-nav-item-hover-text-color: #e6ede1;
+    --header-special-nav-item-hover-bg-color: #64705b;
+    --header-special-nav-item-border-radius: 10px;
+
+    --bottom-bar-bg-color: var(--hero-heading-color);
+    --bottom-bar-height: 5px;
+
+    --hero-heading-font-size: 2.5em;
+    --hero-heading-color: #afc79f;
+    --hero-paragraph-font-size: 1.1em;
+    --hero-text-color: #e3d6d1;
+
+    --hero-action-btn-color: var(--hero-text-color);
+    --hero-action-btn-bg-color: #41282179;
+    --hero-action-btn-border-color: var(--hero-text-color);
+    --hero-action-btn-border-radius: 15px;
+    --hero-action-btn-padding: 10px 20px;
+    --hero-action-btn-hover-color: var(--hero-heading-color);
+    --hero-action-btn-hover-bg-color: #412821a9;
+    --hero-action-btn-hover-border-color: var(--hero-heading-color);
+    --image-border-radius: 15px;
+
+    --sections-padding-big-screen: 40px 100px;
+    --sections-padding-small-screen: 40px 20px;
+
+/*  --Font Sizes */
+    --heading-font-family: 'Montserrat', sans-serif;
+    --heading2-font-size: 1.7em;
+    --heading2-color: #9b786d;
+    --heading3-font-size: 1.2em;
+    --heading3-color: #626262;
+    --heading4-font-size: 1.1em;
+    --paragraph-font-family: 'Poppins', sans-serif;
+    --paragraph-font-size: 1em;
+    --paragraph-text-color: var(--default-text-color);
+    --paragraph-line-height: 1.6em;
+    --paragraph-gap-spacing: 20px;
+
+    --our-approaches-bg-color: #f1e6e6;
+    --our-approaches-border-color: var(--heading2-color);
+    --our-approach-container-bg-color: #f7f0f0;
+    --our-approaches-content-margin-left: 10px;
+    --our-approaches-number-width: 25px;
+
+    --our-services-bg-color: var(--our-approach-container-bg-color);
+    --our-services-item-bg-color: #f1e6e6;
+    --our-services-item-border-color: var(--heading2-color);
+
+    --healing-modalities-bg-color: #f7f0f0;
+    --healing-modalities-list-bg-color: #f1e8e8;
+    --healing-modalities-check-mark-bg-color: #e1d5d5;
+    --healing-modalities-check-mark-color: #918d88;
+    
+    --cta-container-bg-color: #e6ede1;
+    --cta-section-font-size: 1.5em;
+    --cta-section-text-color: #64705b;
+    --cta-section-btn-color: var(--cta-container-bg-color);
+    --cta-section-btn-bg-color: var(--cta-section-text-color);
+    --cta-section-btn-hover-color: #dce7d3;
+    --cta-section-btn-hover-bg-color: #738169;
+
+    --footer-heading-color: #bfcfb2;
+    --footer-paragraph-color: #cfbbb6;
+    --footer-bg-color: #564540;
+    --footer-link-hover-color: #ebb1a0;
+    --footer-text-font-size: 0.9em;
+}
+
+/*  Feel like adding some styles to the browser's scroll bar */
+::-webkit-scrollbar {
+    width: 6px;
+    background-color: #f7f4f0;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--heading2-color);
+    border-radius: 10px;
+}
+
 html {
     font-size: 100%;
     scroll-behavior: smooth;
-}
 
-body {
-    font-size: 1em;
-    font-family: montserrat;
-    background-color: var(--light-grey);
-    position: relative;
-    scroll-behavior: smooth;
-}
-
-p {
-    font-family: poppins;
-    font-size: 1.1em;
-    line-height: 1.6em;
+    scrollbar-color: var(--heading2-color) #f7f4f0;
+    scrollbar-width: thin;
 }
 
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    list-style: none;
     text-decoration: none;
 }
 
 ::selection {
-    background-color: rgba(245, 219, 171, 0.459);    
+    background-color: #b39b937a;    
 }
 
-/*  Let's define some color variables. 
-    We will make use of these color variables to help us maintain consistency
-*/
-:root {
-    /*Colors*/
-    --dark-brown: #59372d;
-    --brown: #ab918a;
-    --green: #008000;
-    --light-green: #b5de9b;
-    --orange-brown: #E3B67B;
-    --whitish-brown: #f9f3e9;
-    --light-grey: #f5f5f5;
-    --light-brown: #f3eadf;
-    --black-color: rgb(98 98 98);
-    --grey-color: #d1c9c9;
-    --white: #fff9f7;
-
-    /*Size, padding and margin of elements in pixels*/
-    --header-size: 100px;
-    --wide-screen-padding: 100px;
-    --small-screen-padding: 20px;
-    --hero-img-border-radius: 15px;
+body {
+    background-color: var(--header-nav-item-color);
+    scroll-behavior: smooth;
+    position: relative;
+    color: var(--default-text-color);
+    font-family: var(--default-font-family);
 }
 
-/*  Let's style our header*/
+
+@font-face {
+    font-family: 'Montserrat';
+    src: url('../fonts/montserrat/Montserrat-Regular.ttf') format('truetype');
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: 'Montserrat';
+    src: url('../fonts/montserrat/Montserrat-Medium.ttf') format('truetype');
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: 'Montserrat';
+    src: url('../fonts/montserrat/Montserrat-SemiBold.ttf') format('truetype');
+    font-weight: 600;
+}
+
+@font-face {
+    font-family: 'Montserrat';
+    src: url('../fonts/montserrat/Montserrat-Bold.ttf') format('truetype');
+    font-weight: 700;
+}
+
+@font-face {
+    font-family: 'Poppins';
+    src: url('../fonts/poppins/Poppins-Regular.ttf') format('truetype');
+    font-weight: 400;
+}
+
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--heading-font-family);
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+h1 {
+    font-size: var(--hero-heading-font-size);
+    color: var(--hero-heading-color);
+}
+
+h2 {
+    font-size: var(--heading2-font-size);
+    color: var(--heading2-color);
+}
+
+h3 {
+    font-size: var(--heading3-font-size);
+    color: var(--heading3-color);
+}
+
+h4 {
+    font-size: var(--heading4-font-size);
+}
+
+p, ul.list li {
+    font-family: var(--paragraph-font-family);
+    font-size: var(--paragraph-font-size);
+    line-height: var(--paragraph-line-height);
+    color: var(--paragraph-text-color);
+}
+
+p:not(:nth-of-type(1)) {
+    margin-top: var(--paragraph-gap-spacing);
+}
+
+a {
+    font-family: var(--heading-nav-item-font-family);
+}
+
+span {
+    font-family: var(--default-font-family);
+}
+
+.button {
+    padding: var(--button-padding);
+    display: block;
+    cursor: pointer;
+    border-radius: var(--button-border-radius);
+    width: fit-content;
+    font-size: 1.2em;
+    transition: 0.3s;
+}
+
+
+/*  Let's style our header */
 header {
     width: 100%;
-    background-color: var(--light-brown);
-    box-shadow: 0px 2px 15px 1px #0000001f;
+    background-color: var(--header-bg-color);
+    box-shadow: var(--header-box-shadow);
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
-    position: absolute;
     transition-duration: 0.3s;
     z-index: 1;
+    position: absolute;
 }
 
-.flex1 {
-    margin: 20px 0 20px 100px;
+header .flex1 {
+    height: 95px;
+    padding-left: 100px;
     display: flex;
+    align-items: center;
     justify-content: space-between;
     transition: 0.3s;
 }
 
-.flex2 {
-    margin-right: 100px;
+header .flex2 {
+    padding-right: 100px;
     transition: 0.3s;
 }
+
 
 .logo img {
     width: 180px;
@@ -85,60 +253,68 @@ header {
     transition: 0.3s;
 }
 
-.nav-bar ul {
-    display: flex;
-}
 
-.nav-bar ul li a, header .book-appointment {
-    display: block;
-    color: var(--dark-brown);
-    padding: 10px 12px;
-    font-weight: 500;
-    transition: 0.3s;
-    position: relative;
-    font-size: 0.97em;
-}
-
-/*  Let's make our Nav Bar's position to be relative so we can position the Bottom Bar*/
+/*  Let's make our Nav Bar's position to be relative so we can position the Bottom Bar */
 .nav-bar {
     position: relative;
 }
 
-/*  Let's style our Bottom Bar*/
-.bottom-bar {
-    position: absolute;
-    bottom: 0;
-    width: 0;
-    height: 5px;
-    background-color: var(--light-green);
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    transition: 0.3s cubic-bezier(0.32, 0.54, 0, 0.68);
+
+.nav-bar ul {
+    display: flex;
+    list-style: none;
+}
+
+
+header .nav-bar ul li a, header .book-appointment {
+    display: block;    
+    padding: var(--header-nav-item-padding);
+    font-weight: var(--header-nav-item-font-weight);
+    transition: 0.3s;
+    position: relative;
+    font-size: var(--header-nav-item-font-size);
+}
+
+header .nav-bar ul li a:not(.book-appointment) {
+    color: var(--header-nav-item-color);
 }
 
 /*  Let's style our Book Appointment button */
 header a.book-appointment {
-    background-color: var(--dark-brown);
-    color: var(--whitish-brown) !important;
-    border-radius: 10px;
+    color: var(--header-special-nav-item-color);
+    background-color: var(--header-special-nav-item-bg-color);
+    border-radius: var(--header-special-nav-item-border-radius);
     margin-left: 10px;
 }
 
 header a.book-appointment:hover {
-    background-color: var(--green);
+    background-color: var(--header-special-nav-item-hover-bg-color);
+    color: var(--header-special-nav-item-hover-text-color);
 }
 
+
+/*  Let's style our Bottom Bar */
+.bottom-bar {
+    position: absolute;
+    bottom: 0;
+    width: 0;
+    height: var(--bottom-bar-height);
+    background-color: var(--bottom-bar-bg-color);
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    transition: 0.5s cubic-bezier(0.09, 0.88, 0.6, 0.96);
+}
+
+
 /*  This is to make our Appointment and Hamburger
-    Menu buttons to sit on the same line with a middle alignment
-*/
+    Menu buttons to sit on the same line with a middle alignment */
 .hamburger-and-button {
     display: none;
     align-items: center;
 }
 
 /*  Let's add a right margin to the Book Appointment
-    Button that's close to our Hamburger Menu
-*/
+    Button that's close to our Hamburger Menu */
 .hamburger-and-button .book-appointment {
     margin-right: 20px;
 }
@@ -149,7 +325,7 @@ header a.book-appointment:hover {
     margin: 6px auto;
     width: 100%;
     height: 3px;
-    background-color: var(--dark-brown);
+    background-color: var(--header-nav-item-color);
     transition: 0.3s;
 }
 
@@ -158,32 +334,36 @@ header a.book-appointment:hover {
     width: 30px;
 }
 
-/*When this active class is applied to the Hamburger Menu button, it changes to X*/
+/*  When this active class is applied to the Hamburger Menu button, it changes to X */
 .hamburger-menu.active span:nth-of-type(1) {
     transform: translateY(8px) rotate(45deg);
 }
+
 .hamburger-menu.active span:nth-of-type(2) {
     transform: rotate(-45deg);
 }
+
 .hamburger-menu.active span:nth-of-type(3) {
     opacity: 0;
 }
 
-/*This will give a slide down effect to our Nav Bar */
+
+/*  This will give a slide down effect to our Nav Bar */
 .nav-bar.active {
     height: 300px;
 }
 
+
 header.shrinked .flex1 {
-    margin-top: 5px;
-    margin-bottom: 5px;
+    height: 70px;
 }
+
 header.shrinked .logo img {
     width: 170px;
 }
 
 header.scroll-slide {
-    animation: scroll-slide 0.5s ease;
+    animation: scroll-slide 0.7s ease;
 }
 
 @keyframes scroll-slide {
@@ -197,41 +377,48 @@ header.scroll-slide {
 }
 
 header.background-effect {
-    background-color: #fff5e6e0;
-    backdrop-filter: blur(4px);
+    background-color: var(--header-slide-down-bg-color);
+    backdrop-filter: blur(var(--header-slide-down-blur));
     transition: background-color 0.2s ease 0.5s, backdrop-filter 0.2s ease 0.5s;
 }
 
-/*Let's style the rest of our Landing Page*/
-.hero-section {   
-    background-size: cover;
-    background-repeat: no-repeat;
-    padding-top: 100px;
-    overflow-y: hidden;
-}
 
-.hero-container {
-    padding: 50px 100px;
-    color: var(--light-brown); 
+section > .container {
+    padding: var(--sections-padding-big-screen);
     transition: 0.3s;
 }
 
-.hero-container .row {
+
+/*  Let's style the rest of our Landing Page */
+.hero-section {   
+    background-size: cover;
+    background-repeat: no-repeat;    
+    overflow-y: hidden;
+    transition: 0.3s;
+}
+
+.hero-section > .container {
+    padding-top: 150px;
+}
+
+.hero-section > .container .row {
     display: flex;
     gap: 30px;
     flex-wrap: wrap;
 }
 
-.hero-container .row .column {
-    flex: 1; /*This will give the columns equal width*/
+.hero-section > .container .row .column {
+    flex: 1; /* This will give the columns equal width */
 }
 
 .hero-img {
     width: 100%;
     height: 430px;    
-    border-radius: var(--hero-img-border-radius);
+    border-radius: var(--image-border-radius);
     object-fit: cover;
     transition: 0.3s;
+    object-position: top;
+    filter: grayscale(40%);
 }
 
 .hero-caption {
@@ -240,63 +427,513 @@ header.background-effect {
 }
 
 .hero-caption h1 {
-    font-size: 2.5em;
+    font-size: var(--hero-heading-font-size);
+    font-weight: 600;
+    margin: 0;
+    color: var(--hero-heading-color);
 }
 
 .hero-caption p {
+    font-size: var(--hero-paragraph-font-size);
+    color: var(--hero-text-color);
     margin-top: 20px;
 }
 
 .hero-button {
-    padding: 10px 20px;
+    padding: var(--hero-action-btn-padding);
     display: block;
     margin-top: 25px;
-    color: var(--orange-brown);
-    background-color: #41282179;
+    color: var(--hero-action-btn-color);
+    background-color: var(--hero-action-btn-bg-color);
     cursor: pointer;
-    border: 2px solid var(--orange-brown);
-    border-radius: 15px;
+    border: 1px solid var(--hero-action-btn-border-color);
+    border-radius: var(--hero-action-btn-border-radius);
     width: fit-content;
     font-size: 1.2em;
     transition: 0.3s;
 }
 
 .hero-button:hover {
-    background-color: #412821a9;
-    border: 2px solid var(--light-green);
-    color: var(--light-green);
+    background-color: var(--hero-action-btn-hover-bg-color);
+    border: 1px solid var(--hero-action-btn-hover-border-color);
+    color: var(--hero-action-btn-hover-color);
 }
 
 .hero-button:active {
     transform: scale(0.95);
 }
 
-@media screen and (min-width: 1300px) {
-    .hero-section {
-        min-height: 100vh; /*This will be changed to "fit-content" for smaller screen devices*/
+
+.testimonials .container {    
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+
+.our-approach .wrapper {
+    padding: var(--sections-padding-big-screen);
+    padding-top: 0;
+    display: flex;
+    background-color: var(--our-approach-container-bg-color);
+}
+
+.our-approach .wrapper > img {
+    display: block;
+    width: 190px;
+    object-fit: cover;
+    object-position: left;
+    filter: grayscale(60%);
+    border-radius: var(--image-border-radius);
+}
+
+.our-approach .wrapper > .container {
+    padding-left: 40px;
+    display: flex;
+    flex-direction: column;
+}
+
+.our-approach .list {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+.our-approach .list .item {
+    flex: 1;
+    display: flex;
+    position: relative;
+    background-color: var(--our-approaches-bg-color);
+    border-radius: 15px;
+    padding: 10px 15px;
+    border-left: 2px solid var(--our-approaches-border-color);
+    border-top: 1px solid var(--our-approaches-border-color);
+}
+
+.our-approach .list .item .number {
+    border: 1px solid var(--heading2-color);
+    width: var(--our-approaches-number-width);
+    height: var(--our-approaches-number-width);
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--heading2-color);
+}
+
+.our-approach .list .item .content {
+    margin-left: var(--our-approaches-content-margin-left);
+}
+
+.our-approach .list .item .content .description {
+    margin-top: 10px;
+    margin-left: calc((var(--our-approaches-content-margin-left) + var(--our-approaches-number-width)) * -1);
+}
+
+
+.our-services .wrapper {
+    padding: var(--sections-padding-big-screen);
+    background-color: var(--our-services-bg-color);
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+}
+
+.our-services .wrapper img {
+    width: 190px;
+    height: auto;
+    border-radius: var(--image-border-radius);
+    object-fit: cover;
+    filter: contrast(0.7);
+}
+
+.our-services .container .list {
+    margin-top: 20px;
+}
+
+.our-services .container .list .row {    
+    display: flex;
+    gap: 10px;
+}
+
+.our-services .container .list .row:not(:first-child) {
+    margin-top: 10px;
+}
+
+.our-services .container .list .item {
+    background-color: var(--our-services-item-bg-color);
+    padding: 10px 15px;
+    border-radius: 15px;
+    border-left: 2px solid var(--our-services-item-border-color);
+    border-top: 1px solid var(--our-services-item-border-color);
+    flex: 1;
+}
+
+.our-services .container .list h3:not(:first-child) {
+    margin-top: 20px;
+}
+
+.our-services .container .list p {
+    margin: 0;
+}
+
+
+.healing-modalities .wrapper {
+    padding: var(--sections-padding-big-screen);
+    background-color: var(--healing-modalities-bg-color);
+    display: flex;
+    gap: 40px;
+}
+
+.healing-modalities .wrapper .container {
+    max-width: 730px;
+    flex-shrink: 0;
+}
+
+.healing-modalities .wrapper img {
+    width: 390px;
+    min-width: 190px;
+    flex-shrink: 1;
+    height: auto;
+    object-fit: cover;
+    border-radius: var(--image-border-radius);
+    filter: contrast(1.2) brightness(0.9) grayscale(0.5);
+}
+
+.healing-modalities .list {
+    list-style-type: none;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 20px;
+    gap: 5px;
+}
+
+.healing-modalities .list li {
+    background-color: var(--healing-modalities-list-bg-color);
+    padding: 10px 20px 10px 15px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.healing-modalities .list li i {
+    font-size: 1.1em;
+    color: var(--healing-modalities-check-mark-color);
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+
+.cta-section .container {
+    background-color: var(--cta-container-bg-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+}
+
+.cta-section .container .column:nth-of-type(1) {
+    max-width: 390px;
+}
+
+.cta-section p {
+    font-size: var(--cta-section-font-size);
+    color: var(--cta-section-text-color);
+}
+
+.cta-btn {       
+    margin-top: 25px;
+    color: var(--cta-section-btn-color);
+    background-color: var(--cta-section-btn-bg-color);
+}
+
+.cta-btn:hover {
+    background-color: var(--cta-section-btn-hover-bg-color);
+    color: var(--cta-section-btn-hover-color);
+}
+
+.cta-btn:active {
+    transform: scale(0.95);
+}
+
+.cta-section .container img {
+    width: 190px;
+    height: auto;
+}
+
+
+.footer .container {
+    background-color: var(--footer-bg-color);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5%;
+    padding-bottom: 20px;
+}
+
+.footer .container .column {
+    flex: 1;
+}
+
+.footer .container .about-us, .footer .container .contact-us, .footer .container .subscription-container {
+    flex: 2;
+}
+
+.footer h4 {
+    color: var(--footer-heading-color);
+}
+
+.footer ul {
+    list-style: none;
+    list-style-position: inside;
+}
+
+.footer p, .footer ul li {
+    color: var(--footer-paragraph-color);
+    font-size: var(--footer-text-font-size);
+    margin: 0;
+}
+
+.footer ul li:not(:nth-of-type(1)) {
+    margin-top: 5px;
+}
+
+.footer .contact-us p:nth-of-type(2), .footer .contact-us .socials {
+    margin-top: 15px;
+}
+
+.footer .contact-us i {
+    margin-right: 10px;
+}
+
+.footer .contact-us i.fa-whatsapp {
+    font-size: 1.2em;
+}
+
+.footer .contact-us i.fa-envelope {
+    font-size: 1.1em;
+}
+
+.footer .contact-us .socials {
+    color: var(--footer-paragraph-color);
+    font-size: 1.7em;
+}
+
+.footer a {
+    color: var(--footer-paragraph-color);
+    font-family: var(--default-font-family);
+    transition: 0.3s;
+}
+
+.footer a:hover {
+    color: var(--footer-link-hover-color);
+}
+
+.footer .links a:hover {
+    text-decoration: underline;
+}
+
+.footer .container .copyright a {
+    text-decoration: underline;
+}
+
+.footer input {
+    border: none;
+    padding: 7px 10px;
+    border-radius: 7px;
+    font-size: var(--footer-text-font-size);
+    font-family: var(--default-font-family);
+    transition: 0.3s;
+}
+
+.footer input::placeholder {
+    color: #b7a6a1;
+}
+
+.footer input:not(input[type=submit]) {
+    width: 100%;
+    margin-top: 10px;
+    color: var(--footer-paragraph-color);
+    background-color: transparent;
+    border: 2px solid var(--footer-paragraph-color);
+}
+
+.footer input:not(input[type=submit]):focus {    
+    border: 2px solid var(--footer-link-hover-color);
+    color: var(--footer-link-hover-color);
+}
+
+.footer input:not(input[type=submit]):hover {    
+    border: 2px solid var(--footer-link-hover-color);
+}
+
+.footer input:not(input[type=submit]):focus::placeholder {
+    color: var(--footer-link-hover-color);
+}
+
+.footer input[type=submit] {
+    background-color: var(--footer-paragraph-color);
+    color: var(--footer-bg-color);
+    cursor: pointer;
+    width: 100px;
+}
+
+.footer input[type=submit]:not(.disabled):hover {
+    background-color: var(--footer-link-hover-color);
+}
+
+.footer input[type=submit].disabled {
+    cursor: not-allowed;
+}
+
+
+.footer input:focus {
+    outline: none;
+}
+
+.footer .container .copyright {
+    flex: 100%;
+    margin-top: 30px;
+}
+
+.footer .container .divider {
+    height: 1px;
+    background-color: #403331;
+    position: relative;
+    margin-bottom: 5px;
+}
+
+.footer .container .divider::after {
+    content: "";
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 1px;
+    background-color: #60524e;
+    top: -2px;
+}
+
+.btn-and-loader {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.loader {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    border: 4px solid var(--footer-link-hover-color);
+    border-top: 4px solid transparent;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    animation: spin 0.6s cubic-bezier(0.33, 0.27, 0.55, 0.47) infinite;
+}
+
+.show-loader {
+    opacity: 1;
+}
+  
+@keyframes spin {
+    0% { 
+        transform: rotate(0deg);
+    }
+    100% { 
+        transform: rotate(360deg);
     }
 }
 
-/*  Let's add some media queries to make our Site responsive */
-@media screen and (max-width: 1270px) {
-    .flex1 {
-        margin-left: 20px;
-        margin-right: 20px;
-    }
+.modal-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
+    z-index: 1;
+    display: none;
+    padding: 30px;
+}
 
-    .flex2 {
-        margin-right: 20px;
-    }
+.modal h2 {
+    font-size: 1.3em;
+}
 
-    .hero-container {
-        padding: 50px 20px;
-    }
+.modal {
+    max-width: 430px;
+    margin-left: 5%;
+    margin-right: 5%;
+    position: absolute;
+    padding: 15px 20px;
+    background-color: #f7f0f0;
+    box-shadow: 0px 2px 6px 2px #9b786d29;
+    border-radius: 15px;
+    transition: 0.3s;
+    top: 20%;
+}
 
-    .hero-caption {
-        margin-top: 0;
-    }
+.show-modal {  
+    animation: show-modal 0.3s forwards;
+}
 
-    
+.hide-modal {
+    animation: hide-modal 0.3s forwards;
+}
+
+@keyframes show-modal {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    } to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes hide-modal {
+    from {
+        transform: scale(1);
+        opacity: 1;
+    } to {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+}
+
+.modal .btn-container {
+    display: flex;
+    gap: 10px;    
+    margin-top: 20px;
+}
+
+.modal .button {
+    font-size: var(--paragraph-font-size);
+    color: var(--paragraph-text-color);
+}
+
+.modal .button:nth-of-type(1) {
+    background-color: #efdede;
+    border: none;
+}
+
+.modal .button:nth-of-type(1):hover {
+    background-color: #e1d2d2;
+}
+
+.modal .button:nth-of-type(2) {    
+    background-color: transparent;
+    border: 2px solid #efdede;
+}
+
+.modal .button:nth-of-type(2):hover {
+    border: 2px solid #e1d2d2;
+}
+
+/*  Media Queries for responsiveness to screen sizes */
+
+@media screen and (min-width: 1300px) {
+    .hero-section {
+        min-height: 100vh;
+    }
 }
 
 @media screen and (max-width: 1090px) { 
@@ -304,20 +941,19 @@ header.background-effect {
         width: 170px;
     }
     
-    /*  Hide the Bottom Bar, as it's not needed at this point*/
+    /*  Hide the Bottom Bar, as it's not needed at this point */
     .bottom-bar {
         display: none;
     }
 
     /*  On mobile and smaller screen devices, the Nav Items
-        should show below our Logo
-    */
-    .flex1, .flex2{
-        flex: 100%; /*This will make each item occupy different horizontal lines*/
+        should show below our Logo */
+    header .flex1, header .flex2 {
+        flex: 100%; 
     }
 
     .nav-bar {
-        background-color: var(--light-brown);
+        background-color: var(--header-bg-color);
         width: 100vw;
         overflow: hidden;
         height: 0;
@@ -333,7 +969,7 @@ header.background-effect {
         position: absolute;
         width: 100%;
         height: 1px;
-        background-color: #59372d24;
+        background-color: var(--header-nav-divider-color);
         top: 0;
         left: 0;
     }
@@ -345,8 +981,7 @@ header.background-effect {
     }
 
     /*  Since the Bottom Bar won't show in mobile or smaller screen devices, 
-        let's make each Nav Item bolder when hovered
-    */
+        let's make each Nav Item bolder when hovered */
     .nav-bar ul li a:not(.book-appointment):hover, .nav-bar ul li a:not(.book-appointment).active  {
         font-weight: 800;
     }
@@ -361,8 +996,7 @@ header.background-effect {
     }
 
     /*  Show the Appointment and Hamburger Menu Buttons and 
-        make them sit next to each other, using display flex
-    */
+        make them sit next to each other, using display flex */
     .hamburger-and-button {
         display: flex;
     }
@@ -383,37 +1017,149 @@ header.background-effect {
     }
 }
 
-@media screen and (max-width: 520px) {
-    /*  Hide the Book Appointment Button that's close to the Hamburger Menu
-        when the device width is exactly or smaller than 500px 
-    */
-    .hamburger-and-button .book-appointment {
-        display: none;
+@media screen and (max-width: 1206px) {
+
+    header .flex1 {
+        padding: 0 20px;
     }
 
-    /*  Then show the Book Appointment Button that's inside the Nav Bar */
-    .nav-bar ul li .book-appointment {
-        display: block;
-        margin-bottom: 10px;
-        width: fit-content;
+    header .flex2 {
+        padding-right: 20px;
     }
 
-    .hamburger-menu span {
-        height: 2px;
+    .hero-caption {
+        margin-top: 0;
+    }
+
+    .hero-caption h1 {
+        font-size: 2.3em;
+        font-weight: 600;
+    }
+    
+    h2 {
+        font-size: 1.7em;
+    }
+
+    h3 {
+        font-size: 1.1em;
+    }
+
+    section > .container {
+        padding: var(--sections-padding-small-screen);
+    }
+
+    .testimonials .container {        
+        padding: var(--sections-padding-small-screen);
+    }
+
+    .our-approach .wrapper, .our-services .wrapper {
+        padding: var(--sections-padding-small-screen);
+    }
+
+    .cta-section p {
+        font-size: 1.3em;
+    }
+
+    .cta-section .container img {
+        width: 250px;
+    }
+
+    .healing-modalities .wrapper {
+        padding: var(--sections-padding-small-screen);
     }
 }
 
-@media screen and (max-width: 760px) {
-    .hero-container {
-        padding-bottom: 15px;
+@media screen and (max-width: 1070px) {
+
+    .our-approach .list h3 {
+        margin-top: 2px;
     }
 
-    .hero-container .row {
+    .our-approach p, ul.list li {
+        font-size: 1em;
+    }
+    
+    .our-approach .list .item .content .description {
+        margin-left: 0;
+    }
+
+    .our-approach .list {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .our-approach .list .item {
+        background-color: transparent;
+        border: none;
+        padding: 0;
+    }
+
+    .our-approach .list .item:not(:last-child) .content {
+        margin-block-end: 10px;
+    }
+
+    /*  Let's create a vertical line that connects to the next item */
+    .our-approach .list .item:not(:last-child)::after {
+        content: "";
+        position: absolute;
+        width: 1px;
+        height: calc(100% - var(--our-approaches-number-width));
+        background-color: var(--heading2-color);
+        bottom: 0;
+        left: calc(var(--our-approaches-number-width) / 2);
+    }
+
+    .healing-modalities .wrapper .container {
+        flex-shrink: 1;
+    }
+}
+
+@media screen and (max-width: 980px) {
+    .our-services .container .list .row {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .our-services .container .list .row:not(:first-child) {
+        margin-top: 20px;
+    }
+
+    .our-services .container .list .item {
+        padding: 0;
+        background-color: transparent;
+        border: none;
+    }
+}
+
+@media screen and (max-width: 870px) {
+    .footer .container {
+        gap: 30px;
+    }
+    
+    .footer .container .column {
+        flex: 45%;
+    }
+}
+
+@media screen and (max-width: 770px) {
+    .hero-section .container {
+        padding-right: 0px;
+        padding-left: 0px;
+        padding-bottom: 0;
+    }
+
+    .hero-section > .container .row {
         justify-content: center;
     }
 
-    .hero-container .row .column {
-        flex: 100%; /*This will make each item occupy different horizontal lines*/ 
+    .hero-section > .container .row .column {
+        flex: 100%; /* This will make each item occupy different horizontal lines */ 
+    }
+
+    .hero-caption {
+        padding: var(--sections-padding-small-screen);
+        padding-top: 0;
+        padding-bottom: 0;
     }
 
     .hero-caption h1 {
@@ -424,67 +1170,103 @@ header.background-effect {
         font-size: 1em;
     }
 
-    .hero-button {
-        margin-top: 25px;
+    .button {
+        font-size: 1em;
+        font-weight: 500;
     }
     
     .hero-img {
-        height: 250px;
+        height: 150px;
+        border-radius: 0;
+        object-position: center;
+        filter: grayscale(60%);
     }
 
     .logo img, header.shrinked .logo img {
         width: 150px;
     }
-       
-}
 
-
-.testimonials .container {
-    height: fit-content;
-    background-color: var(--whitish-brown);
-    padding-top: 40px;
-    padding-bottom: 20px;
-    color: var(--black-color);
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    transition: 0.3s;
-}
-
-.heading-wrapper, .testimonial-wrapper {
-    padding: 0 var(--wide-screen-padding);
-}
-
-.testimonial-wrapper {
-    padding: 0 calc(var(--wide-screen-padding) - 50px);
-}
-
-.testimonials h2 {
-    font-size: 2em;
-    margin-bottom: 10px;
-}
-
-.testimonials .heading-wrapper p {
-    align-self: center;
-}
-
-.testimonials p:not(:nth-of-type(1)) {
-    margin-top: 20px;
-}
-
-@media screen and (max-width: 1206px) {
-
-    .heading-wrapper, .testimonial-wrapper {
-        padding: 0 var(--small-screen-padding);
+    .our-approach .wrapper > .container {
+        padding: var(--sections-padding-small-screen);
+    }
+    
+    .our-approach .wrapper, .our-services .wrapper, .healing-modalities .wrapper {
+        flex-wrap: wrap;
+        flex-direction: column;
+        padding: 0;
+        gap: 0;
     }
 
-    .testimonials h2 {
-        font-size: 1.8em;
+    .our-approach .wrapper img, .our-services .wrapper img, .healing-modalities .wrapper img {
+        height: 150px;
+        width: 100%;
+        border-radius: 0;
+        object-position: bottom;
+        object-fit: cover;
     }
 
-    .testimonials p {
-        font-size: 1em;
+    .our-services .wrapper .container {
+        order: 2;
+        padding: var(--sections-padding-small-screen);
+    }
+    
+    .healing-modalities .wrapper .container {
+        padding: var(--sections-padding-small-screen);
     }
 }
 
+@media screen and (max-width: 670px) {
+    .cta-section > .container {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .cta-section .column:nth-of-type(1) {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+    }
 
+    .cta-section .column:nth-of-type(1) {
+        order: 2;
+    }
+
+    .cta-section .container img {
+        width: 200px;
+        height: auto;
+    }
+
+    .cta-section p {
+        font-size: 1.1em;
+    }
+}
+
+@media screen and (max-width: 520px) {
+    /*  Hide the Book Appointment Button that's close to the Hamburger Menu
+        when the device width is exactly or smaller than 500px */
+    .hamburger-and-button .book-appointment {
+        display: none;
+    }
+
+    /*  Then show the Book Appointment Button that's inside the Nav Bar */
+    .nav-bar ul li a.book-appointment {
+        display: block;
+        margin-bottom: 10px;
+        width: fit-content;
+    }
+
+    .hamburger-menu span {
+        height: 2px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .footer .container {
+        flex-direction: column;
+    }
+    
+    .footer .container .column {
+        flex: 100%;
+    }
+}

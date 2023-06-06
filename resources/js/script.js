@@ -177,6 +177,8 @@ window.onload = ()=> {
                 item.classList.remove("show");
             });
         }
+
+        
         
     });
     
@@ -189,4 +191,4 @@ window.onload = ()=> {
         header.classList.add("scroll-slide");
         header.classList.add("background-effect");
     }
-}                  
+}
