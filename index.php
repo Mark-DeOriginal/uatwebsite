@@ -220,6 +220,11 @@
 
         <!-- Modals -->
         <div class="modal-container">
+            <div class="loading-indicator">
+                <div class="loader"></div>
+                <p>Please wait</p>
+            </div>
+
             <div class="modal subscription-status-modal">
                 <h2 class="heading"></h2>
                 <p class="message"></p>

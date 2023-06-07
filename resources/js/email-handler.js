@@ -1,7 +1,9 @@
 window.addEventListener("load", function() {
     var subscriptionForm = document.getElementById("subscription-form");
     var sendEmailBtn = document.querySelector(".send-email-btn");
-    var loader = document.querySelector(".loader");
+    var modalContainer = document.querySelector(".modal-container");
+    var spinningLoader = document.querySelector(".loading-indicator .loader");
+    var loadingText = document.querySelector(".loading-indicator p");
     var formData;
 
     subscriptionForm.onsubmit = function(event) {
@@ -13,28 +15,16 @@ window.addEventListener("load", function() {
             subscriptionForm = document.getElementById("subscription-form");
             formData = new FormData(subscriptionForm);
 
+            modalContainer.style.display = "block";
+            spinningLoader.style.display = "block";
+            loadingText.style.display = "block";
+
             sendConfirmationEmail(formData);
         }
         
     }
 
-    loader.addEventListener("transitionend", ()=> {
-        if (loader.classList.contains("show-loader")) {
-            sendEmailBtn.value = "Please wait";
-            sendEmailBtn.classList.add("disabled");
-        } else {
-            sendEmailBtn.value = "Subscribe";
-            sendEmailBtn.classList.remove("disabled");
-        }      
-    });
-
-    function sendConfirmationEmail(data) {
-
-        loader.classList.add("show-loader");
-
-        function hideLoader() {
-            loader.classList.remove("show-loader");
-        }
+    function sendConfirmationEmail(data) {       
 
         var xhr = new XMLHttpRequest();
         xhr.open("POST", "send-confirmation-email.php", true);
@@ -51,21 +41,18 @@ window.addEventListener("load", function() {
                     modalHeading = "Confirm Subscription";
                     modalMessage = "A confirmation link has been sent to your email. Please click on it to confirm your subscription.";
                     
-                    hideLoader();
                     showModal(modalHeading, modalMessage, buttonText);
                     
                 } else if (response === "Resent") {
                     modalHeading = "Confirm Subscription";
                     modalMessage = "A confirmation link has been resent to your email. Click on it to confirm your subscription.";
 
-                    hideLoader();
                     showModal(modalHeading, modalMessage, buttonText);
                     
                 } else if (response === "Confirmed") {
                     modalHeading = "Already Subscribed";
                     modalMessage = "The email address you provided has already been added to our subscription list and has been confirmed.";
 
-                    hideLoader();
                     showModal(modalHeading, modalMessage, buttonText);
 
                 } else if (response === "Not Confirmed") {
@@ -73,7 +60,6 @@ window.addEventListener("load", function() {
                     modalMessage = "We sent a confirmation code to you previously. Do you want us to resend it?";
                     buttonText = "Yes, resend";
 
-                    hideLoader();
                     showModal(modalHeading, modalMessage, buttonText);
 
                 } else {
@@ -81,7 +67,6 @@ window.addEventListener("load", function() {
                     modalHeading = "Oops!";
                     modalMessage = response;
                     
-                    hideLoader();
                     showModal(modalHeading, modalMessage, buttonText);
                 }
             }
@@ -102,12 +87,32 @@ window.addEventListener("load", function() {
         modalHeading.innerText = headingText;
         modalMessage.innerText = message;
 
-        subscriptionModalContainer.style.display = "flex"; 
+        function hideLoader() {
+            spinningLoader.style.animation = "hide-spinning-loader 0.3s ease";
+            loadingText.style.animation = "hide-loading-text 0.3s ease";
+            setTimeout(() => {
+                spinningLoader.style.display = "none";
+                spinningLoader.style.animation = "";
+
+                loadingText.style.display = "none";
+                loadingText.style.animation = "";
+            }, 300);            
+        }
+        
+        setTimeout(() => {
+            hideLoader();
+            
+            //  Then show the modal
+            modalContainer.style.display = "block";
+            spinningLoader.style.display = "block";
+            loadingText.style.display = "block";
+            subscriptionModal.style.display = "block";
+        }, 1000);
         
         if (buttonText === "Yes, resend") {
             modalBtnContainer.innerHTML = 
             ` <button type="button" class="resend-btn button">${buttonText}</button>
-                <button type="button" class="modal-close-btn button">Close</button>`;
+              <button type="button" class="modal-close-btn button">Close</button>`;
             
             var resendBtn = document.querySelector(".modal .resend-btn");
 
@@ -116,41 +121,50 @@ window.addEventListener("load", function() {
                 formData = new FormData(subscriptionForm);
                 formData.append("resend-confirmation", true);
 
+                subscriptionModal.style.animation = "hide-modal 0.3s ease";
+                setTimeout(()=>{
+                    subscriptionModal.style.display = "";
+                    subscriptionModal.style.animation = "";                    
+                }, 300);
+
+                spinningLoader.style.display = "block";
+                loadingText.style.display = "block";
+
                 sendConfirmationEmail(formData);
             });
+
         } else {
             modalBtnContainer.innerHTML = 
             ` <button type="button" class="modal-close-btn button">Okay</button>`;  
         }
 
-        if (subscriptionModal.classList.contains("show-modal") == false) {
-            subscriptionModal.classList.add("show-modal");
-        }
+        var modalCloseBtn = document.querySelector(".modal-close-btn");
 
-        var modalCloseBtns = document.querySelectorAll(".modal .button");
-
-        modalCloseBtns.forEach(btn => {
-            btn.addEventListener("click", function(){
-                subscriptionModal.classList.remove("show-modal");
-                subscriptionModal.classList.add("hide-modal");
-            });
-        });        
-        
+        modalCloseBtn.addEventListener("click", function(){
+            closeModal();
+        });
+             
         subscriptionModalContainer.addEventListener("click", function(evt) {
             if (evt.target === subscriptionModalContainer) {
-                subscriptionModal.classList.remove("show-modal");
-                subscriptionModal.classList.add("hide-modal");  
+                closeModal();
             } 
         });
 
-        function handleModalClosed() {
-            if (subscriptionModal.classList.contains("hide-modal")) {
-                subscriptionModal.classList.remove("hide-modal");
-                subscriptionModalContainer.style.display = "none"; 
-            }
+        function closeModal() {
+            subscriptionModal.style.animation = "hide-modal 0.3s ease forwards";
+            setTimeout(()=>{
+                subscriptionModal.style.display = "none";
+                subscriptionModal.style.animation = "";
+
+                subscriptionModalContainer.style.animation = "hide-modal-container 0.3s ease forwards";
+                setTimeout(()=>{
+                    subscriptionModalContainer.style.display = "none";
+                    subscriptionModalContainer.style.animation = "";
+                }, 300);
+                
+            }, 300);
         }
 
-        subscriptionModal.addEventListener("animationend", handleModalClosed);
     }
 });
 

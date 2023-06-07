@@ -738,6 +738,7 @@ section > .container {
 .footer input {
     border: none;
     padding: 7px 10px;
+    margin-top: 10px;
     border-radius: 7px;
     font-size: var(--footer-text-font-size);
     font-family: var(--default-font-family);
@@ -750,7 +751,6 @@ section > .container {
 
 .footer input:not(input[type=submit]) {
     width: 100%;
-    margin-top: 10px;
     color: var(--footer-paragraph-color);
     background-color: transparent;
     border: 2px solid var(--footer-paragraph-color);
@@ -811,26 +811,72 @@ section > .container {
     top: -2px;
 }
 
-.btn-and-loader {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-top: 10px;
+.modal-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1;
+    padding: 10px;
+    padding-top: 120px;
+    background-color: #564540ba;
+    animation: show-modal-container 0.3s ease forwards;
+    display: none;
 }
 
-.loader {
-    opacity: 0;
-    transition: opacity 0.3s ease;
+@keyframes show-modal-container {
+    from {
+        opacity: 0;
+    } to {
+        opacity: 1;
+    }
+}
+
+@keyframes hide-modal-container {
+    from {
+        opacity: 1;
+    } to {
+        opacity: 0;
+    }
+}
+
+.modal h2 {
+    font-size: 1.3em;
+}
+
+.modal-container .loading-indicator {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -30%);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.modal-container .loading-indicator .loader {
+    transition: 0.3s ease;
     border: 4px solid var(--footer-link-hover-color);
     border-top: 4px solid transparent;
     border-radius: 50%;
-    width: 20px;
-    height: 20px;
-    animation: spin 0.6s cubic-bezier(0.33, 0.27, 0.55, 0.47) infinite;
+    width: 70px;
+    height: 70px;
+    position: relative;
+    opacity: 0;
+    animation: show-spinning-loader 0.3s ease 0.1s forwards, spin 0.6s cubic-bezier(0.33, 0.27, 0.55, 0.47) infinite;
+    display: none;
 }
 
-.show-loader {
-    opacity: 1;
+@keyframes show-spinning-loader {
+    from {
+        opacity: 0;
+        top: 100px;
+    } to {
+        opacity: 1;
+        top: 0;
+    }
 }
   
 @keyframes spin {
@@ -842,41 +888,56 @@ section > .container {
     }
 }
 
-.modal-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    justify-content: center;
-    z-index: 1;
-    display: none;
-    padding: 30px;
+@keyframes hide-spinning-loader {
+    from {
+        opacity: 1;
+        transform: scale(1);
+    } to {
+        opacity: 0;
+        transform: scale(0.7);
+    }
 }
 
-.modal h2 {
-    font-size: 1.3em;
+.modal-container .loading-indicator p {
+    position: relative;
+    opacity: 0;
+    color: #ebb1a0;
+    animation: show-loading-text 0.5s ease 0.1s forwards;
+    display: none;
+}
+
+@keyframes show-loading-text {
+    from {
+        opacity: 0;
+        top: 110px;
+    } to {
+        opacity: 1;
+        top: 10px;
+    }
+}
+
+@keyframes hide-loading-text {
+    from {
+        opacity: 1;
+        transform: scale(1);
+    } to {
+        opacity: 0;
+        transform: scale(0.7);
+    }
 }
 
 .modal {
     max-width: 430px;
-    margin-left: 5%;
-    margin-right: 5%;
-    position: absolute;
+    margin: 0 auto;
     padding: 15px 20px;
     background-color: #f7f0f0;
     box-shadow: 0px 2px 6px 2px #9b786d29;
     border-radius: 15px;
     transition: 0.3s;
-    top: 20%;
-}
-
-.show-modal {  
-    animation: show-modal 0.3s forwards;
-}
-
-.hide-modal {
-    animation: hide-modal 0.3s forwards;
+    z-index: 1;
+    position: relative;
+    animation: show-modal 0.3s ease forwards;
+    display: none;
 }
 
 @keyframes show-modal {

@@ -40,7 +40,6 @@
             
             <div class="btn-and-loader">
                 <input type="submit" value="Subscribe" class="send-email-btn">
-                <div class="loader"></div>
             </div>            
         </form>
     </div>
