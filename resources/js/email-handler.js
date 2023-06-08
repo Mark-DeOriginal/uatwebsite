@@ -57,7 +57,7 @@ window.addEventListener("load", function() {
 
                 } else if (response === "Not Confirmed") {
                     modalHeading = "Confirm Subscription";
-                    modalMessage = "We sent a confirmation code to you previously. Do you want us to resend it?";
+                    modalMessage = "We sent a confirmation code to you previously. Would you like us to resend it?";
                     buttonText = "Yes, resend";
 
                     showModal(modalHeading, modalMessage, buttonText);
@@ -88,8 +88,8 @@ window.addEventListener("load", function() {
         modalMessage.innerText = message;
 
         function hideLoader() {
-            spinningLoader.style.animation = "hide-spinning-loader 0.3s ease";
-            loadingText.style.animation = "hide-loading-text 0.3s ease";
+            spinningLoader.style.animation = "hide-spinning-loader 0.3s ease forwards";
+            loadingText.style.animation = "hide-loading-text 0.3s ease forwards";
             setTimeout(() => {
                 spinningLoader.style.display = "none";
                 spinningLoader.style.animation = "";
@@ -103,9 +103,7 @@ window.addEventListener("load", function() {
             hideLoader();
             
             //  Then show the modal
-            modalContainer.style.display = "block";
-            spinningLoader.style.display = "block";
-            loadingText.style.display = "block";
+            
             subscriptionModal.style.display = "block";
         }, 1000);
         
@@ -121,7 +119,7 @@ window.addEventListener("load", function() {
                 formData = new FormData(subscriptionForm);
                 formData.append("resend-confirmation", true);
 
-                subscriptionModal.style.animation = "hide-modal 0.3s ease";
+                subscriptionModal.style.animation = "hide-modal 0.3s ease forwards";
                 setTimeout(()=>{
                     subscriptionModal.style.display = "";
                     subscriptionModal.style.animation = "";                    

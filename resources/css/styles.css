@@ -11,7 +11,7 @@
     --base-color: #59372d;
 
     --header-bg-color: #f0e8dd;
-    --header-slide-down-bg-color: #f1e8dde8;
+    --header-slide-down-bg-color: #f1e8ddf7;
     --header-slide-down-blur: 2px;
     --header-padding: 0 100px 0 100px;
     --header-box-shadow: 0px 2px 6px 2px #9b786d29;
@@ -378,8 +378,7 @@ header.scroll-slide {
 
 header.background-effect {
     background-color: var(--header-slide-down-bg-color);
-    backdrop-filter: blur(var(--header-slide-down-blur));
-    transition: background-color 0.2s ease 0.5s, backdrop-filter 0.2s ease 0.5s;
+    transition: background-color 0.2s ease 0.5s;
 }
 
 
@@ -575,7 +574,6 @@ section > .container {
 .our-services .container .list p {
     margin: 0;
 }
-
 
 .healing-modalities .wrapper {
     padding: var(--sections-padding-big-screen);
@@ -808,7 +806,7 @@ section > .container {
     width: 100%;
     height: 1px;
     background-color: #60524e;
-    top: -2px;
+    top: -1px;
 }
 
 .modal-container {
@@ -1190,6 +1188,10 @@ section > .container {
         background-color: transparent;
         border: none;
     }
+
+    .our-services .wrapper img {
+        height: 513px;
+    }
 }
 
 @media screen and (max-width: 870px) {
@@ -1230,11 +1232,6 @@ section > .container {
     .hero-caption p {
         font-size: 1em;
     }
-
-    .button {
-        font-size: 1em;
-        font-weight: 500;
-    }
     
     .hero-img {
         height: 150px;
@@ -1273,6 +1270,22 @@ section > .container {
     
     .healing-modalities .wrapper .container {
         padding: var(--sections-padding-small-screen);
+    }
+
+    .footer input:not(input[type=submit]) {
+        width: 100%;
+        color: var(--footer-paragraph-color);
+        background-color: transparent;
+        border: 1px solid var(--footer-paragraph-color);
+    }
+    
+    .footer input:not(input[type=submit]):focus {    
+        border: 1px solid var(--footer-link-hover-color);
+        color: var(--footer-link-hover-color);
+    }
+    
+    .footer input:not(input[type=submit]):hover {    
+        border: 1px solid var(--footer-link-hover-color);
     }
 }
 
