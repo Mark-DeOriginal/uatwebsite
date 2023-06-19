@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             $subscriberFName = mysqli_real_escape_string($conn, $subscriberFName);
             $subscriberEmail = mysqli_real_escape_string($conn, $subscriberEmail);
-            
+
             //  If the request wasn't for us to "resend" the confirmation, then proceed with this block
             if (isset($_POST['resend-confirmation']) == false) {        
 
@@ -37,7 +37,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     confirmation_code VARCHAR(100) NOT NULL,
                     subscription_date VARCHAR(30),
                     confirmation_status VARCHAR(30),
-                    confirmation_time_lapse VARCHAR(30)
+                    confirmation_time_lapse VARCHAR(30),
+                    subscription_status VARCHAR(30),
+                    date_unsubscribed VARCHAR(30)
                 )";
 
                 mysqli_query($conn, $sql);
@@ -49,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 if (mysqli_num_rows($result) > 0) {
                     $row = mysqli_fetch_assoc($result);
 
-                    if ($row['confirmation_status'] === "Confirmed") {
+                    if ($row['confirmation_status'] === "Confirmed" && $row['subscription_status'] === "Subscribed") {
                         $response = "Confirmed";
                     } else {
                         $response = "Not Confirmed";
@@ -64,37 +66,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         }
                         
                         $confirmationCode = generateCode(); 
-                        $confirmationLink = 'http://localhost/uatwebsite/confirm-subscription.php?confirmation-code='. $confirmationCode;
+                        $confirmationLink = 'http://localhost/uatwebsite/confirm/'. $confirmationCode;
 
-                        $emailBody =  '<html>'
-                                    . '<head>'
-                                    . ' <style>
-                                            h1 {
-                                                color: #9b786d; 
-                                                font-family: montserrat;
-                                                font-size: 1.5em;
-                                            }
-                                            h2 {
-                                                font-size: 1.3em;
-                                                font-weight: 400;
-                                            }
-                                            p, a {
-                                                font-size: 1.1em;
-                                            }
-                                            h2, p, a {
-                                                font-family: poppins; 
-                                                color: #626262;
-                                            }                    
-                                        </style>'
-                                    . '</head>'
-                                    . '<body>'
-                                    . ' <h1>Confirm Subscription</h1>'
-                                    . ' <h2>Hello, ' . $subscriberFName . '.</h2>' 
-                                    . ' <p>We got your request to subscribe to our health updates.</p>'
-                                    . ' <p>If ' . $subscriberEmail . ' is your correct email, please click on the confirmation link below to confirm your subscription.</p>'
-                                    . ' <a href="'. $confirmationLink .'">'. $confirmationLink .'</a>'
-                                    . '</body>'
-                                    . '</html>';
+                        $unsubscribeLink = 'http://localhost/uatwebsite/unsubscribe/'. $confirmationCode;
+                        
+                        $emailBody = file_get_contents("confirmation-email-template.php");
+                        
+                        $search = array('{{SUBSCRIBER_NAME}}', '{{SUBSCRIBER_EMAIL}}', '{{CONFIRMATION_LINK}}', '{{UNSUBSCRIPTION_LINK}}');
+                        $replaceWith = array($subscriberFName, $subscriberEmail, $confirmationLink, $unsubscribeLink);
+    
+                        $emailBody = str_replace($search, $replaceWith, $emailBody);
 
                         $mail = new PHPMailer(true);
 
@@ -104,13 +85,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         $mail->Username = 'davidmarkfriday16@gmail.com';
                         $mail->Password = 'scqgmmrblcansmvs';
                         $mail->SMTPSecure = 'tls';
+                        $mail->CharSet = 'UTF-8';
                         $mail->Port = 587;
                 
+                        $mail->addCustomHeader('List-Unsubscribe', '<' . $unsubscribeLink . '>');
                         $mail->setFrom('davidmarkfriday16@gmail.com', 'Mark Friday');
                         $mail->addAddress($subscriberEmail, $subscriberFName);
                         
                         $mail->isHTML(true);
-                        $mail->Subject = 'Subscription';
+                        $mail->Subject = 'Confirm Subscription';
                 
                         $mail->Body = $emailBody;
 
@@ -120,17 +103,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                             $subscription_date_TimeStamp = date("Y-m-d H:i:s A");
                 
-                            $sql = "INSERT INTO email_subscribers (first_name, email, confirmation_code, subscription_date, confirmation_status, confirmation_time_lapse)
-                                    VALUES ('$subscriberFName', '$subscriberEmail', '$confirmationCode', '$subscription_date_TimeStamp', 'Not confirmed', '-')";
+                            $sql = "INSERT INTO email_subscribers (first_name, email, confirmation_code, subscription_date, confirmation_status, confirmation_time_lapse, subscription_status, date_unsubscribed)
+                                    VALUES ('$subscriberFName', '$subscriberEmail', '$confirmationCode', '$subscription_date_TimeStamp', 'Not Confirmed', '-', 'Not Subscribed', '-')";
                 
                             mysqli_query($conn, $sql);
                 
                         } else {
-                            $response = "The email was not sent. An error occurred. Please try again.";
+                            $response = "Request failed. An error occurred. Please try again.";
                         }
                 
                     } catch (Exception $e) {
-                        $response = "Email not sent. Error: " . $e->getMessage();
+                        $response = "Network Error";
                     }
                 }
 
@@ -144,38 +127,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $row = mysqli_fetch_assoc($result);
 
                     $confirmationCode = $row['confirmation_code'];
-                    $confirmationLink = 'http://localhost/uatwebsite/confirm-subscription.php?confirmation-code='. $confirmationCode;
+                    $confirmationLink = 'http://localhost/uatwebsite/confirm/'. $confirmationCode;
                 
-                    $emailBody =  '<html>'
-                                    . '<head>'
-                                    . ' <style>
-                                            h1 {
-                                                color: #9b786d; 
-                                                font-family: montserrat;
-                                                font-size: 1.5em;
-                                            }
-                                            h2 {
-                                                font-size: 1.3em;
-                                                font-weight: 400;
-                                            }
-                                            p, a {
-                                                font-size: 1.1em;
-                                            }
-                                            h2, p, a {
-                                                font-family: poppins; 
-                                                color: #626262;
-                                            }                    
-                                        </style>'
-                                    . '</head>'
-                                    . '<body>'
-                                    . ' <h1>Confirm Subscription</h1>'
-                                    . ' <h2>Hello, ' . $row['first_name'] . '.</h2>' 
-                                    . ' <p>We got your request to subscribe to our health updates.</p>'
-                                    . ' <p>If ' . $subscriberEmail . ' is your correct email, please click on the confirmation link below to confirm your subscription.</p>'
-                                    . ' <a href="'. $confirmationLink .'">'. $confirmationLink .'</a>'
-                                    . '</body>'
-                                    . '</html>';
+                    $unsubscribeLink = 'http://localhost/uatwebsite/unsubscribe/'. $confirmationCode;
 
+                    $emailBody =  file_get_contents("confirmation-email-template.php");
+
+                    $search = array('{{SUBSCRIBER_NAME}}', '{{SUBSCRIBER_EMAIL}}', '{{CONFIRMATION_LINK}}', '{{UNSUBSCRIPTION_LINK}}');
+                    $replaceWith = array($subscriberFName, $subscriberEmail, $confirmationLink, $unsubscribeLink);
+
+                    $emailBody = str_replace($search, $replaceWith, $emailBody);
+                    
                     $mail = new PHPMailer(true);
 
                     $mail->isSMTP();
@@ -184,13 +146,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $mail->Username = 'davidmarkfriday16@gmail.com';
                     $mail->Password = 'scqgmmrblcansmvs';
                     $mail->SMTPSecure = 'tls';
+                    $mail->CharSet = 'UTF-8';
                     $mail->Port = 587;
             
+                    $mail->addCustomHeader('List-Unsubscribe', '<' . $unsubscribeLink . '>');
                     $mail->setFrom('davidmarkfriday16@gmail.com', 'Mark Friday');
                     $mail->addAddress($subscriberEmail, $subscriberFName);
-                    
+
                     $mail->isHTML(true);
-                    $mail->Subject = 'Subscription';
+                    $mail->Subject = 'Confirm Subscription';
             
                     $mail->Body = $emailBody;
 
@@ -201,8 +165,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     } else {
                         $response = "The email was not sent. An error occurred. Please try again.";
                     }
+                    
                 } catch (Exception $e) {
-                    $response = "Email not sent. Error: " . $e->getMessage();
+                    $response = "Network Error";
                 }
             }
         }
@@ -212,6 +177,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     header('Cache-Control: no-cache, no-store, must-revalidate');
     echo $response;
        
+} else {
+
+    header("location: index.php");
 }
     
 ?>

@@ -1,0 +1,106 @@
+:root {
+    --border-width: 1px;
+    --place-holder-color: #bdacac;
+}
+
+main {
+    padding-top: 150px;
+    background-color: #f7f0f0;
+}
+
+.subscription-container {
+    padding: var(--sections-padding-big-screen);
+    padding-top: 0;
+    transition: 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.subscription-container h2 {
+    color: var(--heading2-color);
+}
+.subscription-container h2, .subscription-container p {
+    text-align: center;
+}
+
+#subscription-form {
+    max-width: 370px;
+}
+
+.submit-btn-container {
+    display: flex;
+    justify-content: center;
+}
+
+.subscription-container input {
+    border: none;
+    padding: 7px 10px;
+    margin-top: 10px;
+    border-radius: 7px;
+    font-size: var(--paragraph-font-size);
+    font-family: var(--default-font-family);
+    transition: 0.3s;
+    text-align: center;
+}
+
+.subscription-container input::placeholder {
+    color: var(--place-holder-color);
+}
+
+.subscription-container input:not(input[type=submit]) {
+    width: 100%;
+    color: #59372d;;
+    background-color: transparent;
+    border: var(--border-width) solid var(--heading2-color);
+}
+
+.subscription-container input:not(input[type=submit]):focus {    
+    border: var(--border-width) solid #705d57;
+}
+
+.subscription-container input:not(input[type=submit]):hover {    
+    border: var(--border-width) solid #705d57;
+}
+
+.subscription-container input:not(input[type=submit]):focus::placeholder {
+    color: #705d57;
+}
+
+.subscription-container input[type=submit] {
+    background-color: #705d57;
+    color: #f7f0f0;
+    cursor: pointer;
+    width: 200px;
+    padding: 9px 12px;
+    font-family: var(--heading-nav-item-font-family);
+}
+
+.subscription-container input[type=submit]:not(.disabled):hover {
+    background-color: #59372d;
+    color: #f7f0f0;
+}
+
+.subscription-container input[type=submit]:not(.disabled):active {
+    transform: scale(0.95);
+}
+
+.subscription-container input[type=submit].disabled {
+    cursor: not-allowed;
+}
+
+.subscription-container input:focus {
+    outline: none;
+}
+
+
+@media screen and (max-width: 1206px) {
+    .subscription-container {
+        padding: var(--sections-padding-small-screen);
+        padding-top: 0;
+    }
+    
+    :root {
+        --border-width: 1px;
+    }
+}

@@ -5,16 +5,17 @@
     --default-text-color: #626262;
     --button-border-radius: 15px;
     --button-padding: 10px 20px;
-
+    --input-placeholder-color : #b7a6a1;
+    
     --site-logo-width: 180px;
 
     --base-color: #59372d;
 
-    --header-bg-color: #f0e8dd;
-    --header-slide-down-bg-color: #f1e8ddf7;
+    --header-bg-color: #f3e8e5;
+    --header-slide-down-bg-color: var(--header-bg-color);
     --header-slide-down-blur: 2px;
     --header-padding: 0 100px 0 100px;
-    --header-box-shadow: 0px 2px 6px 2px #9b786d29;
+    --header-box-shadow: 0px 2px 10px 1px #201e1e1f;
     
     --header-nav-item-color: var(--base-color);
     --header-nav-item-padding: 10px 12px;
@@ -91,6 +92,26 @@
     --footer-bg-color: #564540;
     --footer-link-hover-color: #ebb1a0;
     --footer-text-font-size: 0.9em;
+
+    --footer-divider-lighting: #60524e;
+    --footer-divider-shadow: #403331;
+
+    --modal-container-bg-color: #564540eb;
+    --modal-bg-color: #f7f0f0;
+    --modal-border-radius: 15px;
+    --modal-btn-color: #626262;
+    --modal-first-btn-bg-color: #efdede;
+    --modal-first-btn-hover-bg-color: #e1d2d2;
+    --modal-second-btn-bg-color: transparent;
+    --modal-second-btn-border: 2px solid var(--modal-first-btn-bg-color);
+    --modal-second-btn-hover-border: 2px solid var(--modal-first-btn-hover-bg-color);
+    
+    --spinning-loader-width: 70px;
+    --spinning-loader-thickness: 4px;
+    --spinning-loader-border-color: #ebb1a0;
+    --spinning-loader-border: var(--spinning-loader-thickness) solid var(--spinning-loader-border-color);
+    
+    --loading-text-color: #ebb1a0;
 }
 
 /*  Feel like adding some styles to the browser's scroll bar */
@@ -744,23 +765,23 @@ section > .container {
 }
 
 .footer input::placeholder {
-    color: #b7a6a1;
+    color: var(--input-placeholder-color);
 }
 
 .footer input:not(input[type=submit]) {
     width: 100%;
     color: var(--footer-paragraph-color);
     background-color: transparent;
-    border: 2px solid var(--footer-paragraph-color);
+    border: 1px solid var(--footer-paragraph-color);
 }
 
 .footer input:not(input[type=submit]):focus {    
-    border: 2px solid var(--footer-link-hover-color);
+    border: 1px solid var(--footer-link-hover-color);
     color: var(--footer-link-hover-color);
 }
 
 .footer input:not(input[type=submit]):hover {    
-    border: 2px solid var(--footer-link-hover-color);
+    border: 1px solid var(--footer-link-hover-color);
 }
 
 .footer input:not(input[type=submit]):focus::placeholder {
@@ -778,10 +799,13 @@ section > .container {
     background-color: var(--footer-link-hover-color);
 }
 
+.footer input[type=submit]:not(.disabled):active {
+    transform: scale(0.95);
+}
+
 .footer input[type=submit].disabled {
     cursor: not-allowed;
 }
-
 
 .footer input:focus {
     outline: none;
@@ -794,9 +818,9 @@ section > .container {
 
 .footer .container .divider {
     height: 1px;
-    background-color: #403331;
+    background-color: var(--footer-divider-shadow);
     position: relative;
-    margin-bottom: 5px;
+    margin-bottom: 15px;
 }
 
 .footer .container .divider::after {
@@ -805,7 +829,7 @@ section > .container {
     display: block;
     width: 100%;
     height: 1px;
-    background-color: #60524e;
+    background-color: var(--footer-divider-lighting);
     top: -1px;
 }
 
@@ -818,7 +842,7 @@ section > .container {
     z-index: 1;
     padding: 10px;
     padding-top: 120px;
-    background-color: #564540ba;
+    background-color: var(--modal-container-bg-color);
     animation: show-modal-container 0.3s ease forwards;
     display: none;
 }
@@ -856,11 +880,11 @@ section > .container {
 
 .modal-container .loading-indicator .loader {
     transition: 0.3s ease;
-    border: 4px solid var(--footer-link-hover-color);
-    border-top: 4px solid transparent;
+    border: var(--spinning-loader-border);
+    border-top: var(--spinning-loader-thickness) solid transparent;
     border-radius: 50%;
-    width: 70px;
-    height: 70px;
+    width: var(--spinning-loader-width);
+    height: var(--spinning-loader-width);
     position: relative;
     opacity: 0;
     animation: show-spinning-loader 0.3s ease 0.1s forwards, spin 0.6s cubic-bezier(0.33, 0.27, 0.55, 0.47) infinite;
@@ -899,7 +923,7 @@ section > .container {
 .modal-container .loading-indicator p {
     position: relative;
     opacity: 0;
-    color: #ebb1a0;
+    color: var(--loading-text-color);
     animation: show-loading-text 0.5s ease 0.1s forwards;
     display: none;
 }
@@ -928,9 +952,9 @@ section > .container {
     max-width: 430px;
     margin: 0 auto;
     padding: 15px 20px;
-    background-color: #f7f0f0;
+    background-color: var(--modal-bg-color);
     box-shadow: 0px 2px 6px 2px #9b786d29;
-    border-radius: 15px;
+    border-radius: var(--modal-border-radius);
     transition: 0.3s;
     z-index: 1;
     position: relative;
@@ -966,25 +990,29 @@ section > .container {
 
 .modal .button {
     font-size: var(--paragraph-font-size);
-    color: var(--paragraph-text-color);
+    color: var(--modal-btn-color);
 }
 
 .modal .button:nth-of-type(1) {
-    background-color: #efdede;
+    background-color: var(--modal-first-btn-bg-color);
     border: none;
 }
 
 .modal .button:nth-of-type(1):hover {
-    background-color: #e1d2d2;
+    background-color: var(--modal-first-btn-hover-bg-color);
 }
 
 .modal .button:nth-of-type(2) {    
-    background-color: transparent;
-    border: 2px solid #efdede;
+    background-color: var(--modal-second-btn-bg-color);
+    border: var(--modal-second-btn-border);
 }
 
 .modal .button:nth-of-type(2):hover {
-    border: 2px solid #e1d2d2;
+    border: var(--modal-second-btn-hover-border);
+}
+
+.modal .button:active {
+    transform: scale(0.95);
 }
 
 /*  Media Queries for responsiveness to screen sizes */
@@ -1096,7 +1124,7 @@ section > .container {
     }
     
     h2 {
-        font-size: 1.7em;
+        font-size: 1.5em;
     }
 
     h3 {
@@ -1270,22 +1298,6 @@ section > .container {
     
     .healing-modalities .wrapper .container {
         padding: var(--sections-padding-small-screen);
-    }
-
-    .footer input:not(input[type=submit]) {
-        width: 100%;
-        color: var(--footer-paragraph-color);
-        background-color: transparent;
-        border: 1px solid var(--footer-paragraph-color);
-    }
-    
-    .footer input:not(input[type=submit]):focus {    
-        border: 1px solid var(--footer-link-hover-color);
-        color: var(--footer-link-hover-color);
-    }
-    
-    .footer input:not(input[type=submit]):hover {    
-        border: 1px solid var(--footer-link-hover-color);
     }
 }
 

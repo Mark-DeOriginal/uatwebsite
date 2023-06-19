@@ -5,7 +5,7 @@
         Uju Alternative Therapies
     </title>
 
-    <!--Relevant Meta Tags-->
+    <!--Relevant Meta Tags-->    
     <meta charset="utf-8">
     <meta name="title" content="Uju Alternative Therapies">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,17 +15,15 @@
 
     <meta property="og:title" content="We help people achieve permanent healing from different kinds of diseases, such as High Blood Pressure, Diabetes, Ulcer, Pile, Erectile Dysfunction, using natural and alternative remedies.">
     <meta property="og:image" content="resources/images/uat-social-media-display-image.svg">
-    <meta property="og:url" content="index.html">
+    <meta property="og:url" content="index.php">
 
     <meta property="twitter:title" content="Uju Alternative Therapies">
     <meta property="twitter:description" content="We help people achieve permanent healing from different kinds of diseases, such as High Blood Pressure, Diabetes, Ulcer, Pile, Erectile Dysfunction, using natural and alternative remedies.">
     <meta property="twitter:image" content="resources/images/uat-social-media-display-image.svg">
-    <meta property="twitter:url" content="index.html">
+    <meta property="twitter:url" content="index.php">
 
     <!--Cache control-->
-    <meta http-equiv="cache-control" content="no-cache, no-store, must-revalidate, post-check=0, pre-check=0">
-    <!-- Will remove this comment tag later
-    <meta http-equiv="cache-control" content="max-age=86400"> The browser should cache our webpage for only 24hrs, after which it would have to reload every resource of the webpage-->
+    <meta http-equiv="cache-control" content="max-age=3600">
     
     <!--Useful links-->
     <link href="resources/images/uat-web-icon.png" rel="icon" type="image/png">
@@ -213,9 +211,19 @@
 
         <!-- Footer Section -->
         <section class="footer">
-            <?php
-                include "footer.php";
-            ?>
+            <div class="container">
+                <?php     
+                    include "footer/about-us.php"; 
+                    
+                    include "footer/contact-us.php";
+
+                    include "footer/links.php";
+
+                    include "footer/subscription-form.php";
+
+                    include "footer/copyright.php";
+                ?>
+            </div> 
         </section>
 
         <!-- Modals -->

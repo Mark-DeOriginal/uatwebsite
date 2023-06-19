@@ -4,10 +4,17 @@ window.onload = ()=> {
     //  When this function is called, adjust the position and width of the Bottom 
     //  Bar to be same with the element in the parameter
     function adjustBottomBar(item) {
-        if (window.getComputedStyle(bottomBar).display !== 'none') {
+        if (window.getComputedStyle(bottomBar).display !== 'none' && item) {
+            bottomBar.style.opacity = "1";
             bottomBar.style.width = item.offsetWidth + "px";
             bottomBar.style.transform = "translateX(" + item.offsetLeft + "px)";
-        }        
+        }
+        
+        //  If no item was returned, to slide the Bottom Bar back to, 
+        //  then we use the fade out effect to hide it
+        if (!item) {
+            bottomBar.style.opacity = "0";
+        }
     }
 
     //  Get the currently active Nav Item
@@ -153,9 +160,9 @@ window.onload = ()=> {
     //  When the Browser is resized, perform these actions
     window.addEventListener("resize", ()=> {
             
-        //  If the bottom bar is not in the correct position, or does
+        //  If there's an active Nav item and the bottom bar is not in the correct position, or does
         //  not have same width as the active Nav item, then adjust it
-        if (bottomBar.style.width !== activeNavItem.style.offsetWidth) {
+        if (activeNavItem && bottomBar.style.width !== activeNavItem.style.offsetWidth) {
             adjustBottomBar(activeNavItem);
         }
 
@@ -177,9 +184,6 @@ window.onload = ()=> {
                 item.classList.remove("show");
             });
         }
-
-        
-        
     });
     
     //  Once the page loads, apply these to the header element

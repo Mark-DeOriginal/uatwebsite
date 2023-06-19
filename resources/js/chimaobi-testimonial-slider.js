@@ -1,5 +1,5 @@
 /*  Chimaobi Testimonial Slider
-    Copyright © 2023 - Chimaobi Friday
+    Copyright © March, 2023 - Chimaobi Friday
     Email: davidmarkfriday16@gmail.com
     WhatsApp: +2348072157818 */
 
@@ -406,6 +406,8 @@ window.addEventListener("load", function() {
         //  Call this function when the User presses or  
         //  touches the testimonial cards
         function registerDragStartPosX(event) {
+
+            testimonialContainer.style.cursor = "grabbing";
     
             //  If it's a mousedown event, then it was done using a PC
             if (event.type === "mousedown") {
@@ -530,6 +532,8 @@ window.addEventListener("load", function() {
                 event.preventDefault();
             }
             
+            testimonialContainer.style.cursor = "grab";
+
             //  Be sure the mouse was pressed or that the screen 
             //  was touched, before proceeding
             if (isMouseDown == true || isTouchStart == true) {

@@ -1,5 +1,5 @@
 /*  Chimaobi Testimonial Slider
-    Copyright © 2023 - Chimaobi Friday
+    Copyright © March, 2023 - Chimaobi Friday
     Email: davidmarkfriday16@gmail.com
     WhatsApp: +2348072157818 */
 
@@ -99,7 +99,7 @@ i.fa-arrow-right::after {
     position: relative;
     overflow-x: hidden;
     -webkit-overflow-scrolling: touch;
-    cursor: move;
+    cursor: grab;
     user-select: none;
     -webkit-user-select: none;
 }
