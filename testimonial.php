@@ -44,7 +44,7 @@
                         <div class="row card-footer">
                             <?php
                                 //  To place the testimonial tags in separate <span> elements, 
-                                //  we have to split them from the coma delimiter and store them in an array                            
+                                //  let's split them from the coma delimiter and store them in an array                            
                                 $illness_tags = explode(",", $testimonial['illness_tags']);
 
                                 //  After that, we use this foreach loop to display each of the tags in the array

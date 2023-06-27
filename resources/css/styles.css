@@ -35,7 +35,7 @@
 
     --hero-heading-font-size: 2.5em;
     --hero-heading-color: #afc79f;
-    --hero-paragraph-font-size: 1.1em;
+    --hero-paragraph-font-size: 1.2em;
     --hero-text-color: #e3d6d1;
 
     --hero-action-btn-color: var(--hero-text-color);
@@ -52,8 +52,9 @@
     --sections-padding-small-screen: 40px 20px;
 
 /*  --Font Sizes */
+    --heading-big-font-family: 'Suez One', sans-serif;
     --heading-font-family: 'Montserrat', sans-serif;
-    --heading2-font-size: 1.7em;
+    --heading2-font-size: 1.8em;
     --heading2-color: #9b786d;
     --heading3-font-size: 1.2em;
     --heading3-color: #626262;
@@ -183,11 +184,24 @@ body {
     font-weight: 400;
 }
 
+@font-face {
+    font-family: 'Suez One';
+    src: url('../fonts/Suez_One/SuezOne-Regular.ttf') format('truetype');
+    font-weight: 400;
+}
 
-h1, h2, h3, h4, h5, h6 {
-    font-family: var(--heading-font-family);
-    font-weight: 600;
+
+h1, h2, h3, h4, h5, h6 {   
     margin-bottom: 10px;
+}
+
+h1, h2 {
+    font-family: var(--heading-big-font-family);
+    font-weight: 400;
+}
+
+h3, h4, h5, h6 {
+    font-family: var(--heading-font-family);
 }
 
 h1 {
@@ -267,6 +281,12 @@ header .flex2 {
     transition: 0.3s;
 }
 
+.logo a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
 
 .logo img {
     width: 180px;
@@ -279,7 +299,6 @@ header .flex2 {
 .nav-bar {
     position: relative;
 }
-
 
 .nav-bar ul {
     display: flex;
@@ -432,11 +451,10 @@ section > .container {
 }
 
 .hero-img {
-    width: 100%;
+    max-width: 500px;
     height: 430px;    
     border-radius: var(--image-border-radius);
     object-fit: cover;
-    transition: 0.3s;
     object-position: top;
     filter: grayscale(40%);
 }
@@ -447,8 +465,6 @@ section > .container {
 }
 
 .hero-caption h1 {
-    font-size: var(--hero-heading-font-size);
-    font-weight: 600;
     margin: 0;
     color: var(--hero-heading-color);
 }
@@ -1118,17 +1134,8 @@ section > .container {
         margin-top: 0;
     }
 
-    .hero-caption h1 {
+    h1 {
         font-size: 2.3em;
-        font-weight: 600;
-    }
-    
-    h2 {
-        font-size: 1.5em;
-    }
-
-    h3 {
-        font-size: 1.1em;
     }
 
     section > .container {
@@ -1202,6 +1209,15 @@ section > .container {
 }
 
 @media screen and (max-width: 980px) {
+
+    h2 {
+        font-size: 1.5em;
+    }
+
+    h3 {
+        font-size: 1.1em;
+    }
+
     .our-services .container .list .row {
         flex-direction: column;
         gap: 20px;
@@ -1253,8 +1269,8 @@ section > .container {
         padding-bottom: 0;
     }
 
-    .hero-caption h1 {
-        font-size: 2em;
+    h1 {
+        font-size: 1.8em;
     }
 
     .hero-caption p {
@@ -1262,6 +1278,7 @@ section > .container {
     }
     
     .hero-img {
+        max-width: 100%;
         height: 150px;
         border-radius: 0;
         object-position: center;

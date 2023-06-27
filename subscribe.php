@@ -6,8 +6,22 @@
     </title>
 
     <meta charset="utf-8">
-    <meta name="title" content="Uju Alternative Therapies">
+    <meta name="title" content="Subscribe to our mailing list">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Subscribe to get exclusive health updates from us, delivered right to your inbox.">
+    <meta name="keywords" content="Healing, Diseases, Infection, Infertility, Diabetes, Cancer, Pile, High Blood Pressure (HBP), Ulcer, Infertility, Erectile dysfunction">
+    <meta name="robots" content="index, follow">
+
+    <meta property="og:title" content="Subscribe to our mailing list">
+    <meta property="og:description" content="Subscribe to get exclusive health updates from us, delivered right to your inbox.">
+    <meta property="og:image" content="http://localhost/uatwebsite/resources/images/uat-social-media-display-image.svg">
+    <meta property="og:url" content="http://localhost/uatwebsite/subscribe.php">
+
+    <meta property="twitter:title" content="Subscribe to our mailing list">
+    <meta property="twitter:description" content="Subscribe to get exclusive health updates from us, delivered right to your inbox.">
+    <meta property="twitter:image" content="http://localhost/uatwebsite/resources/images/uat-social-media-display-image.svg">
+    <meta property="twitter:url" content="http://localhost/uatwebsite/subscribe.php">
+
     <!--Cache control-->
     <meta http-equiv="cache-control" content="max-age=3600">
     

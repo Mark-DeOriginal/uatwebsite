@@ -1,0 +1,165 @@
+main {
+    background-color: #f7f0f0;
+}
+
+.who-we-are {
+    padding: var(--sections-padding-big-screen);
+    padding-top: 170px;
+    transition: 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-image: linear-gradient(rgba(89 55 45 / 85%), rgba(89 55 45 / 85%)), url('../images/calliope_coach_therapist-1000x667.JPG');
+    background-size: cover;
+    filter: grayscale(0.3);
+}
+
+.who-we-are .container {
+    padding: 0;
+}
+
+.who-we-are .container h1 {
+    color: #cfb9b3;
+    font-size: 1.1em;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+}
+
+.who-we-are .container h2 {
+    color: #ebb1a0;
+    font-size: var(--hero-heading-font-size);
+}
+
+.who-we-are .container h1, .who-we-are .container h2, .who-we-are .container p {
+    text-align: center;
+}
+
+.who-we-are .container p {
+    font-size: 1.2em;
+    max-width: 690px;
+    color: #e3d6d1;
+}
+
+section.about-us-info .container {
+    margin: 0 auto 0 auto;
+    transition: 0.3s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    max-width: 1195px;
+}
+
+section.vision-and-mission * {
+    text-align: center;
+}
+
+.vision-and-mission h2 {
+    font-family: var(--heading-font-family);
+    font-weight: 700;
+}
+
+.vision-and-mission p {
+    font-size: 1.2em;
+    color: #918787;
+    position: relative;
+}
+
+.vision-and-mission .quote {
+    font-family: 'Suez One', sans-serif;
+    font-size: 2em;
+    color: #d3c9c9;
+    position: relative;
+    top: 5px;
+}
+
+.vision-and-mission .quote.open {
+    padding-right: 10px;
+}
+
+.vision-and-mission .quote.close {
+    padding-left: 10px;
+}
+
+section.vision-and-mission .container {
+    flex-direction: column;
+}
+
+.vision-and-mission .container div {
+    flex: 1;
+    max-width: 545px;
+}
+
+section.about-us-info img {
+    min-height: 250px;
+    width: 350px;
+    object-fit: cover;
+    border-radius: var(--image-border-radius);
+}
+
+.what-we-do .container img {
+    object-position: right;
+}
+
+section.about-us-info .container .img-container {
+    display: flex;
+    justify-content: stretch;
+}
+
+section.about-us-info:not(:nth-of-type(2)) .container {
+    padding-top: 0;
+}
+
+@media screen and (max-width: 1206px) {
+    .who-we-are {
+        padding: var(--sections-padding-small-screen);
+        padding-top: 135px;
+    }
+
+    .who-we-are .container h2 {
+        font-size: 2.3em;
+    }
+
+    section.about-us-info .container {
+        padding: var(--sections-padding-small-screen);
+    }
+}
+
+@media screen and (max-width: 840px) {
+    section.about-us-info img {
+        width: 200px;
+    }
+}
+
+@media screen and (max-width: 705px) {
+
+    section.about-us-info .container {
+        flex-wrap: wrap;
+        flex-direction: column;
+        gap: 40px;
+    }
+
+    section.about-us-info img {
+        width: 100%;
+        min-height: 150px;
+        height: 150px;
+    }
+
+    section.about-us-info .container .column {
+        width: 100%;
+    }
+
+    section.about-us-info:nth-of-type(even) .container .column:nth-of-type(1) {
+        order: 2;
+    }
+}
+
+@media screen and (max-width: 770px) {
+    .who-we-are .container h2 {
+        font-size: 1.8em;
+    }
+
+    .who-we-are .container p, .vision-and-mission .container p {
+        font-size: 1em;
+    }
+}
