@@ -7,6 +7,7 @@
 
     <!--Relevant Meta Tags-->    
     <meta charset="utf-8">
+    <meta name="theme-color" content="#564540">
     <meta name="title" content="Briefs">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Here's a brief description of some of the complicated diseases we handle.">

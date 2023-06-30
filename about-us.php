@@ -7,6 +7,7 @@
 
     <!--Relevant Meta Tags-->    
     <meta charset="utf-8">
+    <meta name="theme-color" content="#564540">
     <meta name="title" content="About Us - Uju Alternative Therapies">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="We help people achieve permanent healing from different kinds of diseases, such as High Blood Pressure, Diabetes, Ulcer, Pile, Erectile Dysfunction, using natural and alternative remedies.">

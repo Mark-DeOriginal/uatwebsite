@@ -8,12 +8,11 @@
 :root {
     --cards-bg-color: #f7f4f0;
     --cards-text-color: #626262;
-
     --cards-shadow-color: #0000001f;
-    --cards-shadow-blur: 5px;
-    --cards-shadow-spread: 2px;
+    --cards-shadow-blur: 4px;
+    --cards-shadow-spread: 1px;
     --cards-shadow-x-offset: 0px;
-    --cards-shadow-y-offset: 2px;
+    --cards-shadow-y-offset: 1px;
 
     --cards-tags-bg-color: #f3eae8;
     --cards-tags-text-color: var(--cards-text-color);

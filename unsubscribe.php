@@ -6,6 +6,7 @@
     </title>
 
     <meta charset="utf-8">
+    <meta name="theme-color" content="#564540">
     <meta name="title" content="Uju Alternative Therapies">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--Cache control-->

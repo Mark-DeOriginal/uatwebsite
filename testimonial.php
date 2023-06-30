@@ -19,7 +19,7 @@
             include "database-connect.php";
 
             //  Let's select all the rows in the uat_testimonials table
-            $sql = "SELECT * FROM uat_testimonials";
+            $sql = "SELECT * FROM uat_testimonials LIMIT 9";
             $testimonials = mysqli_query($conn, $sql);
 
             //  Using this while loop, display all the testimonials from each row, respectively

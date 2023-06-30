@@ -7,6 +7,7 @@
 
     <!-- Relevant Meta Tags -->    
     <meta charset="utf-8">
+    <meta name="theme-color" content="#564540">
     <meta name="title" content="Uju Alternative Therapies">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="We help people achieve permanent healing from different kinds of diseases, such as High Blood Pressure, Diabetes, Ulcer, Pile, Erectile Dysfunction, using natural and alternative remedies.">
@@ -52,7 +53,7 @@
                 <div class="row">
                     <div class="column hero-caption">
                         <h1>Welcome to Uju <br>Alternative Therapies</h1>
-                        <p> We believe that any disease can be treated, as long as there are no completely damaged organs, and we have helped several people heal from different debilitating diseases.</p> 
+                        <p> We believe that any disease is curable, as long as there are no completely damaged organs. Through our expertise, we have helped several people heal from different diseases.</p> 
                         <p> Whether it is cancer, infertility, high blood pressure, erectile dysfunction, pile, ulcer, etc., our Healing Coach/Health Therapist is ready to help you achieve total healing.</p>
                         
                         <!-- Our Hero Call to Action (CTA) Button -->

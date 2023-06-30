@@ -1,6 +1,7 @@
 <?php
 
     require 'vendor/autoload.php';
+    require_once "config.php";
 
     use PHPMailer\PHPMailer\PHPMailer;
     use PHPMailer\PHPMailer\Exception;
@@ -82,8 +83,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         $mail->isSMTP();
                         $mail->Host = 'smtp.gmail.com';
                         $mail->SMTPAuth = true;
-                        $mail->Username = 'davidmarkfriday16@gmail.com';
-                        $mail->Password = 'scqgmmrblcansmvs';
+                        $mail->Username = email_username;
+                        $mail->Password = email_password;
                         $mail->SMTPSecure = 'tls';
                         $mail->CharSet = 'UTF-8';
                         $mail->Port = 587;
@@ -143,8 +144,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $mail->isSMTP();
                     $mail->Host = 'smtp.gmail.com';
                     $mail->SMTPAuth = true;
-                    $mail->Username = 'davidmarkfriday16@gmail.com';
-                    $mail->Password = 'scqgmmrblcansmvs';
+                    $mail->Username = email_username;
+                    $mail->Password = email_password;
                     $mail->SMTPSecure = 'tls';
                     $mail->CharSet = 'UTF-8';
                     $mail->Port = 587;

@@ -7,6 +7,7 @@
 
     <!--Relevant Meta Tags-->    
     <meta charset="utf-8">
+    <meta name="theme-color" content="#564540">
     <meta name="title" content="Testimonials">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Through our expertise, we have helped several people heal from different debilitating diseases.">
@@ -79,7 +80,7 @@
 
                                 $testimonialToViewFrom = ($pageNumber * $testimonialsPerPage) - $testimonialsPerPage + 1;
                             
-                                //  Let's select the first three rows in the uat_testimonials table
+                                //  Let's select the number of rows we want per page from the uat_testimonials table
                                 $sql = "SELECT * FROM uat_testimonials WHERE id >= '$testimonialToViewFrom' LIMIT $testimonialsPerPage";
                                 $testimonials = mysqli_query($conn, $sql);
 
