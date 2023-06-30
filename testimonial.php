@@ -4,7 +4,7 @@
         <h2 class="heading">Testimonials</h2>
         <!--
         <p>Our Health Therapist/Healing Coach is a knowledgeable and experienced professional with a deep understanding of how the human body works, and how to help the body heal from different diseases.</p> -->
-        <p>Here are testimonies from some of our Patients.</p>
+        <p>Here are testimonials from some of our Patients.</p>
     </div>
     
     <div class="testimonial-wrapper">

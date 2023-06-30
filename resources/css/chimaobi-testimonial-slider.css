@@ -71,17 +71,13 @@
     transform: scale(var(--arrow-btns-hover-scale));
     color: var(--arrow-btns-hover-color);
 }
-
-i.fa-arrow-left::before, i.fa-arrow-right::before {
-    content: none;
-}
   
-i.fa-arrow-left::after {
+i.fa-arrow-left::before {
     content: "\f053";
     font-size: 25px;
 }
 
-i.fa-arrow-right::after {
+i.fa-arrow-right::before {
     content: "\f054";
     font-size: 25px;
 }
@@ -169,6 +165,10 @@ p.no-testimonials-text {
 .testimonial-container .card-header i {
     font-size: 1em;
     margin-right: 5px;
+}
+
+.testimonial-container .card .image {
+    display: flex;
 }
 
 .testimonial-container .card img {

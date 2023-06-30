@@ -1,0 +1,204 @@
+main {
+    background-color: #f7f0f0;
+}
+
+.hero {
+    padding: var(--sections-padding-big-screen);
+    padding-top: 170px;
+    transition: 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-image: linear-gradient(rgba(89 55 45 / 85%), rgba(89 55 45 / 85%)), url('../images/calliope_coach_therapist-1000x667.JPG');
+    background-size: cover;
+    filter: grayscale(0.3);
+}
+
+.hero .container {
+    padding: 0;
+}
+
+.hero .container h1 {
+    color: #ebb1a0;
+    font-size: var(--hero-heading-font-size);
+}
+
+.hero .container h1, .hero .container p {
+    text-align: center;
+}
+
+.hero .container p {
+    font-size: 1.2em;
+    max-width: 690px;
+    color: #e3d6d1;
+}
+
+section.testimonials .container {
+    margin: 0 auto 0 auto;
+    max-width: 700px;
+    transition: 0.3s;
+}
+
+section.testimonials .testimonial {
+    padding: 15px 20px;
+    box-shadow: 0px 1px 2px 1px #0000001f;
+    background-color: #f7f4f0;
+    border-radius: 10px;
+}
+
+section.testimonials .testimonial:not(:nth-of-type(1)) {
+    margin-top: 20px;
+}
+
+section.testimonials .testimonial .header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+section.testimonials .testimonial .caption h3 {
+    font-size: 1.2em;
+    margin-bottom: 0;
+    color: #9b786d;
+}
+
+section.testimonials .testimonial .caption p {
+    font-size: 1em;
+}
+
+section.testimonials .testimonial .caption p i {
+    font-size: 1em;
+    margin-right: 5px;
+}
+
+section.testimonials .testimonial .avatar {
+    display: flex;
+}
+
+section.testimonials .testimonial .avatar img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+}
+
+section.testimonials .testimonial .body p {
+    font-size: 1em;
+}
+
+section.testimonials .testimonial .footer {
+    margin-top: 20px;
+}
+
+section.testimonials .testimonial .tag {
+    background-color: #f3eae8;    
+    color: #626262;
+    border-radius: 5px;
+    padding: 4px;
+    margin-inline-end: 3px;
+    margin-block-end: 3px;
+    font-size: 0.9em;
+    display: inline-block;
+}
+
+p.no-testimonial-msg {
+    text-align: center;
+    color: #b7b1b1;
+}
+
+.pagination-wrapper {
+    display: flex;
+    justify-content: center;
+    padding: 40px 20px 0 20px;
+    gap: 20px;
+}
+
+.pagination-wrapper form button {
+    width: 130px;
+    padding: 10px 10px;
+    cursor: pointer;
+    font-size: 1em;
+    font-family: 'Montserrat', sans-serif;
+    color: #9b786d;
+    background-color: #f7f4f0;
+    border-radius: 10px;
+    border: none;
+    box-shadow: 0px 1px 2px 1px #0000001f;
+    transition: 0.3s;
+}
+
+.pagination-wrapper form button.disabled {
+    background-color: transparent;
+    color: #b7b1b1;
+    cursor: default;
+}
+
+.pagination-wrapper form button:not(.disabled):hover {
+    background-color: #f3ebea;
+}
+
+.pagination-wrapper form button:not(.disabled):active {
+    transform: scale(0.97);
+}
+
+.pagination-wrapper form button i.prev {
+    padding-right: 10px;
+}
+
+.pagination-wrapper form button i.next {
+    padding-left: 10px;
+}
+
+i.fa-arrow-left::before {
+    content: "\f053";
+}
+
+i.fa-arrow-right::before {
+    content: "\f054";
+}
+
+@media screen and (max-width: 1206px) {
+    .hero {
+        padding: var(--sections-padding-small-screen);
+        padding-top: 135px;
+    }
+
+    .hero .container h1 {
+        font-size: 2.3em;
+    }
+}
+
+@media screen and (max-width: 770px) {
+    .hero .container h1 {
+        font-size: 1.8em;
+    }
+
+    .hero .container p {
+        font-size: 1em;
+    }
+}
+
+@media screen and (max-width: 500px)  {
+    section.testimonials .testimonial .avatar img {
+        width: 50px;
+        height: 50px;
+    }
+
+    section.testimonials .testimonial .caption h3 {
+        font-size: 1.1em;
+    }
+
+    section.testimonials .testimonial .caption p {
+        font-size: 0.9em;
+    }
+
+    section.testimonials .testimonial .body p {
+        font-size: 0.9em;
+    }
+
+    section.testimonials .testimonial .tag {
+        font-size: 0.9em;
+    }
+}

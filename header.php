@@ -33,10 +33,10 @@
                     <a href="about-us" class="<?php if (basename($_SERVER['PHP_SELF']) == 'about-us.php') echo 'active'?>">About</a>
                 </li>
                 <li>
-                    <a href="#services" class="<?php if (basename($_SERVER['PHP_SELF']) == 'briefs.php') echo 'active'?>">Briefs</a>
+                    <a href="briefs" class="<?php if (basename($_SERVER['PHP_SELF']) == 'briefs.php') echo 'active'?>">Briefs</a>
                 </li>
                 <li>
-                    <a href="#" class="<?php if (basename($_SERVER['PHP_SELF']) == 'testimonials.php') echo 'active'?>">Testimonials</a>
+                    <a href="testimonials" class="<?php if (basename($_SERVER['PHP_SELF']) == 'testimonials.php') echo 'active'?>">Testimonials</a>
                 </li>
                 <li>
                     <a href="#" class="<?php if (basename($_SERVER['PHP_SELF']) == 'faq.php') echo 'active'?>">FAQ</a>
