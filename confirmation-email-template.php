@@ -99,8 +99,8 @@
                 <p class="small-text">If you didn't subscribe to our health updates or you're not sure why you received this email, you can disregard it.</p>
                 <p class="small-text">For questions or any enquiry, kindly reach out to us: <br>
                    <strong>Uju Alternative Therapies</strong><br>
-                   #29 Maxwell Street, Trademore Estate, Lugbe - Abuja, Nigeria.<br>
-                   (+234) 812 1277 401</p>
+                   {{COMPANY_ADDRESS}}<br>
+                   {{COMPANY_PHONE}}</p>
             </div>
             
         </div>

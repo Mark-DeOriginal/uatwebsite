@@ -39,13 +39,13 @@
                     <a href="testimonials" class="<?php if (basename($_SERVER['PHP_SELF']) == 'testimonials.php') echo 'active'?>">Testimonials</a>
                 </li>
                 <li>
-                    <a href="#" class="<?php if (basename($_SERVER['PHP_SELF']) == 'faq.php') echo 'active'?>">FAQ</a>
+                    <a href="faq" class="<?php if (basename($_SERVER['PHP_SELF']) == 'faq.php') echo 'active'?>">FAQ</a>
                 </li>
                 <li>
-                    <a href="#" class="<?php if (basename($_SERVER['PHP_SELF']) == 'contact.php') echo 'active'?>">Contact us</a>
+                    <a href="contact-us" class="<?php if (basename($_SERVER['PHP_SELF']) == 'contact-us.php') echo 'active'?>">Contact us</a>
                 </li>
                 <li>
-                    <a href="#" class="book-appointment">Book Appointment</a>
+                    <a href="book-appointment" class="book-appointment">Book Appointment</a>
                 </li>                
             </ul>            
         </nav>

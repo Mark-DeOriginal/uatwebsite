@@ -136,6 +136,8 @@
             // Redirect User to the home page
             header("location: http://localhost/uatwebsite/");
         }
+
+        mysqli_close($conn);
 ?>                
             </div>
         </section>

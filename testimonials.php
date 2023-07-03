@@ -36,7 +36,7 @@
     <link href="resources/css/testimonials.css" rel="stylesheet" type="text/css">
 
     <script src="resources/js/script.js" type="text/javascript"></script>
-    <script src="resources/js/email-handler.js" type="text/javascript"></script>
+    <script src="resources/js/subscribe.js" type="text/javascript"></script>
 </head>
 <body>
 
@@ -234,25 +234,19 @@
                                     nextBtn.classList.add("disabled");
                                     nextBtn.disabled = true;
                                 </script>
-                        <?php
+                <?php
                             }
                     }
+
+                        mysqli_close($conn);
                 ?>                              
             </div>                     
         </section>
         
         <!-- Call to Action (CTA) Section -->
-        <section class="cta-section">
-            <div class="container">
-                <div class="column">
-                    <p>Would you like to have a session with our Health Professional?</p>
-                    <a href="#" class="cta-btn button">Book Appointment</a>                                
-                </div>
-                <div class="column">
-                    <img src="resources/images/therapist-session-img.svg" alt="Therapist session image">
-                </div>                
-            </div>
-        </section>
+        <?php 
+            include "cta-section.php";
+        ?>
 
         <!-- Footer Section -->
         <section class="footer">

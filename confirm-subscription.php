@@ -154,7 +154,10 @@
                             <h2 class="error">Confirmation Error!</h2>
                             <p>An error occurred while trying to confirm your subscription.</p>  
 
-                <?php   } ?>
+                <?php   } 
+                
+                    mysqli_close($conn);
+                ?>
             </div>
         </section>
 

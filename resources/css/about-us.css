@@ -110,6 +110,21 @@ section.about-us-info:not(:nth-of-type(2)) .container {
     padding-top: 0;
 }
 
+section.founder-short-bio .container {
+    background-color: #f3eded;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+section.founder-short-bio .container img { 
+    width: 130px;
+    height: 130;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
 @media screen and (max-width: 1206px) {
     .who-we-are {
         padding: var(--sections-padding-small-screen);
@@ -128,6 +143,16 @@ section.about-us-info:not(:nth-of-type(2)) .container {
 @media screen and (max-width: 840px) {
     section.about-us-info img {
         width: 200px;
+    }
+}
+
+@media screen and (max-width: 770px) {
+    .who-we-are .container h2 {
+        font-size: 1.8em;
+    }
+
+    .who-we-are .container p, .vision-and-mission .container p {
+        font-size: 1em;
     }
 }
 
@@ -152,14 +177,18 @@ section.about-us-info:not(:nth-of-type(2)) .container {
     section.about-us-info:nth-of-type(even) .container .column:nth-of-type(1) {
         order: 2;
     }
-}
 
-@media screen and (max-width: 770px) {
-    .who-we-are .container h2 {
-        font-size: 1.8em;
+    section.founder-short-bio .container { 
+        flex-direction: column;
     }
 
-    .who-we-are .container p, .vision-and-mission .container p {
-        font-size: 1em;
+    section.founder-short-bio .container img {
+        width: 110px;
+        height: 110px;
+    }
+
+    section.founder-short-bio .container {
+        font-size: 0.9em;
+        text-align: center;
     }
 }

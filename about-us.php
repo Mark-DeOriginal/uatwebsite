@@ -34,7 +34,7 @@
     <link href="resources/css/about-us.css" rel="stylesheet" type="text/css">
 
     <script src="resources/js/script.js" type="text/javascript"></script>
-    <script src="resources/js/email-handler.js" type="text/javascript"></script>
+    <script src="resources/js/subscribe.js" type="text/javascript"></script>
 </head>
 <body>
 
@@ -106,18 +106,20 @@
             </div>
         </section>
 
-        <!-- Call to Action (CTA) Section -->
-        <section class="cta-section">
+        <!-- Founder's Short Bio Section -->
+        <section class="founder-short-bio">
             <div class="container">
-                <div class="column">
-                    <p>Would you like to have a session with our Health Professional?</p>
-                    <a href="#" class="cta-btn button">Book Appointment</a>                                
+                <img src="resources/images/dr-peter.JPG" alt="Image of the founder of Uju Alternative Therapies">
+                <div class="bio">
+                    <h4>Dr. Peter Emeka</h4>
+                    <p>Founder/Healing and Wellness Coach,<br>Uju Alternative Therapies</p>
                 </div>
-                <div class="column">
-                    <img src="resources/images/therapist-session-img.svg" alt="Therapist session image">
-                </div>                
             </div>
         </section>
+        <!-- Call to Action (CTA) Section -->
+        <?php 
+            include "cta-section.php";
+        ?>
 
         <!-- Footer Section -->
         <section class="footer">

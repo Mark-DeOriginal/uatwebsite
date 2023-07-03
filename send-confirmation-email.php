@@ -23,7 +23,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } else {
 
             //  Connect to the database
-            require_once "database-connect.php";   
+            require_once "database-connect.php";
+
+            //  Get and store the company info, like, address, phone number, etc.
+            $getCompanyInfo = "SELECT * FROM contact_information WHERE Id= '1' LIMIT 1";
+            $companyInfo = mysqli_fetch_assoc(mysqli_query($conn, $getCompanyInfo));
 
             $subscriberFName = mysqli_real_escape_string($conn, $subscriberFName);
             $subscriberEmail = mysqli_real_escape_string($conn, $subscriberEmail);
@@ -73,18 +77,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         
                         $emailBody = file_get_contents("confirmation-email-template.php");
                         
-                        $search = array('{{SUBSCRIBER_NAME}}', '{{SUBSCRIBER_EMAIL}}', '{{CONFIRMATION_LINK}}', '{{UNSUBSCRIPTION_LINK}}');
-                        $replaceWith = array($subscriberFName, $subscriberEmail, $confirmationLink, $unsubscribeLink);
+                        $search = array('{{SUBSCRIBER_NAME}}', '{{SUBSCRIBER_EMAIL}}', '{{CONFIRMATION_LINK}}', '{{UNSUBSCRIPTION_LINK}}', '{{COMPANY_ADDRESS}}', '{{COMPANY_PHONE}}');
+                        $replaceWith = array($subscriberFName, $subscriberEmail, $confirmationLink, $unsubscribeLink, $companyInfo['address'], $companyInfo['phone_number']);
     
                         $emailBody = str_replace($search, $replaceWith, $emailBody);
 
                         $mail = new PHPMailer(true);
 
                         $mail->isSMTP();
-                        $mail->Host = 'smtp.gmail.com';
+                        $mail->Host = 'smtp-relay.brevo.com';
                         $mail->SMTPAuth = true;
-                        $mail->Username = email_username;
-                        $mail->Password = email_password;
+                        $mail->Username = smtp_username;
+                        $mail->Password = smtp_password;
                         $mail->SMTPSecure = 'tls';
                         $mail->CharSet = 'UTF-8';
                         $mail->Port = 587;
@@ -114,7 +118,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         }
                 
                     } catch (Exception $e) {
-                        $response = "Network Error";
+                        $response = "An error occurred while sending the email. Error info: " . $e;
                     }
                 }
 
@@ -134,24 +138,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                     $emailBody =  file_get_contents("confirmation-email-template.php");
 
-                    $search = array('{{SUBSCRIBER_NAME}}', '{{SUBSCRIBER_EMAIL}}', '{{CONFIRMATION_LINK}}', '{{UNSUBSCRIPTION_LINK}}');
-                    $replaceWith = array($subscriberFName, $subscriberEmail, $confirmationLink, $unsubscribeLink);
+                    $search = array('{{SUBSCRIBER_NAME}}', '{{SUBSCRIBER_EMAIL}}', '{{CONFIRMATION_LINK}}', '{{UNSUBSCRIPTION_LINK}}', '{{COMPANY_ADDRESS}}', '{{COMPANY_PHONE}}');
+                    $replaceWith = array($subscriberFName, $subscriberEmail, $confirmationLink, $unsubscribeLink, $companyInfo['address'], $companyInfo['phone_number']);
 
                     $emailBody = str_replace($search, $replaceWith, $emailBody);
                     
                     $mail = new PHPMailer(true);
 
                     $mail->isSMTP();
-                    $mail->Host = 'smtp.gmail.com';
+                    $mail->Host = 'smtp-relay.brevo.com';
                     $mail->SMTPAuth = true;
-                    $mail->Username = email_username;
-                    $mail->Password = email_password;
+                    $mail->Username = smtp_username;
+                    $mail->Password = smtp_password;
                     $mail->SMTPSecure = 'tls';
                     $mail->CharSet = 'UTF-8';
                     $mail->Port = 587;
             
                     $mail->addCustomHeader('List-Unsubscribe', '<' . $unsubscribeLink . '>');
-                    $mail->setFrom('davidmarkfriday16@gmail.com', 'Mark Friday');
+                    $mail->setFrom('info@uat-wellness.com', 'Uju Alternative Therapies');
                     $mail->addAddress($subscriberEmail, $subscriberFName);
 
                     $mail->isHTML(true);
@@ -168,11 +172,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     }
                     
                 } catch (Exception $e) {
-                    $response = "Network Error";
+                    $response = "An error occurred while sending the email. Error info: " . $e;
                 }
             }
         }
-    }        
+    }
+    
+    mysqli_close($conn);
 
     header('Content-Type: text/plain');
     header('Cache-Control: no-cache, no-store, must-revalidate');

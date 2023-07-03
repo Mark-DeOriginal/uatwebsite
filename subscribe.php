@@ -33,7 +33,7 @@
     <link href="resources/css/subscribe.css" rel="stylesheet" type="text/css">
 
     <script src="resources/js/script.js" type="text/javascript"></script>
-    <script src="resources/js/email-handler.js" type="text/javascript"></script>
+    <script src="resources/js/subscribe.js" type="text/javascript"></script>
 </head>
 <body>
         
