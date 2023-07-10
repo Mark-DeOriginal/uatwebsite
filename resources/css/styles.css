@@ -253,6 +253,23 @@ span {
     transition: 0.3s;
 }
 
+input, select, button, textarea {
+    border: none;
+    padding: 7px 10px;
+    font-size: var(--paragraph-font-size);
+    font-family: var(--default-font-family);
+    transition: 0.3s;
+}
+
+input:focus, select:focus, textarea:focus {
+    outline: none;
+}
+
+select {
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+}
 
 /*  Let's style our header */
 header {

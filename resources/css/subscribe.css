@@ -34,13 +34,7 @@ main {
 }
 
 .subscription-container input {
-    border: none;
-    padding: 7px 10px;
     margin-top: 10px;
-    border-radius: 7px;
-    font-size: var(--paragraph-font-size);
-    font-family: var(--default-font-family);
-    transition: 0.3s;
     text-align: center;
 }
 

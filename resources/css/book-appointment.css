@@ -1,0 +1,301 @@
+main {
+    background-color: #f7f0f0;
+}
+
+.hero {
+    padding: var(--sections-padding-big-screen);
+    padding-top: 170px;
+    transition: 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-image: linear-gradient(rgba(89 55 45 / 90%), rgba(89 55 45 / 90%)), url('../images/book-appointment-bg.JPG');
+    background-size: cover;
+    background-position: center;
+    filter: grayscale(0.3);
+}
+
+.hero .container {
+    padding: 0;
+}
+
+.hero .container h1 {
+    color: #ebb1a0;
+    font-size: var(--hero-heading-font-size);
+}
+
+.hero .container h1, .hero .container p {
+    text-align: center;
+}
+
+.hero .container p {
+    font-size: 1.2em;
+    max-width: 690px;
+    color: #e3d6d1;
+}
+
+section.book-appointment .container {
+    margin: 0 auto 0 auto;
+    max-width: 700px;
+    transition: 0.3s;
+}
+
+section.book-appointment form { 
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+section.book-appointment input.text-input, section.book-appointment .consultation-type, section.book-appointment .upload-wrapper, section.book-appointment textarea {
+    box-shadow: 0px 1px 2px 1px #0000001f;
+    background-color: #fbf9f7;
+    border-radius: 7px;
+    padding: 10px 15px;
+    color: var(--default-text-color);
+}
+
+section.book-appointment textarea {    
+    height: 150px;
+    min-height: 50px;
+    resize: vertical;
+}
+
+section.book-appointment .consultation-date-wrapper {
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0px 1px 2px 1px #0000001f;
+    background-color: #fbf9f7;
+    padding: 10px 15px;
+    border-radius: 7px;
+}
+
+section.book-appointment #c-date {
+    padding: 0;
+    background-color: transparent;
+    color: var(--default-text-color);
+}
+
+section.book-appointment .consultation-type-wrapper {
+    position: relative;
+}
+
+section.book-appointment .consultation-type-wrapper * {
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+}
+
+section.book-appointment .consultation-type {
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+}
+
+section.book-appointment .consultation-type + .list {
+    box-shadow: 0px 1px 2px 1px #0000001f;
+    background-color: #f1e9e7;
+    border-radius: 7px;
+    margin-top: 1px;
+    overflow: hidden;
+    position: absolute;
+    width: 100%;
+    border: 1px solid #564540;
+    display: none;
+    animation: fade-in-dropdown 0.3s ease;
+}
+
+@keyframes fade-in-dropdown {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    } to {
+        opacity: 1;
+        transform: translateY(0px);
+    }
+}
+
+section.book-appointment .consultation-type + .list ul {
+    list-style-type: none;
+}
+
+section.book-appointment .consultation-type + .list ul li:nth-of-type(1) { 
+    padding: 10px 15px 0 15px;
+    color: #a5928d;
+}
+
+section.book-appointment .consultation-type + .list ul li:not(:nth-of-type(1)) {    
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+section.book-appointment .consultation-type + .list ul li:not(:nth-of-type(1)):hover {
+    background-color: #e3d7d4;
+}
+
+section.book-appointment .consultation-type .toggle-icon i {
+    font-size: 1em;
+    transition: 0.3s;
+    color: var(--default-text-color);
+}
+
+section.book-appointment .consultation-type .toggle-icon.rotate i {
+    transform: rotate(-180deg);
+}
+
+section.book-appointment .upload-wrapper .choose-file-btn {
+    padding: 8px 15px;
+    font-family: var(--default-font-family);
+    color: var(--default-text-color);
+    border-radius: 7px;
+    outline: none;
+    border: none;
+    background-color: #ede1e1;
+    cursor: pointer;
+    display: block;
+    margin: 10px 0 0 0;
+    width: fit-content;
+}
+
+section.book-appointment .upload-wrapper input[type="file"] {
+    padding: 0;
+    max-width: 200px;
+    align-self: center;
+    color: var(--default-text-color);
+}
+
+section.book-appointment .upload-wrapper input[type="file"]::-webkit-file-upload-button {
+    display: none;
+}
+
+section.book-appointment .upload-wrapper .files-wrapper .file {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 15px;
+    background-color: #f5f0f0;
+    border-radius: 7px;
+    margin-top: 3px;
+    gap: 20px;
+}
+
+section.book-appointment .upload-wrapper .files-wrapper .file.hidden {
+    display: none;
+}
+
+section.book-appointment .upload-wrapper p.info {
+    font-size: 0.9em;
+    margin-top: 5px;
+    color: #c1a79f;
+}
+
+section.book-appointment .upload-wrapper .files-wrapper .file:nth-of-type(1) { 
+    margin-top: 10px;
+}
+
+section.book-appointment .upload-wrapper .files-wrapper .file i.delete-file-icon {
+    font-style: normal;
+    font-size: 1.5em;
+    cursor: pointer;
+}
+
+section.book-appointment .upload-wrapper .file .file-name {
+    display: flex;
+    justify-content: center;
+}
+
+section.book-appointment .pricing-area {
+    box-shadow: 0px 1px 2px 1px #0000001f;
+    background-color: #fbf9f7;
+    border-radius: 7px;
+    overflow: hidden;
+}
+
+section.book-appointment .pricing-area .header {
+    padding: 10px 15px;
+    background-color: #fde5e5;
+}
+
+section.book-appointment .pricing-area .header h4 {
+    margin: 0;
+    font-size: 1em;
+}
+
+section.book-appointment .pricing-area .body .price-list p {
+    margin: 0;
+    padding: 10px 15px;
+    border-bottom: 1px solid #e7e4e3;
+}
+
+section.book-appointment .pricing-area .body .payment-info p {
+    margin: 0;
+    padding: 10px 15px;
+}
+
+section.book-appointment .pricing-area .body .payment-info p:not(:nth-of-type(1)) {
+    padding-top: 0;
+    padding-bottom: 5px;
+}
+
+section.book-appointment .pricing-area .payment-upload {
+    padding: 10px 15px;
+    background-color: #eaf9e8;
+}
+
+section.book-appointment .pricing-area .payment-upload input.uploader {
+    padding: 10px 0 0 0;
+    color: var(--default-text-color);
+    max-width: 300px;
+}
+
+section.book-appointment .pricing-area .payment-upload input.uploader::-webkit-file-upload-button {
+    padding: 8px 15px;
+    font-family: var(--default-font-family);
+    color: var(--default-text-color);
+    border-radius: 7px;
+    outline: none;
+    border: none;
+    background-color: #c0dfbb;
+    cursor: pointer;
+    width: fit-content;
+}
+
+section.book-appointment input.book-appointment-btn {
+    box-shadow: 0px 1px 2px 1px #0000001f;
+    border-radius: 7px;
+    cursor: pointer;
+    padding: 10px 20px;
+    background-color: #fbf9f7;
+    width: fit-content;
+    align-self: center;
+    margin-top: 20px;
+    color: var(--default-text-color);
+}
+
+section.book-appointment input.book-appointment-btn:hover {
+    background-color: #f3eaea;
+}
+
+section.book-appointment input.book-appointment-btn:active {
+    transform: scale(0.95);
+}
+
+@media screen and (max-width: 1206px) {
+    .hero {
+        padding: var(--sections-padding-small-screen);
+        padding-top: 135px;
+    }
+
+    .hero .container h1 {
+        font-size: 2.3em;
+    }
+}
+
+@media screen and (max-width: 770px) {
+    .hero .container h1 {
+        font-size: 1.8em;
+    }
+
+    .hero .container p {
+        font-size: 1em;
+    }
+}
