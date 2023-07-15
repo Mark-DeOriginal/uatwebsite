@@ -170,7 +170,6 @@ window.addEventListener("load", function() {
             hideLoader();
             
             subscriptionModalContainer.style.display = "block";
-            //  Then show the modal            
             subscriptionModal.style.display = "block";
         }, 1000);
         

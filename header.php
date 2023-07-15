@@ -2,7 +2,7 @@
     <div class="flex1">
         <!-- Logo Section -->
         <div class="logo">
-            <a href="index.html">
+            <a href="index">
                 <img src="resources/images/uat-logo-svg.svg" alt="UAT Logo">
             </a>
         </div>

@@ -94,7 +94,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         $mail->Port = 587;
                 
                         $mail->addCustomHeader('List-Unsubscribe', '<' . $unsubscribeLink . '>');
-                        $mail->setFrom('davidmarkfriday16@gmail.com', 'Mark Friday');
+                        $mail->setFrom('info@uat-wellness.com', 'Uju Alternative Therapies');
                         $mail->addAddress($subscriberEmail, $subscriberFName);
                         
                         $mail->isHTML(true);

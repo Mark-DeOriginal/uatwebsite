@@ -1,6 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-6PEG72CWXN"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-6PEG72CWXN');
+    </script>
+    
     <title>
         Manage Subscription
     </title>
@@ -12,7 +22,7 @@
     <!--Cache control-->
     <meta http-equiv="cache-control" content="max-age=3600">
     
-    <base href="/uatwebsite/">
+    <base href="http://localhost/uatwebsite/">
     
     <!--Useful links-->
     <link href="resources/images/uat-web-icon.png" rel="icon" type="image/png">

@@ -1,6 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-6PEG72CWXN"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-6PEG72CWXN');
+    </script>
+    
     <title>
         Testimonials
     </title>
@@ -27,7 +37,7 @@
     <!--Cache control-->
     <meta http-equiv="cache-control" content="max-age=3600">
 
-    <base href="/uatwebsite/">
+    <base href="http://localhost/uatwebsite/">
     
     <!--Useful links-->
     <link href="resources/images/uat-web-icon.png" rel="icon" type="image/png">
@@ -78,14 +88,17 @@
                             if ($isValidPageNumber !== false && $isValidPageNumber > 0) {
                                 $pageNumber = $_GET['page'];
 
+                                //  Using this formula, page 2, for example, will start from 
+                                //  the 4th testimonial, since testimonial per page is 3
                                 $testimonialToViewFrom = ($pageNumber * $testimonialsPerPage) - $testimonialsPerPage + 1;
                             
                                 //  Let's select the number of rows we want per page from the uat_testimonials table
                                 $sql = "SELECT * FROM uat_testimonials WHERE id >= '$testimonialToViewFrom' LIMIT $testimonialsPerPage";
                                 $testimonials = mysqli_query($conn, $sql);
-
+                                //  Store the total number of testimonials returned
                                 $noOfTestimonials = mysqli_num_rows($testimonials);
 
+                                //  Display the testimonials if there is any
                                 if ($noOfTestimonials > 0) {
 
                                     while ($testimonial = mysqli_fetch_assoc($testimonials)) { ?>
@@ -121,6 +134,9 @@
                                     $noOfTestimonials = mysqli_num_rows(mysqli_query($conn, $sql));
 
                                     $isFirstPage = $pageNumber == 1 ? true : false;
+                                    //  This formula will let us know if we are in the last page.
+                                    //  It works by multiplying the page number and number of testimonials in each page,
+                                    //  and then checking if its > or = the total no. of testimonials 
                                     $isLastPage = $noOfTestimonials <= $testimonialsPerPage * $pageNumber ? true : false;
 
                                     if ($noOfTestimonials > $testimonialsPerPage) {

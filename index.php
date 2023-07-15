@@ -1,6 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-6PEG72CWXN"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-6PEG72CWXN');
+    </script>
+    
     <title>
         Uju Alternative Therapies
     </title>
@@ -57,7 +67,7 @@
                         <p> Whether it is cancer, infertility, high blood pressure, erectile dysfunction, pile, ulcer, etc., our Healing Coach/Health Therapist is ready to help you achieve total healing.</p>
                         
                         <!-- Our Hero Call to Action (CTA) Button -->
-                        <a href="#" class="hero-button button">Book Appointment</a>
+                        <a href="book-appointment" class="hero-button button">Book Appointment</a>
                     </div>
                     
                     <img src="resources/images/pexels-stanislav-kondratiev-9226260.jpg" alt="Natural Herbs" class="hero-img column hero-img-container">       

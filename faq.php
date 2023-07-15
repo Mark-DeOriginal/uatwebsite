@@ -1,6 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-6PEG72CWXN"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-6PEG72CWXN');
+    </script>
+    
     <title>
         Frequently Asked Questions
     </title>
@@ -62,6 +72,7 @@
                     $sql = "SELECT * FROM faqs";
                     $faqs = mysqli_query($conn, $sql);
 
+                    //  Display the rows in their respective elements
                     while ($faq = mysqli_fetch_assoc($faqs)) { ?>
                         <div class="faq">
                             <div class="header">

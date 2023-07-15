@@ -1,6 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-6PEG72CWXN"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-6PEG72CWXN');
+    </script>
+    
     <title>
         About Us
     </title>
@@ -83,7 +93,7 @@
         <!-- What we do -->
         <section class="about-us-info">
             <div class="container">
-                <div class="column">                    
+                <div class="column">
                     <h2>What We Do!</h2>
                     <p>Healing and wellness guide/coaching, Root Cause Diagnosis Test, health consultation, sales of healing and wellness products, design of anti-aging and personalized weight loss programs among others, are some of the services we provide. So whether you're experiencing a health challenge, trying to lose weight, reverse aging or want to have an interactive session with a health professional, we've got you covered.</p>
                 </div>
@@ -109,7 +119,7 @@
         <!-- Founder's Short Bio Section -->
         <section class="founder-short-bio">
             <div class="container">
-                <img src="resources/images/dr-peter.JPG" alt="Image of the founder of Uju Alternative Therapies">
+                <img src="resources/images/dr-peter.jpg" alt="Image of the founder of Uju Alternative Therapies">
                 <div class="bio">
                     <h4>Dr. Peter Emeka</h4>
                     <p>Founder/Healing and Wellness Coach,<br>Uju Alternative Therapies</p>

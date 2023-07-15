@@ -9,7 +9,7 @@ main {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-image: linear-gradient(rgba(89 55 45 / 85%), rgba(89 55 45 / 85%)), url('../images/faq-bg-img.JPG');
+    background-image: linear-gradient(rgba(89 55 45 / 85%), rgba(89 55 45 / 85%)), url('../images/faq-bg-img.jpg');
     background-size: cover;
     background-position: center;
     filter: grayscale(0.3);
