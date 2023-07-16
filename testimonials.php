@@ -74,6 +74,7 @@
 
                         //  Connect to the uat_database
                         require_once "database-connect.php";
+                        mysqli_set_charset($conn, "utf8");
 
                         $canShowPagination = true;
                         

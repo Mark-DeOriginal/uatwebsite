@@ -61,7 +61,7 @@
                 $subscriptionStatus = $row['subscription_status'];
 
                 //  If the record has not been confirmed
-                if ($confirmationStatus === "Not Confirmed" || $subscriptionStatus === "Unsubscribed") {
+                if ($confirmationStatus !== "Confirmed" || $subscriptionStatus === "Unsubscribed") {
                     //  Get the date and time the user subscribed
                     $subscription_date_TimeStamp = $row['subscription_date'];
                     //  Get the current date and time
